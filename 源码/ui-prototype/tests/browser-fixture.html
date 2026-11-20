@@ -1,0 +1,15 @@
+<!doctype html><html lang="zh-CN"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>本地浏览器验收夹具</title><div id="root"></div><script type="module">
+// Test-only, per-window memory storage: never read or change the user's browser records.
+import {DRAFT_KEY,SESSION_KEY} from '/src/lib/draft.mjs'
+import {SCHEDULE_KEY,createSchedule} from '/src/lib/schedule.mjs'
+if(!location.hash.includes('case='))history.replaceState(null,'',location.pathname+location.search+(location.hash||'#new')+(location.hash.includes('?')?'&':'?')+'case=classic')
+const fault=new URLSearchParams(location.search).get('fault');const records=new Map()
+if(fault==='corrupt')for(const key of [DRAFT_KEY,SESSION_KEY,SCHEDULE_KEY])records.set(key,'{broken')
+if(fault==='empty'){const schedule=createSchedule();schedule.entries.forEach(entry=>entry.status='completed');records.set(SCHEDULE_KEY,JSON.stringify(schedule))}
+Object.defineProperty(window,'localStorage',{value:{getItem:key=>records.get(key)??null,setItem:(key,value)=>{if(fault==='quota')throw new DOMException('Simulated quota','QuotaExceededError');records.set(key,String(value))},removeItem:key=>records.delete(key)},configurable:true})
+if(fault==='render'){
+ const React=await import('react');const {createRoot}=await import('react-dom/client');const {PageBoundary}=await import('/src/components/WorkspaceQuality.tsx');await import('/src/index.css');await import('/src/components/quality.css');
+ function Broken(){throw Error('Simulated local rendering fault')}
+ createRoot(document.getElementById('root')).render(React.createElement(PageBoundary,null,React.createElement(Broken)))
+}else await import('/src/main.tsx')
+</script></html>

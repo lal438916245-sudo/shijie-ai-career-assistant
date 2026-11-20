@@ -1,0 +1,362 @@
+{
+  "contract_version": "competition-case-v1",
+  "case_id": "competition-data-01",
+  "version": 1,
+  "frozen_on": "2026-11-03",
+  "source_kind": "curated_demo",
+  "run_mode": "demo",
+  "evidence_use": "presentation_only",
+  "title": "从离线订单报表到可信的数据开发学习闭环",
+  "story": "同一位虚构初级候选人，为同一个电商订单数据场景学习、验证并练习表达。",
+  "candidate": {
+    "candidate_id": "CP-CAND-01",
+    "display_name": "小林（虚构）",
+    "resume_text": "计算机相关专业应届生。用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习；能说明样本输入和汇总结果。未提供复杂连接、执行计划、事实粒度、自动测试与监控的验证材料。没有生产Flink链路、商业上线和真实性能提升经历。用过AI解释报错，尚未提供系统性验证记录。",
+    "notice": "完全虚构，不从用户图片提取姓名、照片或联系方式，不套用真实候选人的结果。"
+  },
+  "position": {
+    "position_id": "CP-POS-01",
+    "title": "初级数据开发工程师（应届/初级）",
+    "source_kind": "synthetic_input",
+    "jd_text": "初级数据开发工程师（应届/初级）\n岗位职责\n1、开发订单报表，核对多表连接、分组和金额口径。\n2、参与数仓建模，明确事实粒度与维度关系，设计质量检查。\n3、学习和参与实时数据处理，解释事件时间、窗口和恢复边界。\n4、为数据处理设计测试和日志，协作排查问题。\n岗位要求\n1、具备Python和基础SQL能力，能用小样本说明结果。\n2、能说明方案假设、核对依据和未验证边界，愿意学习工程方法。\n加分项\n1、有可复现的流处理或自动化测试练习。\n面试安排\n远程技术交流；不作为技能要求。"
+  },
+  "learning_preferences": {
+    "available_days": 14,
+    "daily_minutes": 60,
+    "starting_level": "beginner"
+  },
+  "topics": [
+    {
+      "topic_id": "sql",
+      "title": "复杂SQL与性能分析",
+      "gap_template_id": "CP-GAP-SQL",
+      "diagnosis_disposition": "partial",
+      "next_action": "verify",
+      "notice": "这是固定案例待验证项，不是模型已证实的个人能力缺陷；实际会话必须绑定新A返回的真实gap_id。"
+    },
+    {
+      "topic_id": "stream",
+      "title": "实时计算与故障恢复",
+      "gap_template_id": "CP-GAP-STREAM",
+      "diagnosis_disposition": "not_provided",
+      "next_action": "verify",
+      "notice": "这是固定案例待验证项，不是模型已证实的个人能力缺陷；实际会话必须绑定新A返回的真实gap_id。"
+    },
+    {
+      "topic_id": "model",
+      "title": "数仓建模与数据质量",
+      "gap_template_id": "CP-GAP-MODEL",
+      "diagnosis_disposition": "not_provided",
+      "next_action": "verify",
+      "notice": "这是固定案例待验证项，不是模型已证实的个人能力缺陷；实际会话必须绑定新A返回的真实gap_id。"
+    },
+    {
+      "topic_id": "engineering",
+      "title": "工程测试与可观测性",
+      "gap_template_id": "CP-GAP-ENGINEERING",
+      "diagnosis_disposition": "not_provided",
+      "next_action": "verify",
+      "notice": "这是固定案例待验证项，不是模型已证实的个人能力缺陷；实际会话必须绑定新A返回的真实gap_id。"
+    }
+  ],
+  "existing_strength": {
+    "text": "Python清洗、基础SQL与小样本报表练习",
+    "source": "candidate.resume_text",
+    "scope": "候选人自述的入门优势，未经实测认证。"
+  },
+  "deferred_scope": {
+    "title": "生产Flink集群与商业性能承诺",
+    "reason": "先补小样本验证与基本概念，不在14天入门计划要求部署生产平台。",
+    "revisit_when": "能独立说明结果、完成基础验证且有额外项目时间后再安排。",
+    "counts_as_mastered": false
+  },
+  "learning_tasks": [
+    {
+      "task_template_id": "CP-T01",
+      "day": 1,
+      "topic_ids": [
+        "sql",
+        "model"
+      ],
+      "gap_template_ids": [
+        "CP-GAP-SQL",
+        "CP-GAP-MODEL"
+      ],
+      "title": "连接后金额为什么变大了？",
+      "resource_ids": [
+        "PG18-JOIN",
+        "MS-STAR"
+      ],
+      "source_kind": "curated_demo",
+      "evidence_use": "presentation_only",
+      "state": "not_started"
+    },
+    {
+      "task_template_id": "CP-T02",
+      "day": 2,
+      "topic_ids": [
+        "stream"
+      ],
+      "gap_template_ids": [
+        "CP-GAP-STREAM"
+      ],
+      "title": "事件时间、处理时间与迟到",
+      "resource_ids": [
+        "FL21-TIME"
+      ],
+      "source_kind": "curated_demo",
+      "evidence_use": "presentation_only",
+      "state": "not_started"
+    },
+    {
+      "task_template_id": "CP-T03",
+      "day": 3,
+      "topic_ids": [
+        "model"
+      ],
+      "gap_template_ids": [
+        "CP-GAP-MODEL"
+      ],
+      "title": "订单与订单明细的粒度",
+      "resource_ids": [
+        "KIMBALL-GRAIN",
+        "MS-STAR"
+      ],
+      "source_kind": "curated_demo",
+      "evidence_use": "presentation_only",
+      "state": "not_started"
+    },
+    {
+      "task_template_id": "CP-T04",
+      "day": 4,
+      "topic_ids": [
+        "sql"
+      ],
+      "gap_template_ids": [
+        "CP-GAP-SQL"
+      ],
+      "title": "先正确，再看执行计划",
+      "resource_ids": [
+        "PG18-EXPLAIN"
+      ],
+      "source_kind": "curated_demo",
+      "evidence_use": "presentation_only",
+      "state": "not_started"
+    },
+    {
+      "task_template_id": "CP-T05",
+      "day": 5,
+      "topic_ids": [
+        "stream"
+      ],
+      "gap_template_ids": [
+        "CP-GAP-STREAM"
+      ],
+      "title": "状态与检查点的恢复边界",
+      "resource_ids": [
+        "FL21-STATE",
+        "FL21-CHECKPOINT"
+      ],
+      "source_kind": "curated_demo",
+      "evidence_use": "presentation_only",
+      "state": "not_started"
+    },
+    {
+      "task_template_id": "CP-T06",
+      "day": 6,
+      "topic_ids": [
+        "engineering"
+      ],
+      "gap_template_ids": [
+        "CP-GAP-ENGINEERING"
+      ],
+      "title": "为金额核对写正常和异常用例",
+      "resource_ids": [
+        "PY313-UNITTEST"
+      ],
+      "source_kind": "curated_demo",
+      "evidence_use": "presentation_only",
+      "state": "not_started"
+    },
+    {
+      "task_template_id": "CP-T07",
+      "day": 8,
+      "topic_ids": [
+        "stream"
+      ],
+      "gap_template_ids": [
+        "CP-GAP-STREAM"
+      ],
+      "title": "用窗口与水位线解释延迟",
+      "resource_ids": [
+        "FL21-WINDOW",
+        "FL21-TIME"
+      ],
+      "source_kind": "curated_demo",
+      "evidence_use": "presentation_only",
+      "state": "not_started"
+    },
+    {
+      "task_template_id": "CP-T08",
+      "day": 9,
+      "topic_ids": [
+        "sql"
+      ],
+      "gap_template_ids": [
+        "CP-GAP-SQL"
+      ],
+      "title": "窗口排名与热点验证的边界",
+      "resource_ids": [
+        "PG18-WINDOW",
+        "PG18-EXPLAIN"
+      ],
+      "source_kind": "curated_demo",
+      "evidence_use": "presentation_only",
+      "state": "not_started"
+    },
+    {
+      "task_template_id": "CP-T09",
+      "day": 10,
+      "topic_ids": [
+        "model"
+      ],
+      "gap_template_ids": [
+        "CP-GAP-MODEL"
+      ],
+      "title": "唯一键、空值与模型变更核对",
+      "resource_ids": [
+        "PG18-CONSTRAINTS",
+        "MS-STAR"
+      ],
+      "source_kind": "curated_demo",
+      "evidence_use": "presentation_only",
+      "state": "not_started"
+    },
+    {
+      "task_template_id": "CP-T10",
+      "day": 11,
+      "topic_ids": [
+        "engineering"
+      ],
+      "gap_template_ids": [
+        "CP-GAP-ENGINEERING"
+      ],
+      "title": "用日志与关联ID缩小排查范围",
+      "resource_ids": [
+        "PY313-LOGGING",
+        "PY313-SETS"
+      ],
+      "source_kind": "curated_demo",
+      "evidence_use": "presentation_only",
+      "state": "not_started"
+    }
+  ],
+  "non_learning_days": [
+    {
+      "day": 7,
+      "kind": "week_review",
+      "task_count": 0
+    },
+    {
+      "day": 12,
+      "kind": "week_review",
+      "task_count": 0
+    },
+    {
+      "day": 13,
+      "kind": "flex_or_topic_retest",
+      "task_count": 0
+    },
+    {
+      "day": 14,
+      "kind": "interview_and_resume",
+      "task_count": 0
+    }
+  ],
+  "agent_flow": [
+    {
+      "agent": "A",
+      "purpose": "岗位证据/未知项与优先级",
+      "implementation": "新合同本地验收已通过；新版真实质量未验收"
+    },
+    {
+      "agent": "B",
+      "purpose": "按14天/60分钟安排验证、学习与暂缓",
+      "implementation": "复用日学习合同基础；统一案例完整适配待后续"
+    },
+    {
+      "agent": "F",
+      "purpose": "学习开始前审查预算、先修、资料/目标和交付",
+      "implementation": "规则定稿；统一案例运行适配待后续"
+    },
+    {
+      "agent": "C",
+      "purpose": "日/周独立考核、专题逐题复测",
+      "implementation": "旧固定流程可复用；新案例题目/来源绑定待后续"
+    },
+    {
+      "agent": "E",
+      "purpose": "整个岗位的多轮对话与追问建议",
+      "implementation": "旧固定岗位对话可复用；统一候选人绑定待后续"
+    },
+    {
+      "agent": "D",
+      "purpose": "按可追溯学习/答卷/面试证据改写；拒绝夸大经历",
+      "implementation": "旧建议与拦截可复用；统一证据绑定待后续"
+    }
+  ],
+  "question_policy": {
+    "day": {
+      "default_count": 2,
+      "basis": "当天确认的任务、目标、实际进度；考前冻结范围"
+    },
+    "week": {
+      "default_count": 3,
+      "basis": "该周期确认任务的跨专题综合；非所有专题各出一份"
+    },
+    "retest": {
+      "delivery": "每次一道",
+      "default_max_questions": 3,
+      "basis": "最新同专题失败/不稳定证据与当前回答，达到边界可提前结束；固定替身只走预设分支，不声称动态推理"
+    },
+    "interview": {
+      "planned_questions": 5,
+      "max_follow_ups": 2,
+      "basis": "岗位核心范围+候选人证据，数量先公布；固定替身不根据用户回答智能扩题"
+    },
+    "notice": "本轮冻结数量/来源合同，不修改既有题库和服务上限；学习卡练习不属于考核题。"
+  },
+  "navigation_ownership": {
+    "overview": "同一候选人/会话的下一步摘要",
+    "input_diagnosis": "A证据与待澄清",
+    "learning_plan": "每日总览、专题学习、资料和进度；F审查嵌入计划",
+    "assessment": "日/周范围",
+    "retest": "专题与来源答卷",
+    "interview": "岗位对话",
+    "records_growth": "统一记录和有来源的状态",
+    "resume": "D建议与引用"
+  },
+  "reuse_contract": {
+    "journey": "交互骨架，保留旧会话和深链",
+    "workflow": "真实会话/授权基础，不直接覆盖演示结果",
+    "multi": "四专题证据与D/E/F展示，仅模板复用，不将历史分数迁移给新候选人",
+    "classic": "历史与回归入口，非比赛主入口",
+    "game_client": "跨岗输入回归，不替换主演示",
+    "external_entries": [
+      "demo",
+      "real"
+    ],
+    "new_fifth_mode": false
+  },
+  "legacy_template_bindings": [
+    {
+      "source_scenario_id": "career-pilot-learning-journey-03",
+      "source_task_id": "T03-01",
+      "target_task_template_id": "CP-T01",
+      "learning_card_id": "CP-CARD-SQL-01",
+      "purpose": "learning_content_preview_only",
+      "copy_grades": false
+    }
+  ],
+  "status_notice": "案例与来源合同已定稿；本批仅接第一张固定学习卡，四模式合并、后半程统一适配与新真实质量尚未完成。"
+}

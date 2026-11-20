@@ -1,0 +1,468 @@
+{
+  "catalog_version": "curated-resources-v1",
+  "checked_on": "2026-11-03",
+  "source_kind": "external_reference",
+  "evidence_use": "reference_only",
+  "resources": [
+    {
+      "resource_id": "PG18-JOIN",
+      "title": "多表连接：看清一行怎样匹配成多行",
+      "publisher": "PostgreSQL Global Development Group",
+      "url": "https://www.postgresql.org/docs/18/tutorial-join.html",
+      "topic_ids": [
+        "sql"
+      ],
+      "knowledge_keys": [
+        "join_cardinality",
+        "inner_left_join"
+      ],
+      "starting_level": "topic_beginner",
+      "prerequisites": "先看学习卡中行、列、关联键的中文解释；不要求安装数据库。",
+      "language": "en",
+      "version_scope": "PostgreSQL 18",
+      "section": "2.6 Joins Between Tables",
+      "read_scope": "读开头连接例子及LEFT OUTER JOIN结果表；首次跳过自连接。",
+      "learning_goal": "能把连接描述为按条件配对，并检查未匹配行是否保留。",
+      "estimated_read_minutes": 7,
+      "estimate_basis": "只估指定片段，含停下来对照小例子的时间；非整篇阅读时长，非实测用户耗时。",
+      "verification": {
+        "status": "verified",
+        "checked_on": "2026-11-03",
+        "review_due_on": "2026-12-03",
+        "method": "manual_web_content_review",
+        "checked_content": "核对开头JOIN配对、输出表、未匹配行和LEFT OUTER JOIN例子。",
+        "access": "正文在本次核对中可读取；运行时不自动联网，不保证未来或所有网络环境可访问。"
+      },
+      "use_boundary": "讲SQL语义，不是性能优化教程；中文术语与订单跟做由平台原创提供。",
+      "evidence_use": "reference_only"
+    },
+    {
+      "resource_id": "PG18-AGG",
+      "title": "聚合与分组：先定口径再求和",
+      "publisher": "PostgreSQL Global Development Group",
+      "url": "https://www.postgresql.org/docs/18/tutorial-agg.html",
+      "topic_ids": [
+        "sql"
+      ],
+      "knowledge_keys": [
+        "aggregation",
+        "group_by"
+      ],
+      "starting_level": "foundation",
+      "prerequisites": "知道行、列和SELECT基本含义。",
+      "language": "en",
+      "version_scope": "PostgreSQL 18",
+      "section": "2.7 Aggregate Functions",
+      "read_scope": "只读count/sum的概述、GROUP BY例子和WHERE/HAVING区别；FILTER暂跳过。",
+      "learning_goal": "说明分组如何改变输出粒度，区分聚合前后筛选。",
+      "estimated_read_minutes": 10,
+      "estimate_basis": "只估指定片段，含停下来对照小例子的时间；非整篇阅读时长，非实测用户耗时。",
+      "verification": {
+        "status": "verified",
+        "checked_on": "2026-11-03",
+        "review_due_on": "2026-12-03",
+        "method": "manual_web_content_review",
+        "checked_content": "核对聚合简介、按城市分组和WHERE/HAVING处理阶段。",
+        "access": "正文在本次核对中可读取；运行时不自动联网，不保证未来或所有网络环境可访问。"
+      },
+      "use_boundary": "不直接证明查询在具体业务上的金额口径正确。",
+      "evidence_use": "reference_only"
+    },
+    {
+      "resource_id": "PG18-WINDOW",
+      "title": "窗口函数入门与分组排名",
+      "publisher": "PostgreSQL Global Development Group",
+      "url": "https://www.postgresql.org/docs/18/tutorial-window.html",
+      "topic_ids": [
+        "sql"
+      ],
+      "knowledge_keys": [
+        "window_function",
+        "ranking"
+      ],
+      "starting_level": "foundation",
+      "prerequisites": "已理解SELECT和GROUP BY。",
+      "language": "en",
+      "version_scope": "PostgreSQL 18",
+      "section": "3.5 Window Functions",
+      "read_scope": "读保留明细行的说明、PARTITION BY与row_number例子；高级窗口框架另学。",
+      "learning_goal": "区分聚合压缩行与窗口保留行，解释排名需要排序口径。",
+      "estimated_read_minutes": 12,
+      "estimate_basis": "只估指定片段，含停下来对照小例子的时间；非整篇阅读时长，非实测用户耗时。",
+      "verification": {
+        "status": "verified",
+        "checked_on": "2026-11-03",
+        "review_due_on": "2026-12-03",
+        "method": "manual_web_content_review",
+        "checked_content": "核对OVER/PARTITION BY、row_number及相同排序值的次序说明。",
+        "access": "正文在本次核对中可读取；运行时不自动联网，不保证未来或所有网络环境可访问。"
+      },
+      "use_boundary": "SQL窗口函数与Flink时间窗口是不同概念。",
+      "evidence_use": "reference_only"
+    },
+    {
+      "resource_id": "PG18-EXPLAIN",
+      "title": "执行计划：估计行数与实际验证",
+      "publisher": "PostgreSQL Global Development Group",
+      "url": "https://www.postgresql.org/docs/18/using-explain.html",
+      "topic_ids": [
+        "sql"
+      ],
+      "knowledge_keys": [
+        "query_plan",
+        "performance_validation"
+      ],
+      "starting_level": "foundation",
+      "prerequisites": "会写基本查询，先确认结果正确。",
+      "language": "en",
+      "version_scope": "PostgreSQL 18",
+      "section": "14.1.1 EXPLAIN Basics；14.1.2 EXPLAIN ANALYZE；14.1.3 Caveats",
+      "read_scope": "先看计划节点、cost/rows，再看实际行数与估计差异；只对照示例SELECT，不执行修改数据的示例。",
+      "learning_goal": "知道cost不是毫秒，ANALYZE会真实执行，小样本不能证明生产加速。",
+      "estimated_read_minutes": 15,
+      "estimate_basis": "只估指定片段，含停下来对照小例子的时间；非整篇阅读时长，非实测用户耗时。",
+      "verification": {
+        "status": "verified",
+        "checked_on": "2026-11-03",
+        "review_due_on": "2026-12-03",
+        "method": "manual_web_content_review",
+        "checked_content": "核对基础计划、ANALYZE实际执行与玩具数据不能外推的大段说明。",
+        "access": "正文在本次核对中可读取；运行时不自动联网，不保证未来或所有网络环境可访问。"
+      },
+      "use_boundary": "PostgreSQL计划格式不是MySQL或SQLite通用格式；无环境时只读图解，不伪装实测性能。",
+      "evidence_use": "reference_only"
+    },
+    {
+      "resource_id": "FL21-TIME",
+      "title": "事件时间、处理时间与水位线",
+      "publisher": "Apache Flink",
+      "url": "https://nightlies.apache.org/flink/flink-docs-release-2.1/docs/concepts/time/",
+      "topic_ids": [
+        "stream"
+      ],
+      "knowledge_keys": [
+        "event_time",
+        "processing_time",
+        "watermark"
+      ],
+      "starting_level": "topic_beginner",
+      "prerequisites": "先读中文订单时间线；无需安装Kafka或Flink。",
+      "language": "en",
+      "version_scope": "Flink 2.1（核对页面显示2.1.1）",
+      "section": "Notions of Time；Event Time and Watermarks；Lateness",
+      "read_scope": "先读两种时间和配图；第二遍才读水位线和迟到，跳过并行实现细节。",
+      "learning_goal": "区分发生时间与处理时间，理解水位线是推进判断而不是保证不会再迟到。",
+      "estimated_read_minutes": 10,
+      "estimate_basis": "只估指定片段，含停下来对照小例子的时间；非整篇阅读时长，非实测用户耗时。",
+      "verification": {
+        "status": "verified",
+        "checked_on": "2026-11-03",
+        "review_due_on": "2026-12-03",
+        "method": "manual_web_content_review",
+        "checked_content": "核对两种时间、watermark推进与迟到可能违反预期的说明。",
+        "access": "正文在本次核对中可读取；运行时不自动联网，不保证未来或所有网络环境可访问。"
+      },
+      "use_boundary": "概念入门不等于能部署生产流任务；中文版本可能落后，首版固定英文版本。",
+      "evidence_use": "reference_only"
+    },
+    {
+      "resource_id": "FL21-WINDOW",
+      "title": "时间窗口：边界与迟到处理",
+      "publisher": "Apache Flink",
+      "url": "https://nightlies.apache.org/flink/flink-docs-release-2.1/docs/dev/datastream/operators/windows/",
+      "topic_ids": [
+        "stream"
+      ],
+      "knowledge_keys": [
+        "tumbling_window",
+        "allowed_lateness"
+      ],
+      "starting_level": "foundation",
+      "prerequisites": "已区分事件时间、处理时间和水位线。",
+      "language": "en",
+      "version_scope": "Flink 2.1",
+      "section": "Window Assigners / Tumbling Windows；Allowed Lateness",
+      "read_scope": "只读滚动窗口图、左闭右开边界和Allowed Lateness；Java/Python API不是当天必做。",
+      "learning_goal": "手算五分钟窗口，并说明迟到数据何时需另行处理。",
+      "estimated_read_minutes": 12,
+      "estimate_basis": "只估指定片段，含停下来对照小例子的时间；非整篇阅读时长，非实测用户耗时。",
+      "verification": {
+        "status": "verified",
+        "checked_on": "2026-11-03",
+        "review_due_on": "2026-12-03",
+        "method": "manual_web_content_review",
+        "checked_content": "核对窗口起止边界、滚动窗口无重叠和允许迟到机制。",
+        "access": "正文在本次核对中可读取；运行时不自动联网，不保证未来或所有网络环境可访问。"
+      },
+      "use_boundary": "窗口结果与触发、保留状态有关，不能只凭墙上时钟判定。",
+      "evidence_use": "reference_only"
+    },
+    {
+      "resource_id": "FL21-STATE",
+      "title": "状态与恢复：保存了什么",
+      "publisher": "Apache Flink",
+      "url": "https://nightlies.apache.org/flink/flink-docs-release-2.1/docs/concepts/stateful-stream-processing/",
+      "topic_ids": [
+        "stream"
+      ],
+      "knowledge_keys": [
+        "state",
+        "recovery_boundary"
+      ],
+      "starting_level": "foundation",
+      "prerequisites": "知道事件ID、去重和累计值。",
+      "language": "en",
+      "version_scope": "Flink 2.1",
+      "section": "What is State?；State Persistence",
+      "read_scope": "看累计值/历史事件为什么需要状态，再看输入位置与算子状态如何一起恢复；复杂屏障算法先跳过。",
+      "learning_goal": "区分保存状态与仅重跑程序，说明恢复需要一致的输入位置。",
+      "estimated_read_minutes": 12,
+      "estimate_basis": "只估指定片段，含停下来对照小例子的时间；非整篇阅读时长，非实测用户耗时。",
+      "verification": {
+        "status": "verified",
+        "checked_on": "2026-11-03",
+        "review_due_on": "2026-12-03",
+        "method": "manual_web_content_review",
+        "checked_content": "核对有状态操作例子和从检查点恢复状态并重放输入的描述。",
+        "access": "正文在本次核对中可读取；运行时不自动联网，不保证未来或所有网络环境可访问。"
+      },
+      "use_boundary": "系统内exactly-once不自动等于任何外部输出端到端不重复。",
+      "evidence_use": "reference_only"
+    },
+    {
+      "resource_id": "FL21-CHECKPOINT",
+      "title": "检查点配置与恢复前提",
+      "publisher": "Apache Flink",
+      "url": "https://nightlies.apache.org/flink/flink-docs-release-2.1/docs/dev/datastream/fault-tolerance/checkpointing/",
+      "topic_ids": [
+        "stream"
+      ],
+      "knowledge_keys": [
+        "checkpoint",
+        "replayable_source"
+      ],
+      "starting_level": "foundation",
+      "prerequisites": "先读状态与恢复；本阶段只理解，不搭建集群。",
+      "language": "en",
+      "version_scope": "Flink 2.1",
+      "section": "Checkpointing；Enabling and Configuring Checkpointing；Selecting Checkpoint Storage",
+      "read_scope": "读启用检查点、可重放来源与持久状态前提；看存储概述，不通读配置项。",
+      "learning_goal": "知道检查点要配置和持久保存，能列出恢复前提。",
+      "estimated_read_minutes": 12,
+      "estimate_basis": "只估指定片段，含停下来对照小例子的时间；非整篇阅读时长，非实测用户耗时。",
+      "verification": {
+        "status": "verified",
+        "checked_on": "2026-11-03",
+        "review_due_on": "2026-12-03",
+        "method": "manual_web_content_review",
+        "checked_content": "核对检查点启用/配置、重放条件、默认未设置周期和存储选项。",
+        "access": "正文在本次核对中可读取；运行时不自动联网，不保证未来或所有网络环境可访问。"
+      },
+      "use_boundary": "纸面恢复模拟不是Flink实测；不能据此写生产恢复性能指标。",
+      "evidence_use": "reference_only"
+    },
+    {
+      "resource_id": "KIMBALL-GRAIN",
+      "title": "事实表先声明粒度",
+      "publisher": "Kimball Group / Ralph Kimball",
+      "url": "https://www.kimballgroup.com/2008/11/fact-tables/",
+      "topic_ids": [
+        "model"
+      ],
+      "knowledge_keys": [
+        "fact_grain",
+        "fact_measure"
+      ],
+      "starting_level": "topic_beginner",
+      "prerequisites": "能用一句话描述表的一行代表什么。",
+      "language": "en",
+      "version_scope": "2008-11-05原文；概念资料，不是软件版本指南",
+      "section": "Stay True to the Grain",
+      "read_scope": "只读粒度这一小节，写出订单行与订单明细行的区别；不用通读所有事实表类型。",
+      "learning_goal": "把粒度说成业务测量事件，避免把订单总额混进明细粒度求和。",
+      "estimated_read_minutes": 8,
+      "estimate_basis": "只估指定片段，含停下来对照小例子的时间；非整篇阅读时长，非实测用户耗时。",
+      "verification": {
+        "status": "verified",
+        "checked_on": "2026-11-03",
+        "review_due_on": "2026-12-03",
+        "method": "manual_web_content_review",
+        "checked_content": "核对先声明粒度，以及粒度是业务事件而非外键列表的定义。",
+        "access": "正文在本次核对中可读取；运行时不自动联网，不保证未来或所有网络环境可访问。"
+      },
+      "use_boundary": "陈年概念文用于建模原则，不当作新产品/API指南。",
+      "evidence_use": "reference_only"
+    },
+    {
+      "resource_id": "MS-STAR",
+      "title": "中文补充：事实、维度与星型架构",
+      "publisher": "Microsoft Learn",
+      "url": "https://learn.microsoft.com/zh-cn/power-bi/guidance/star-schema",
+      "topic_ids": [
+        "model"
+      ],
+      "knowledge_keys": [
+        "fact_dimension",
+        "slowly_changing_dimension"
+      ],
+      "starting_level": "topic_beginner",
+      "prerequisites": "先知道表、行与键；不要求Power BI操作基础。",
+      "language": "zh-CN",
+      "version_scope": "Microsoft Learn在线文档；2026-11-03核对",
+      "section": "星型架构概述 / 维度表 / 事实数据表；缓慢变化维度（进阶）",
+      "read_scope": "入门只读事实/维度两小节；第二次学习再读缓慢变化维度，不操作Power BI。",
+      "learning_goal": "用订单金额和渠道属性解释事实/维度；进阶辨别维度是否需留历史。",
+      "estimated_read_minutes": 7,
+      "estimate_basis": "只估指定片段，含停下来对照小例子的时间；非整篇阅读时长，非实测用户耗时。",
+      "verification": {
+        "status": "verified",
+        "checked_on": "2026-11-03",
+        "review_due_on": "2026-12-03",
+        "method": "manual_web_content_review",
+        "checked_content": "核对事实/维度解释、统一粒度，以及缓慢变化维度段落；正文可读，页面也带通用授权提示。",
+        "access": "正文在本次核对中可读取；运行时不自动联网，不保证未来或所有网络环境可访问。"
+      },
+      "use_boundary": "面向Power BI语义模型，首版只借概念，不移植产品专用操作；若用户端受限，使用平台中文引导或Kimball备选。",
+      "evidence_use": "reference_only"
+    },
+    {
+      "resource_id": "PG18-CONSTRAINTS",
+      "title": "数据质量：非空、唯一与关联",
+      "publisher": "PostgreSQL Global Development Group",
+      "url": "https://www.postgresql.org/docs/18/ddl-constraints.html",
+      "topic_ids": [
+        "model",
+        "engineering"
+      ],
+      "knowledge_keys": [
+        "not_null",
+        "unique_key",
+        "foreign_key"
+      ],
+      "starting_level": "foundation",
+      "prerequisites": "理解表的一行粒度与键。",
+      "language": "en",
+      "version_scope": "PostgreSQL 18",
+      "section": "5.5.2 Not-Null；5.5.3 Unique；5.5.4 Primary Keys；5.5.5 Foreign Keys",
+      "read_scope": "读三个约束的用途和空值差异，纸面列质量规则；不在当天创建生产表。",
+      "learning_goal": "区分空值、重复键、孤立关联三个检查，知道数据库方言存在差别。",
+      "estimated_read_minutes": 12,
+      "estimate_basis": "只估指定片段，含停下来对照小例子的时间；非整篇阅读时长，非实测用户耗时。",
+      "verification": {
+        "status": "verified",
+        "checked_on": "2026-11-03",
+        "review_due_on": "2026-12-03",
+        "method": "manual_web_content_review",
+        "checked_content": "核对非空/唯一/主外键，以及不同数据库唯一约束对NULL处理可能不同。",
+        "access": "正文在本次核对中可读取；运行时不自动联网，不保证未来或所有网络环境可访问。"
+      },
+      "use_boundary": "业务对账、数据新鲜度等并不由这些数据库约束全部覆盖。",
+      "evidence_use": "reference_only"
+    },
+    {
+      "resource_id": "PY313-SETS",
+      "title": "Python集合与字典：事件去重的工具",
+      "publisher": "Python Software Foundation",
+      "url": "https://docs.python.org/zh-cn/3.13/tutorial/datastructures.html",
+      "topic_ids": [
+        "engineering",
+        "stream"
+      ],
+      "knowledge_keys": [
+        "set_membership",
+        "dictionary"
+      ],
+      "starting_level": "foundation",
+      "prerequisites": "会读简单Python变量与循环；不会时先纸面跟做。",
+      "language": "zh-CN",
+      "version_scope": "Python 3.13中文文档",
+      "section": "5.4 集合；5.5 字典",
+      "read_scope": "只读集合去重/成员检测和字典键值；列表排序等其他内容暂跳过。",
+      "learning_goal": "用集合记录已见ID，知道集合无序，重复金额不能当唯一ID。",
+      "estimated_read_minutes": 10,
+      "estimate_basis": "只估指定片段，含停下来对照小例子的时间；非整篇阅读时长，非实测用户耗时。",
+      "verification": {
+        "status": "verified",
+        "checked_on": "2026-11-03",
+        "review_due_on": "2026-12-03",
+        "method": "manual_web_content_review",
+        "checked_content": "核对集合消除重复元素、空集合set()、无序提示及字典段落。",
+        "access": "正文在本次核对中可读取；运行时不自动联网，不保证未来或所有网络环境可访问。"
+      },
+      "use_boundary": "这是语言基础，不是分布式幂等或持久状态方案。",
+      "evidence_use": "reference_only"
+    },
+    {
+      "resource_id": "PY313-UNITTEST",
+      "title": "Python单元测试：输入、预期和断言",
+      "publisher": "Python Software Foundation",
+      "url": "https://docs.python.org/zh-cn/3.13/library/unittest.html",
+      "topic_ids": [
+        "engineering"
+      ],
+      "knowledge_keys": [
+        "test_case",
+        "assertion"
+      ],
+      "starting_level": "foundation",
+      "prerequisites": "能读一个返回结果的Python函数。",
+      "language": "zh-CN",
+      "version_scope": "Python 3.13中文文档",
+      "section": "基本实例",
+      "read_scope": "读TestCase与断言示例；先列正常、重复、空输入，再尝试写一个小测试。",
+      "learning_goal": "分开测试输入与预期结果，知道测试通过只覆盖已设计的情境。",
+      "estimated_read_minutes": 12,
+      "estimate_basis": "只估指定片段，含停下来对照小例子的时间；非整篇阅读时长，非实测用户耗时。",
+      "verification": {
+        "status": "verified",
+        "checked_on": "2026-11-03",
+        "review_due_on": "2026-12-03",
+        "method": "manual_web_content_review",
+        "checked_content": "核对基本实例中的TestCase、assertEqual与异常断言。",
+        "access": "正文在本次核对中可读取；运行时不自动联网，不保证未来或所有网络环境可访问。"
+      },
+      "use_boundary": "单元测试通过不是生产规模/性能或安全认证。",
+      "evidence_use": "reference_only"
+    },
+    {
+      "resource_id": "PY313-LOGGING",
+      "title": "Python日志：用事件线索定位问题",
+      "publisher": "Python Software Foundation",
+      "url": "https://docs.python.org/zh-cn/3.13/howto/logging.html",
+      "topic_ids": [
+        "engineering"
+      ],
+      "knowledge_keys": [
+        "logging_level",
+        "diagnostic_evidence"
+      ],
+      "starting_level": "foundation",
+      "prerequisites": "能读基础Python；知道日志描述事件而不是业务总表。",
+      "language": "zh-CN",
+      "version_scope": "Python 3.13中文文档",
+      "section": "日志基础教程 / 什么时候使用日志 / 简单示例",
+      "read_scope": "只读等级与最小示例；尝试区分正常事件、异常和处理结果，跳过高级配置。",
+      "learning_goal": "选出日志等级和关联ID，避免把日志本身当成吞吐/告警系统。",
+      "estimated_read_minutes": 10,
+      "estimate_basis": "只估指定片段，含停下来对照小例子的时间；非整篇阅读时长，非实测用户耗时。",
+      "verification": {
+        "status": "verified",
+        "checked_on": "2026-11-03",
+        "review_due_on": "2026-12-03",
+        "method": "manual_web_content_review",
+        "checked_content": "核对日志等级、默认WARNING及最小调用示例。",
+        "access": "正文在本次核对中可读取；运行时不自动联网，不保证未来或所有网络环境可访问。"
+      },
+      "use_boundary": "日志指南不覆盖完整监控指标/告警平台；不记录Key、真实简历和答卷。",
+      "evidence_use": "reference_only"
+    }
+  ],
+  "scope_notice": "14条覆盖统一数据开发案例，不代表全职业资料库；每项任务最多一主一备，未匹配时保留内置引导，不编造链接。",
+  "excluded_candidates": [
+    {
+      "url": "https://www.kimballgroup.com/2013/04/four-step-dimensional-design-process/",
+      "checked_on": "2026-11-03",
+      "reason": "本次浏览工具未能读取正文，未纳入已核对清单。"
+    }
+  ]
+}

@@ -1,0 +1,602 @@
+{
+  "approved_texts": [
+    "用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习；能说明样本输入和汇总结果。 课程练习补充：用延迟到达的消息样本区分事件时间与处理时间，说明迟到处理的边界。"
+  ],
+  "contract_version": "competition-resume-fixed-v1",
+  "coverage_notice": "只使用开始生成前已保存的学习进度、答卷和已结束面试；进行中的面试不作反馈依据。没有记录的方向明确留空。",
+  "created_at": "2026-11-06T07:35:01+00:00",
+  "final_draft": "计算机相关专业应届生。用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习；能说明样本输入和汇总结果。 课程练习补充：用延迟到达的消息样本区分事件时间与处理时间，说明迟到处理的边界。未提供复杂连接、执行计划、事实粒度、自动测试与监控的验证材料。没有生产Flink链路、商业上线和真实性能提升经历。用过AI解释报错，尚未提供系统性验证记录。",
+  "input_digest": "a0fec59eb5bc1a7a0fcaf841626eb95440585bea1580038190fa5ebf54053c3b",
+  "items": [
+    {
+      "evidence_level": "本人核对 / 原文自述或课程成果，未独立核验",
+      "item_id": "revision-1",
+      "next_action": "使用前核实所有事实及课程练习边界。",
+      "original_quote": "用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习；能说明样本输入和汇总结果。",
+      "original_ref": {
+        "end": 71,
+        "quote": "用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习；能说明样本输入和汇总结果。",
+        "source_id": "resume_original",
+        "start": 11
+      },
+      "reason": "结合课程成果提出待核实表述。",
+      "source_ids": [
+        "APPLICATION_a7e58cc2f11b5386b271d6a9:adopted",
+        "51ecee3081b35b729ee99f46d746c05c:input",
+        "ARTIFACT_6512267abf535994a536a9af"
+      ],
+      "status": "suggested",
+      "suggested_text": "用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习；能说明样本输入和汇总结果。 课程练习补充：用延迟到达的消息样本区分事件时间与处理时间，说明迟到处理的边界。",
+      "title": "核对采用的简历修改"
+    }
+  ],
+  "learning_handoff": {
+    "artifact_tasks": 1,
+    "completed_tasks": 1,
+    "contract_version": "learning-resume-handoff-v1",
+    "notice": "课程练习成果、进度和考核分项为固定演示。面试用于表达复盘；本摘要不证明生产经历。",
+    "plan_record_id": "51ecee3081b35b729ee99f46d746c05c:plan:2",
+    "plan_version": 2,
+    "ready_tasks": 1,
+    "tasks": [
+      {
+        "artifact_record_id": null,
+        "artifact_summary": "",
+        "blockers": [
+          "学习任务尚未标记完成",
+          "尚无已保存的课程练习成果",
+          "关联专题尚缺考核或复测记录"
+        ],
+        "interview_ids": [
+          "INTERVIEW_4c7bc803b6825d6dac68aeaa:report"
+        ],
+        "ready": false,
+        "source_ids": [],
+        "status": "not_started",
+        "task_id": "TASK_e9b2b236e281507db40497bb",
+        "task_template_id": "CP-T01",
+        "title": "连接后金额为什么变大了？",
+        "topic_keys": [
+          "sql",
+          "model"
+        ]
+      },
+      {
+        "artifact_record_id": "ARTIFACT_6512267abf535994a536a9af",
+        "artifact_summary": "用延迟到达的消息样本区分事件时间与处理时间，说明迟到处理的边界。",
+        "blockers": [],
+        "interview_ids": [
+          "INTERVIEW_4c7bc803b6825d6dac68aeaa:report"
+        ],
+        "ready": true,
+        "source_ids": [
+          "PROGRESS_e25f91180da0566ba07932cc",
+          "ARTIFACT_6512267abf535994a536a9af",
+          "ATTEMPT_42ecc7fee8c6548da1f8bd59:saved"
+        ],
+        "status": "completed",
+        "task_id": "TASK_c130c01eb74853518148781b",
+        "task_template_id": "CP-T02",
+        "title": "事件时间、处理时间与迟到",
+        "topic_keys": [
+          "stream"
+        ]
+      },
+      {
+        "artifact_record_id": null,
+        "artifact_summary": "",
+        "blockers": [
+          "学习任务尚未标记完成",
+          "尚无已保存的课程练习成果",
+          "关联专题尚缺考核或复测记录"
+        ],
+        "interview_ids": [
+          "INTERVIEW_4c7bc803b6825d6dac68aeaa:report"
+        ],
+        "ready": false,
+        "source_ids": [],
+        "status": "not_started",
+        "task_id": "TASK_443edd3f4130517c9985ee9d",
+        "task_template_id": "CP-T03",
+        "title": "订单与订单明细的粒度",
+        "topic_keys": [
+          "model"
+        ]
+      },
+      {
+        "artifact_record_id": null,
+        "artifact_summary": "",
+        "blockers": [
+          "学习任务尚未标记完成",
+          "尚无已保存的课程练习成果",
+          "关联专题尚缺考核或复测记录"
+        ],
+        "interview_ids": [
+          "INTERVIEW_4c7bc803b6825d6dac68aeaa:report"
+        ],
+        "ready": false,
+        "source_ids": [],
+        "status": "not_started",
+        "task_id": "TASK_2dd7544318b851f2a0cdff04",
+        "task_template_id": "CP-T04",
+        "title": "先正确，再看执行计划",
+        "topic_keys": [
+          "sql"
+        ]
+      },
+      {
+        "artifact_record_id": null,
+        "artifact_summary": "",
+        "blockers": [
+          "学习任务尚未标记完成",
+          "尚无已保存的课程练习成果",
+          "关联专题尚缺考核或复测记录"
+        ],
+        "interview_ids": [
+          "INTERVIEW_4c7bc803b6825d6dac68aeaa:report"
+        ],
+        "ready": false,
+        "source_ids": [],
+        "status": "not_started",
+        "task_id": "TASK_b59f472f6b065c01903fd5ca",
+        "task_template_id": "CP-T05",
+        "title": "状态与检查点的恢复边界",
+        "topic_keys": [
+          "stream"
+        ]
+      },
+      {
+        "artifact_record_id": null,
+        "artifact_summary": "",
+        "blockers": [
+          "学习任务尚未标记完成",
+          "尚无已保存的课程练习成果",
+          "关联专题尚缺考核或复测记录"
+        ],
+        "interview_ids": [
+          "INTERVIEW_4c7bc803b6825d6dac68aeaa:report"
+        ],
+        "ready": false,
+        "source_ids": [],
+        "status": "not_started",
+        "task_id": "TASK_f71c5af760f454afa30b38fd",
+        "task_template_id": "CP-T06",
+        "title": "为金额核对写正常和异常用例",
+        "topic_keys": [
+          "engineering"
+        ]
+      },
+      {
+        "artifact_record_id": null,
+        "artifact_summary": "",
+        "blockers": [
+          "学习任务尚未标记完成",
+          "尚无已保存的课程练习成果",
+          "关联专题尚缺考核或复测记录"
+        ],
+        "interview_ids": [
+          "INTERVIEW_4c7bc803b6825d6dac68aeaa:report"
+        ],
+        "ready": false,
+        "source_ids": [],
+        "status": "not_started",
+        "task_id": "TASK_d85d4914efa8545a91a2aabf",
+        "task_template_id": "CP-T07",
+        "title": "用窗口与水位线解释延迟",
+        "topic_keys": [
+          "stream"
+        ]
+      },
+      {
+        "artifact_record_id": null,
+        "artifact_summary": "",
+        "blockers": [
+          "学习任务尚未标记完成",
+          "尚无已保存的课程练习成果",
+          "关联专题尚缺考核或复测记录"
+        ],
+        "interview_ids": [
+          "INTERVIEW_4c7bc803b6825d6dac68aeaa:report"
+        ],
+        "ready": false,
+        "source_ids": [],
+        "status": "not_started",
+        "task_id": "TASK_0f5bb860f7065930860aefd5",
+        "task_template_id": "CP-T08",
+        "title": "窗口排名与热点验证的边界",
+        "topic_keys": [
+          "sql"
+        ]
+      },
+      {
+        "artifact_record_id": null,
+        "artifact_summary": "",
+        "blockers": [
+          "学习任务尚未标记完成",
+          "尚无已保存的课程练习成果",
+          "关联专题尚缺考核或复测记录"
+        ],
+        "interview_ids": [
+          "INTERVIEW_4c7bc803b6825d6dac68aeaa:report"
+        ],
+        "ready": false,
+        "source_ids": [],
+        "status": "not_started",
+        "task_id": "TASK_2dd283ca8a585de0bd215e66",
+        "task_template_id": "CP-T09",
+        "title": "唯一键、空值与模型变更核对",
+        "topic_keys": [
+          "model"
+        ]
+      },
+      {
+        "artifact_record_id": null,
+        "artifact_summary": "",
+        "blockers": [
+          "学习任务尚未标记完成",
+          "尚无已保存的课程练习成果",
+          "关联专题尚缺考核或复测记录"
+        ],
+        "interview_ids": [
+          "INTERVIEW_4c7bc803b6825d6dac68aeaa:report"
+        ],
+        "ready": false,
+        "source_ids": [],
+        "status": "not_started",
+        "task_id": "TASK_98d8ab5d52445472b038c67f",
+        "task_template_id": "CP-T10",
+        "title": "用日志与关联ID缩小排查范围",
+        "topic_keys": [
+          "engineering"
+        ]
+      }
+    ],
+    "total_tasks": 10
+  },
+  "model_application": {
+    "application_id": "APPLICATION_a7e58cc2f11b5386b271d6a9",
+    "record_id": "APPLICATION_a7e58cc2f11b5386b271d6a9:adopted",
+    "simulated": true
+  },
+  "notice": "已核对采用并在同一会话保存为新的简历版本；原文、原候选与旧版本保留。事实仍由本人核实。",
+  "position_title": "初级数据开发工程师（应届/初级）",
+  "resume_text": "计算机相关专业应届生。用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习；能说明样本输入和汇总结果。未提供复杂连接、执行计划、事实粒度、自动测试与监控的验证材料。没有生产Flink链路、商业上线和真实性能提升经历。用过AI解释报错，尚未提供系统性验证记录。",
+  "scope": {
+    "case_id": "competition-data-01",
+    "plan_id": "PLAN_51ecee3081b35b72",
+    "session_id": "51ecee3081b35b729ee99f46d746c05c",
+    "trace_id": "TRACE_51ecee3081b35b72"
+  },
+  "server_accepted_item_ids": [
+    "revision-1"
+  ],
+  "snapshot_revision": 22,
+  "source_counts": {
+    "assessment": 1,
+    "diagnosis": 1,
+    "input": 1,
+    "interview": 1,
+    "learning_artifact": 1,
+    "learning_progress": 1,
+    "retest": 0
+  },
+  "sources": [
+    {
+      "kind": "input",
+      "record_id": "51ecee3081b35b729ee99f46d746c05c:input",
+      "seq": 1,
+      "title": "创建统一比赛会话",
+      "view": {
+        "evidence": "虚构候选人原文 / 自述，不是核验事实",
+        "jd_text": "初级数据开发工程师（应届/初级）\n岗位职责\n1、开发订单报表，核对多表连接、分组和金额口径。\n2、参与数仓建模，明确事实粒度与维度关系，设计质量检查。\n3、学习和参与实时数据处理，解释事件时间、窗口和恢复边界。\n4、为数据处理设计测试和日志，协作排查问题。\n岗位要求\n1、具备Python和基础SQL能力，能用小样本说明结果。\n2、能说明方案假设、核对依据和未验证边界，愿意学习工程方法。\n加分项\n1、有可复现的流处理或自动化测试练习。\n面试安排\n远程技术交流；不作为技能要求。",
+        "resume_text": "计算机相关专业应届生。用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习；能说明样本输入和汇总结果。未提供复杂连接、执行计划、事实粒度、自动测试与监控的验证材料。没有生产Flink链路、商业上线和真实性能提升经历。用过AI解释报错，尚未提供系统性验证记录。"
+      }
+    },
+    {
+      "kind": "diagnosis",
+      "record_id": "51ecee3081b35b729ee99f46d746c05c:diagnosis",
+      "seq": 2,
+      "title": "A · 保存岗位证据与专题绑定",
+      "view": {
+        "evidence": "A固定证据判断，不证明新增技能",
+        "requirements": [
+          {
+            "action": "none",
+            "evidence_status": "not_applicable",
+            "follow_up": "",
+            "label": "岗位背景",
+            "priority": "none",
+            "rationale": "岗位背景或面试安排，不作为学习差距。",
+            "requirement_id": "JD-01",
+            "resume_quotes": []
+          },
+          {
+            "action": "verify",
+            "evidence_status": "partial",
+            "follow_up": "用订单小样本补充可核对的结果和说明。",
+            "label": "连接与金额口径验证",
+            "priority": "P1",
+            "rationale": "基础SQL有自述，连接后的金额口径尚需小样本验证；不是确认不会。",
+            "requirement_id": "JD-02",
+            "resume_quotes": [
+              "做过基础SQL聚合和离线订单报表课程练习"
+            ]
+          },
+          {
+            "action": "verify",
+            "evidence_status": "not_provided",
+            "follow_up": "用订单小样本补充可核对的结果和说明。",
+            "label": "事实粒度与数据质量",
+            "priority": "P1",
+            "rationale": "未提供足够验证材料，先核对，不断言不会。",
+            "requirement_id": "JD-03",
+            "resume_quotes": []
+          },
+          {
+            "action": "verify",
+            "evidence_status": "not_provided",
+            "follow_up": "用订单小样本补充可核对的结果和说明。",
+            "label": "事件时间与恢复边界",
+            "priority": "P1",
+            "rationale": "未提供足够验证材料，先核对，不断言不会。",
+            "requirement_id": "JD-04",
+            "resume_quotes": []
+          },
+          {
+            "action": "verify",
+            "evidence_status": "not_provided",
+            "follow_up": "用订单小样本补充可核对的结果和说明。",
+            "label": "工程测试与日志",
+            "priority": "P1",
+            "rationale": "未提供足够验证材料，先核对，不断言不会。",
+            "requirement_id": "JD-05",
+            "resume_quotes": []
+          },
+          {
+            "action": "maintain",
+            "evidence_status": "supported",
+            "follow_up": "",
+            "label": "Python与基础SQL",
+            "priority": "P3",
+            "rationale": "有有限课程实践自述；未经独立考核，不等于精通。",
+            "requirement_id": "JD-06",
+            "resume_quotes": [
+              "用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习"
+            ]
+          },
+          {
+            "action": "verify",
+            "evidence_status": "partial",
+            "follow_up": "用订单小样本补充可核对的结果和说明。",
+            "label": "说明验证依据与边界",
+            "priority": "P1",
+            "rationale": "能说明已有样本；完整假设、核对与未验证边界仍应通过交付说明核对。",
+            "requirement_id": "JD-07",
+            "resume_quotes": [
+              "能说明样本输入和汇总结果"
+            ]
+          },
+          {
+            "action": "verify",
+            "evidence_status": "not_provided",
+            "follow_up": "用订单小样本补充可核对的结果和说明。",
+            "label": "可复现流处理或自动测试",
+            "priority": "P2",
+            "rationale": "未提供足够验证材料，先核对，不断言不会。",
+            "requirement_id": "JD-08",
+            "resume_quotes": []
+          },
+          {
+            "action": "none",
+            "evidence_status": "not_applicable",
+            "follow_up": "",
+            "label": "面试安排",
+            "priority": "none",
+            "rationale": "岗位背景或面试安排，不作为学习差距。",
+            "requirement_id": "JD-09",
+            "resume_quotes": []
+          }
+        ]
+      }
+    },
+    {
+      "kind": "learning_progress",
+      "record_id": "PROGRESS_e25f91180da0566ba07932cc",
+      "seq": 10,
+      "title": "保存学习进度（不产生评分）",
+      "view": {
+        "end_date": "2026-11-04",
+        "plan_version": 2,
+        "revision": 1,
+        "start_date": "2026-11-04",
+        "status": "completed",
+        "task_id": "TASK_c130c01eb74853518148781b"
+      }
+    },
+    {
+      "kind": "learning_artifact",
+      "record_id": "ARTIFACT_6512267abf535994a536a9af",
+      "seq": 11,
+      "title": "事件时间、处理时间与迟到 · 课程练习成果",
+      "view": {
+        "exercise": {
+          "checkpoints": [
+            "我保留了 C、E 的并列。",
+            "我没有把处理时间当作订单发生时间。",
+            "我写出了判断丢弃所缺的信息。"
+          ],
+          "deliverable": "两条排序和一句迟到判断；同分钟可标并列。",
+          "hints": [
+            "分别只读一列再排序。",
+            "找出发生时间等于 10:02 的行。"
+          ],
+          "prompt": "对 C、D、E 写出发生顺序、处理顺序，以及按事件时间统计 10:02 这一分钟有哪些订单。只凭两列时间能否判断 D 被丢弃？",
+          "reference_answer": "发生：C、E 并列，然后 D。处理：D、E、C。10:02 包含 C、E。仅凭到达时间无法确定 D 是否被丢弃，还要知道水位线及窗口迟到规则。",
+          "tables": [
+            {
+              "columns": [
+                "订单",
+                "发生",
+                "收到并处理"
+              ],
+              "rows": [
+                [
+                  "C",
+                  "10:02",
+                  "10:06"
+                ],
+                [
+                  "D",
+                  "10:03",
+                  "10:04"
+                ],
+                [
+                  "E",
+                  "10:02",
+                  "10:05"
+                ]
+              ],
+              "title": "必做数据"
+            }
+          ]
+        },
+        "notice": "内置课程小样本及参考结果，用于演示成果如何进入简历证据链。",
+        "plan_version": 2,
+        "source_kind": "curated_demo",
+        "summary": "用延迟到达的消息样本区分事件时间与处理时间，说明迟到处理的边界。",
+        "task_id": "TASK_c130c01eb74853518148781b",
+        "task_template_id": "CP-T02",
+        "title": "事件时间、处理时间与迟到 · 课程练习成果",
+        "topic_keys": [
+          "stream"
+        ],
+        "verification": "fixed_sample",
+        "version": "coursework-artifact-demo-v1"
+      }
+    },
+    {
+      "kind": "assessment",
+      "record_id": "ATTEMPT_42ecc7fee8c6548da1f8bd59:saved",
+      "seq": 14,
+      "title": "日考核 · 第1题答卷",
+      "view": {
+        "answer": "我先列出样本，检查粒度与结果。",
+        "attempt_id": "ATTEMPT_42ecc7fee8c6548da1f8bd59",
+        "evidence": "固定评分不证明答题能力",
+        "grade": {
+          "application_id": "APPLICATION_62c4e0d6d082575caf2bf023",
+          "evidence_topics": [
+            {
+              "dimensions": [
+                {
+                  "evidence": [
+                    {
+                      "end": 15,
+                      "quote": "我先列出样本，检查粒度与结果。",
+                      "source_id": "ATTEMPT_42ecc7fee8c6548da1f8bd59",
+                      "start": 0
+                    }
+                  ],
+                  "evidence_state": "quoted",
+                  "key": "result",
+                  "rationale": "本地传输固定分项70，仅验证合同与重算，不分析答卷。",
+                  "score": 70
+                },
+                {
+                  "evidence": [
+                    {
+                      "end": 15,
+                      "quote": "我先列出样本，检查粒度与结果。",
+                      "source_id": "ATTEMPT_42ecc7fee8c6548da1f8bd59",
+                      "start": 0
+                    }
+                  ],
+                  "evidence_state": "quoted",
+                  "key": "basis",
+                  "rationale": "本地传输固定分项70，仅验证合同与重算，不分析答卷。",
+                  "score": 70
+                }
+              ],
+              "topic_key": "stream"
+            }
+          ],
+          "feedback": "固定候选响应，不构成真实评分。",
+          "notice": "已核对采用的候选评分。当前是虚构案例会话，能力变化仍为演示，不证明用户真实掌握。",
+          "scores": [
+            {
+              "dimensions": {
+                "basis": 70,
+                "result": 70
+              },
+              "score": 70,
+              "topic_key": "stream"
+            }
+          ],
+          "simulated": true,
+          "source": "reviewed_candidate",
+          "status": "scored",
+          "version": "competition-fixed-rubric-v1"
+        },
+        "plan_version": 2,
+        "question": "温度传感器断线时会缓存读数。恢复后补发一笔落在已关闭时间窗口的读数，应根据哪些时间和规则决定如何处理？",
+        "task_ids": [
+          "TASK_c130c01eb74853518148781b"
+        ],
+        "topic_keys": [
+          "stream"
+        ]
+      }
+    },
+    {
+      "kind": "interview",
+      "record_id": "INTERVIEW_4c7bc803b6825d6dac68aeaa:report",
+      "seq": 23,
+      "title": "岗位面试复盘 · 提前结束",
+      "view": {
+        "answered_count": 1,
+        "findings": [
+          {
+            "analysis_kind": "candidate_reviewed",
+            "answer_record_id": "ITURN_cc0b6e313cc057d08e48b358:saved",
+            "answer_text": "我用订单小样本核对关联后的金额，没有生产验证经历。",
+            "answer_turn_id": "ITURN_cc0b6e313cc057d08e48b358",
+            "confidence": "low",
+            "evidence": [
+              {
+                "end": 25,
+                "quote": "我用订单小样本核对关联后的金额，没有生产验证经历。",
+                "source_id": "ITURN_cc0b6e313cc057d08e48b358",
+                "start": 0
+              }
+            ],
+            "finding_id": "ITURN_cc0b6e313cc057d08e48b358:feedback",
+            "issue": null,
+            "observation": "本地固定候选反馈，未做语义评价。",
+            "question_turn_id": "ITURN_63252ba137395738bc2ca092",
+            "quote": "我用订单小样本核对关联后的金额，没有生产验证经历。",
+            "reference_outline": "此轮已采用候选问题，原题参考不适用；可在结束后核对候选复盘与原话。",
+            "requirement_ids": [
+              "JD-06",
+              "JD-07"
+            ],
+            "suggestion": "核对结论、原始材料与个人贡献边界。",
+            "title": "项目经历与岗位理解",
+            "topic_ids": []
+          }
+        ],
+        "interview_id": "INTERVIEW_4c7bc803b6825d6dac68aeaa",
+        "status": "ended_early"
+      }
+    },
+    {
+      "kind": "resume",
+      "record_id": "APPLICATION_a7e58cc2f11b5386b271d6a9:adopted",
+      "seq": null,
+      "title": "简历候选核对采用记录",
+      "view": {
+        "application_id": "APPLICATION_a7e58cc2f11b5386b271d6a9",
+        "notice": "同一虚构会话内经核对采用；固定替身结果不证明真实能力或简历事实。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "manifest_version": 1,
+  "contract_version": "competition-case-v1",
+  "case_id": "competition-data-01",
+  "files": {
+    "examples/competition_case/v1/case.json": "847e22805282c59d4ba8b5c2dbc53bc96db70437d22413f387251c5d6beebe07",
+    "examples/competition_case/v1/cards/sql-join-grain.json": "fa806d864aed031bd6155da3c2e6e7827935ee97b7ae83f85af69270238896f1",
+    "knowledge_base/curated_resources/v1/catalog.json": "d96a417c3c455bcb888005c94ba1576c575bd0453341c07f595dd8d2ffa02a0e"
+  },
+  "notice": "摘要用于一致性校验，不证明资料/模型输出或个人能力真实。"
+}

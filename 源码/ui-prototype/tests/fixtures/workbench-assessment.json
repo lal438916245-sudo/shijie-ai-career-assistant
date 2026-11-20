@@ -1,0 +1,247 @@
+{
+  "attempt": {
+    "answer": "固定验收作答：先核对粒度和金额。",
+    "attempt_id": "ATTEMPT_defcb980c9c05e6c89f77d00",
+    "event": "answer_submitted",
+    "fingerprint": "a425bf9e9a9fc86852c09d10d3e0b64a10822d3d65f7e6de66af2189e8222a7c",
+    "fixture_path": "repair",
+    "grade": {
+      "feedback": "固定示例：先核对结果，再补依据和边界。分数由所选演示路线决定，与输入答案内容无关。",
+      "scores": [
+        {
+          "dimensions": {
+            "basis": 55,
+            "result": 55
+          },
+          "score": 55,
+          "topic_key": "sql"
+        }
+      ],
+      "status": "scored",
+      "version": "competition-fixed-rubric-v1"
+    },
+    "kind": "day",
+    "notice": "答案原文由用户填写；反馈与分数为所选固定路线，未分析用户作答，不构成真实评分。",
+    "plan_version": 2,
+    "question": {
+      "bank_key": "day:0",
+      "basis": "题目只取本次确认范围中的任务目标；日2题、周3题，不按专题各生成一套。",
+      "branch": "confirmed_scope",
+      "fingerprint": "a425bf9e9a9fc86852c09d10d3e0b64a10822d3d65f7e6de66af2189e8222a7c",
+      "ordinal": 0,
+      "parts": [
+        {
+          "prompt": "订单A=60元、B=40元，A有两条明细，B有一条。按订单ID连接后，直接累加订单金额是多少？真实订单总额是多少？写出修正办法。",
+          "reference": "连接行上60+60+40=160；真实订单总额60+40=100。若只要订单总额直接查订单表；需要明细指标时先按订单ID汇总明细再连接，不能按金额去重。",
+          "rubric": {
+            "dimensions": [
+              {
+                "key": "result",
+                "label": "结论与结果",
+                "weight": 5000
+              },
+              {
+                "key": "basis",
+                "label": "依据与边界",
+                "weight": 5000
+              }
+            ],
+            "topic_key": "sql",
+            "version": "competition-fixed-rubric-v1"
+          },
+          "task_id": "TASK_5cbfa4acd2bd5469ad475e69",
+          "topic_key": "sql"
+        }
+      ],
+      "prompt": "订单A=60元、B=40元，A有两条明细，B有一条。按订单ID连接后，直接累加订单金额是多少？真实订单总额是多少？写出修正办法。",
+      "question_id": "QUESTION_0f43e50fa8f451139ac1adda",
+      "source_gap_ids": [
+        "GAP_28603ea5e7595af8#223e0e847f92"
+      ],
+      "topic_ids": [
+        "TOPIC_86976ce32bf15d03a11e5d9e"
+      ]
+    },
+    "question_id": "QUESTION_0f43e50fa8f451139ac1adda",
+    "record_id": "ATTEMPT_defcb980c9c05e6c89f77d00:saved",
+    "run_id": "RUN_081175b5455f5a93b8de7871",
+    "run_mode": "demo",
+    "scope": {
+      "case_id": "competition-data-01",
+      "plan_id": "PLAN_28603ea5e7595af8",
+      "session_id": "28603ea5e7595af8a7cc5a32fe598df3",
+      "trace_id": "TRACE_28603ea5e7595af8"
+    },
+    "scope_snapshot": {
+      "basis": "按本次确认的日期范围与任务出题；未开始/学习中/暂缓也可自愿选入，开始时冻结实际状态。",
+      "kind": "day",
+      "period_end": "2026-11-03",
+      "period_start": "2026-11-03",
+      "plan_digest": "ecf6fbad5e708619ad78ee95d477955adfac2932a8e0dfeb357ea5956394f9e6",
+      "plan_version": 2,
+      "question_count": 2,
+      "session_revision": 6,
+      "tasks": [
+        {
+          "end_date": "2026-11-03",
+          "schedule_revision": 0,
+          "source_gap_ids": [
+            "GAP_28603ea5e7595af8#223e0e847f92",
+            "GAP_28603ea5e7595af8#6aff07b86e8b"
+          ],
+          "start_date": "2026-11-03",
+          "status": "not_started",
+          "task_id": "TASK_5cbfa4acd2bd5469ad475e69",
+          "task_template_id": "CP-T01",
+          "title": "连接后金额为什么变大了？",
+          "topic_ids": [
+            "TOPIC_86976ce32bf15d03a11e5d9e",
+            "TOPIC_564a6416bd3656ee859d7a29"
+          ],
+          "topic_keys": [
+            "sql",
+            "model"
+          ]
+        }
+      ],
+      "timezone": "Asia/Shanghai"
+    },
+    "simulated": true,
+    "source_kind": "fixed_stub_output",
+    "topic_keys": [
+      "sql"
+    ],
+    "commit_seq": 9
+  },
+  "capabilities": [
+    {
+      "topic_key": "sql",
+      "state": "needs_retest",
+      "label": "待补强复测",
+      "explanation": "最近一次有效专题分项低于60；旧通过不能抵消新失败。",
+      "rule_version": "competition-demo-mastery-v1",
+      "pass_score": 60,
+      "distinct_passes": 0,
+      "latest_score": 55,
+      "latest_attempt_id": "ATTEMPT_defcb980c9c05e6c89f77d00",
+      "evidence_ids": [
+        "ATTEMPT_defcb980c9c05e6c89f77d00"
+      ],
+      "pending_ids": [],
+      "real_state": "unassessed",
+      "simulated": true,
+      "run_mode": "demo",
+      "notice": "这是隔离的演示状态，不代表你的真实能力；未写入真实掌握状态。",
+      "topic_id": "TOPIC_86976ce32bf15d03a11e5d9e",
+      "title": "复杂SQL与性能分析",
+      "source_gap_ids": [
+        "GAP_28603ea5e7595af8#223e0e847f92"
+      ]
+    },
+    {
+      "topic_key": "stream",
+      "state": "learning",
+      "label": "待首次验证",
+      "explanation": "暂无已提交、分项完整的演示答卷；学习完成不自动通过。",
+      "rule_version": "competition-demo-mastery-v1",
+      "pass_score": 60,
+      "distinct_passes": 0,
+      "latest_score": null,
+      "latest_attempt_id": null,
+      "evidence_ids": [],
+      "pending_ids": [],
+      "real_state": "unassessed",
+      "simulated": true,
+      "run_mode": "demo",
+      "notice": "这是隔离的演示状态，不代表你的真实能力；未写入真实掌握状态。",
+      "topic_id": "TOPIC_f270b17f37a75e0e9423f1e6",
+      "title": "实时计算与故障恢复",
+      "source_gap_ids": [
+        "GAP_28603ea5e7595af8#cef0c0bbcd86"
+      ]
+    },
+    {
+      "topic_key": "model",
+      "state": "learning",
+      "label": "待首次验证",
+      "explanation": "暂无已提交、分项完整的演示答卷；学习完成不自动通过。",
+      "rule_version": "competition-demo-mastery-v1",
+      "pass_score": 60,
+      "distinct_passes": 0,
+      "latest_score": null,
+      "latest_attempt_id": null,
+      "evidence_ids": [],
+      "pending_ids": [],
+      "real_state": "unassessed",
+      "simulated": true,
+      "run_mode": "demo",
+      "notice": "这是隔离的演示状态，不代表你的真实能力；未写入真实掌握状态。",
+      "topic_id": "TOPIC_564a6416bd3656ee859d7a29",
+      "title": "数仓建模与数据质量",
+      "source_gap_ids": [
+        "GAP_28603ea5e7595af8#6aff07b86e8b"
+      ]
+    },
+    {
+      "topic_key": "engineering",
+      "state": "learning",
+      "label": "待首次验证",
+      "explanation": "暂无已提交、分项完整的演示答卷；学习完成不自动通过。",
+      "rule_version": "competition-demo-mastery-v1",
+      "pass_score": 60,
+      "distinct_passes": 0,
+      "latest_score": null,
+      "latest_attempt_id": null,
+      "evidence_ids": [],
+      "pending_ids": [],
+      "real_state": "unassessed",
+      "simulated": true,
+      "run_mode": "demo",
+      "notice": "这是隔离的演示状态，不代表你的真实能力；未写入真实掌握状态。",
+      "topic_id": "TOPIC_52a1eecc6e99554db1785622",
+      "title": "工程测试与可观测性",
+      "source_gap_ids": [
+        "GAP_28603ea5e7595af8#635c976a04b7",
+        "GAP_28603ea5e7595af8#5b3e43bbb335"
+      ]
+    }
+  ],
+  "unanswered_question": {
+    "bank_key": "day:0",
+    "basis": "题目只取本次确认范围中的任务目标；日2题、周3题，不按专题各生成一套。",
+    "branch": "confirmed_scope",
+    "fingerprint": "a425bf9e9a9fc86852c09d10d3e0b64a10822d3d65f7e6de66af2189e8222a7c",
+    "ordinal": 0,
+    "prompt": "订单A=60元、B=40元，A有两条明细，B有一条。按订单ID连接后，直接累加订单金额是多少？真实订单总额是多少？写出修正办法。",
+    "question_id": "QUESTION_0f43e50fa8f451139ac1adda",
+    "source_gap_ids": [
+      "GAP_28603ea5e7595af8#223e0e847f92"
+    ],
+    "topic_ids": [
+      "TOPIC_86976ce32bf15d03a11e5d9e"
+    ],
+    "parts": [
+      {
+        "prompt": "订单A=60元、B=40元，A有两条明细，B有一条。按订单ID连接后，直接累加订单金额是多少？真实订单总额是多少？写出修正办法。",
+        "rubric": {
+          "dimensions": [
+            {
+              "key": "result",
+              "label": "结论与结果",
+              "weight": 5000
+            },
+            {
+              "key": "basis",
+              "label": "依据与边界",
+              "weight": 5000
+            }
+          ],
+          "topic_key": "sql",
+          "version": "competition-fixed-rubric-v1"
+        },
+        "task_id": "TASK_5cbfa4acd2bd5469ad475e69",
+        "topic_key": "sql"
+      }
+    ]
+  }
+}

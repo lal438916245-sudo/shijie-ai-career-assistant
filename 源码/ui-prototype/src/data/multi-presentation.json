@@ -1,0 +1,532 @@
+{
+  "schema_version": 2,
+  "scenario_id": "data-engineer-multi-v2",
+  "disclosure": {
+    "generator_type": "curated_demo",
+    "model_name": null,
+    "note": "人工整理的合成固定案例；输入、答卷、评分和面试对话均用于演示，不是真实求职者或本轮模型结果。"
+  },
+  "topic_order": [
+    "stream",
+    "sql",
+    "model",
+    "engineering"
+  ],
+  "topics": [
+    {
+      "key": "stream",
+      "gap_id": "GAP_MULTI_STREAM",
+      "title": "实时计算与故障恢复",
+      "input_refs": [
+        "input:resume-python",
+        "input:jd-stream"
+      ]
+    },
+    {
+      "key": "sql",
+      "gap_id": "GAP_MULTI_SQL",
+      "title": "复杂 SQL 与性能分析",
+      "input_refs": [
+        "input:resume-sql",
+        "input:jd-sql"
+      ]
+    },
+    {
+      "key": "model",
+      "gap_id": "GAP_MULTI_MODEL",
+      "title": "数仓建模与数据质量",
+      "input_refs": [
+        "input:resume-python",
+        "input:jd-model"
+      ]
+    },
+    {
+      "key": "engineering",
+      "gap_id": "GAP_MULTI_ENGINEERING",
+      "title": "工程测试与可观测性",
+      "input_refs": [
+        "input:resume-python",
+        "input:jd-engineering"
+      ]
+    }
+  ],
+  "input_snippets": [
+    {
+      "id": "input:resume-python",
+      "kind": "resume",
+      "text": "使用 Python 完成订单数据清洗，编写基础 SQL 聚合查询并制作离线报表。"
+    },
+    {
+      "id": "input:resume-sql",
+      "kind": "resume",
+      "text": "使用 Join、分组聚合完成课程订单报表练习，尚未记录执行计划或性能对照。"
+    },
+    {
+      "id": "input:jd-stream",
+      "kind": "jd",
+      "text": "理解窗口、乱序与恢复；能解释故障处理取舍。"
+    },
+    {
+      "id": "input:jd-sql",
+      "kind": "jd",
+      "text": "能分析复杂 SQL 与数据倾斜，验证优化前后结果及开销。"
+    },
+    {
+      "id": "input:jd-model",
+      "kind": "jd",
+      "text": "掌握事实粒度、维度关系与质量校验。"
+    },
+    {
+      "id": "input:jd-engineering",
+      "kind": "jd",
+      "text": "具备测试、日志、指标与告警的基本工程意识。"
+    }
+  ],
+  "strengths": [
+    {
+      "title": "Python 基础与数据清洗",
+      "input_refs": [
+        "input:resume-python"
+      ],
+      "note": "原简历提供基础经历；本案例未对该项能力正式考试，不标为已掌握。"
+    }
+  ],
+  "schedule": {
+    "version": 2,
+    "caseId": "data-engineer-multi-v2",
+    "anchor": "2026-10-19",
+    "snapshot_day": 10,
+    "items": [
+      {
+        "id": "multi-task-5101",
+        "task_id": 5101,
+        "topic": "sql",
+        "day": 1,
+        "kind": "study",
+        "title": "复杂查询与结果正确性",
+        "goal": "用窗口函数处理订单去重、分组排名，说明边界。",
+        "output": "查询说明与边界用例",
+        "check": "不看笔记解释你的方案，并指出一个边界或反例。",
+        "minutes": 35,
+        "status": "completed"
+      },
+      {
+        "id": "multi-task-5102",
+        "task_id": 5102,
+        "topic": "stream",
+        "day": 2,
+        "kind": "study",
+        "title": "事件时间与迟到数据",
+        "goal": "画出窗口、Watermark、迟到数据分流的时间线。",
+        "output": "时间线与迟到数据策略",
+        "check": "不看笔记解释你的方案，并指出一个边界或反例。",
+        "minutes": 40,
+        "status": "completed"
+      },
+      {
+        "id": "multi-task-5103",
+        "task_id": 5103,
+        "topic": "model",
+        "day": 3,
+        "kind": "study",
+        "title": "事实粒度与维度关系",
+        "goal": "明确订单与订单明细的粒度，说明慢变维选择。",
+        "output": "模型草图与粒度说明",
+        "check": "不看笔记解释你的方案，并指出一个边界或反例。",
+        "minutes": 35,
+        "status": "completed"
+      },
+      {
+        "id": "multi-task-5104",
+        "task_id": 5104,
+        "topic": "sql",
+        "day": 4,
+        "kind": "study",
+        "title": "执行计划与性能瓶颈",
+        "goal": "比较扫描、Join 和聚合代价，说明如何验证倾斜。",
+        "output": "执行计划排查清单",
+        "check": "不看笔记解释你的方案，并指出一个边界或反例。",
+        "minutes": 45,
+        "status": "completed"
+      },
+      {
+        "id": "multi-task-5105",
+        "task_id": 5105,
+        "topic": "stream",
+        "day": 5,
+        "kind": "study",
+        "title": "状态、Checkpoint 与恢复",
+        "goal": "区分状态恢复、输出重复和端到端一致性边界。",
+        "output": "恢复步骤清单",
+        "check": "不看笔记解释你的方案，并指出一个边界或反例。",
+        "minutes": 45,
+        "status": "completed"
+      },
+      {
+        "id": "multi-task-5106",
+        "task_id": 5106,
+        "topic": "engineering",
+        "day": 6,
+        "kind": "study",
+        "title": "测试案例与验收清单",
+        "goal": "为去重、迟到、失败恢复设计输入与预期结果。",
+        "output": "测试案例表；本页不运行代码",
+        "check": "不看笔记解释你的方案，并指出一个边界或反例。",
+        "minutes": 30,
+        "status": "completed"
+      },
+      {
+        "id": "multi-weekly-7",
+        "task_id": null,
+        "topic": null,
+        "day": 7,
+        "kind": "weekly",
+        "title": "第一周关联复盘",
+        "goal": "回看各专题证据，选择仍不确定的一处补学；可以按时间冲突改期。",
+        "output": "复盘与下一步清单",
+        "check": "哪些任务做完了，哪些能力还没有通过证据？",
+        "minutes": 25,
+        "status": "completed"
+      },
+      {
+        "id": "multi-task-5107",
+        "task_id": 5107,
+        "topic": "stream",
+        "day": 8,
+        "kind": "study",
+        "title": "实时聚合方案与故障分析",
+        "goal": "串联窗口、状态、恢复点与下游幂等。",
+        "output": "完整分析与故障边界",
+        "check": "不看笔记解释你的方案，并指出一个边界或反例。",
+        "minutes": 50,
+        "status": "completed"
+      },
+      {
+        "id": "multi-task-5108",
+        "task_id": 5108,
+        "topic": "sql",
+        "day": 9,
+        "kind": "study",
+        "title": "数据倾斜与优化取舍",
+        "goal": "补学热点键与去重的瓶颈，先验证再优化。",
+        "output": "倾斜排查与对照方案",
+        "check": "不看笔记解释你的方案，并指出一个边界或反例。",
+        "minutes": 40,
+        "status": "in_progress"
+      },
+      {
+        "id": "multi-task-5109",
+        "task_id": 5109,
+        "topic": "model",
+        "day": 10,
+        "kind": "study",
+        "title": "数据质量与模型变更",
+        "goal": "设计唯一性、完整性、对账及字段变更校验。",
+        "output": "质量规则与变更检查表",
+        "check": "不看笔记解释你的方案，并指出一个边界或反例。",
+        "minutes": 35,
+        "status": "in_progress"
+      },
+      {
+        "id": "multi-task-5110",
+        "task_id": 5110,
+        "topic": "engineering",
+        "day": 11,
+        "kind": "study",
+        "title": "指标、日志、告警与验证",
+        "goal": "选择延迟、状态大小、积压与吞吐指标，编写排查顺序。",
+        "output": "指标面板草图与告警说明",
+        "check": "不看笔记解释你的方案，并指出一个边界或反例。",
+        "minutes": 40,
+        "status": "not_started"
+      },
+      {
+        "id": "multi-buffer-12",
+        "task_id": null,
+        "topic": null,
+        "day": 12,
+        "kind": "buffer",
+        "title": "弹性补学与时间调整",
+        "goal": "回看各专题证据，选择仍不确定的一处补学；可以按时间冲突改期。",
+        "output": "复盘与下一步清单",
+        "check": "哪些任务做完了，哪些能力还没有通过证据？",
+        "minutes": 25,
+        "status": "not_started"
+      },
+      {
+        "id": "multi-buffer-13",
+        "task_id": null,
+        "topic": null,
+        "day": 13,
+        "kind": "buffer",
+        "title": "面试反馈补强与缓冲",
+        "goal": "回看各专题证据，选择仍不确定的一处补学；可以按时间冲突改期。",
+        "output": "复盘与下一步清单",
+        "check": "哪些任务做完了，哪些能力还没有通过证据？",
+        "minutes": 25,
+        "status": "not_started"
+      },
+      {
+        "id": "multi-weekly-14",
+        "task_id": null,
+        "topic": null,
+        "day": 14,
+        "kind": "weekly",
+        "title": "第二周复盘与后续验证",
+        "goal": "回看各专题证据，选择仍不确定的一处补学；可以按时间冲突改期。",
+        "output": "复盘与下一步清单",
+        "check": "哪些任务做完了，哪些能力还没有通过证据？",
+        "minutes": 25,
+        "status": "not_started"
+      }
+    ]
+  },
+  "answer_examples": [
+    {
+      "question_id": 5201,
+      "attempt_id": 5301,
+      "text": "用处理时间定时输出；迟到订单直接并入下一窗口。失败后从头运行即可。",
+      "origin": "synthetic_example"
+    },
+    {
+      "question_id": 5202,
+      "attempt_id": 5302,
+      "text": "按事件时间与水位线关闭窗口，迟到流单独补偿。失败时从最近成功 Checkpoint 恢复；还要检查输出是否重复。",
+      "origin": "synthetic_example"
+    },
+    {
+      "question_id": 5203,
+      "attempt_id": 5303,
+      "text": "先核对键与状态分区映射，再检查最近成功恢复点、重放区间和事务边界。以稳定业务键验证下游去重，逐层比对计数，保留回滚点。",
+      "origin": "synthetic_example"
+    },
+    {
+      "question_id": 5211,
+      "attempt_id": 5311,
+      "text": "先为用户 ID 建索引，再增大并行度，统计最后的订单总量。",
+      "origin": "synthetic_example"
+    },
+    {
+      "question_id": 5212,
+      "attempt_id": 5312,
+      "text": "比较分区扫描、各阶段输入量和热点键分布；对照正常日期，尝试局部聚合，观察是否降低单节点压力。",
+      "origin": "synthetic_example"
+    },
+    {
+      "question_id": 5213,
+      "attempt_id": 5313,
+      "text": "直接加盐并对所有列 distinct；如果更快就保留，不需要再比较业务结果。",
+      "origin": "synthetic_example"
+    },
+    {
+      "question_id": 5221,
+      "attempt_id": 5321,
+      "text": "订单与明细分开定义一行的含义，校验主键唯一、金额对账和外键完整。字段变更先比较新旧口径与历史回放；慢变维策略还需补充。",
+      "origin": "synthetic_example"
+    }
+  ],
+  "plan_review": {
+    "id": "REVIEW_MULTI_01",
+    "agent": "F · 学习计划审查员",
+    "plan_id": "PLAN_MULTI_02",
+    "initial_version": "PLAN_MULTI_DRAFT_01",
+    "revised_version": "PLAN_MULTI_REVISED_02",
+    "initial": [
+      {
+        "task_id": 5101,
+        "day": 1,
+        "expected_output": "查询说明与边界用例"
+      },
+      {
+        "task_id": 5102,
+        "day": 2,
+        "expected_output": "时间线与迟到数据策略"
+      },
+      {
+        "task_id": 5103,
+        "day": 3,
+        "expected_output": "模型草图与粒度说明"
+      },
+      {
+        "task_id": 5104,
+        "day": 2,
+        "expected_output": "执行计划排查清单"
+      },
+      {
+        "task_id": 5105,
+        "day": 2,
+        "expected_output": "恢复步骤清单"
+      },
+      {
+        "task_id": 5106,
+        "day": 6,
+        "expected_output": ""
+      },
+      {
+        "task_id": 5107,
+        "day": 8,
+        "expected_output": "完整分析与故障边界"
+      },
+      {
+        "task_id": 5108,
+        "day": 9,
+        "expected_output": "倾斜排查与对照方案"
+      },
+      {
+        "task_id": 5109,
+        "day": 10,
+        "expected_output": "质量规则与变更检查表"
+      },
+      {
+        "task_id": 5110,
+        "day": 11,
+        "expected_output": "指标面板草图与告警说明"
+      }
+    ],
+    "revised": [
+      {
+        "task_id": 5101,
+        "day": 1,
+        "expected_output": "查询说明与边界用例"
+      },
+      {
+        "task_id": 5102,
+        "day": 2,
+        "expected_output": "时间线与迟到数据策略"
+      },
+      {
+        "task_id": 5103,
+        "day": 3,
+        "expected_output": "模型草图与粒度说明"
+      },
+      {
+        "task_id": 5104,
+        "day": 4,
+        "expected_output": "执行计划排查清单"
+      },
+      {
+        "task_id": 5105,
+        "day": 5,
+        "expected_output": "恢复步骤清单"
+      },
+      {
+        "task_id": 5106,
+        "day": 6,
+        "expected_output": "测试案例表；本页不运行代码"
+      },
+      {
+        "task_id": 5107,
+        "day": 8,
+        "expected_output": "完整分析与故障边界"
+      },
+      {
+        "task_id": 5108,
+        "day": 9,
+        "expected_output": "倾斜排查与对照方案"
+      },
+      {
+        "task_id": 5109,
+        "day": 10,
+        "expected_output": "质量规则与变更检查表"
+      },
+      {
+        "task_id": 5110,
+        "day": 11,
+        "expected_output": "指标面板草图与告警说明"
+      }
+    ],
+    "issues": [
+      {
+        "title": "同日负荷过高",
+        "task_ids": [
+          5102,
+          5104,
+          5105
+        ],
+        "finding": "三项任务挤在第 2 天，预计投入 130 分钟。",
+        "change": "B 调整为 D02、D04、D05，并保留弹性时间。"
+      },
+      {
+        "title": "测试任务缺少验收成果",
+        "task_ids": [
+          5106
+        ],
+        "finding": "初稿未定义测试任务预期产出。",
+        "change": "B 补充测试案例表和预期结果，便于人工验收。"
+      }
+    ],
+    "note": "人工整理的 F 审查 / B 调整版本对照，不代表本轮执行了模型审查或自动修订。"
+  },
+  "interview_dialogue": {
+    "evidence_id": "INTERVIEW_MULTI_01",
+    "persona": "E · 模拟面试官｜数据开发岗位",
+    "context": "基于合成简历与 JD；实时专题已掌握，SQL 优化仍待补学。",
+    "turns": [
+      {
+        "role": "interviewer",
+        "text": "订单高峰期看板延迟升高，吞吐没有下降，你先看哪些指标，按什么顺序排查？"
+      },
+      {
+        "role": "candidate",
+        "text": "先比较事件时间与水位线差距，再看状态大小与 Checkpoint 耗时，随后检查下游积压。每一步与正常时段对照，先定位瓶颈再改参数。"
+      },
+      {
+        "role": "interviewer",
+        "text": "如果不能回滚最近的状态变更，而且热点查询也变慢，你会怎样调整？"
+      },
+      {
+        "role": "candidate",
+        "text": "先保留恢复点并限制变更范围，对比水位线、状态和下游延迟；热点查询单独取样验证结果与执行计划。SQL 优化证据还不足，需要补做对照，不直接全量加盐。"
+      }
+    ],
+    "feedback": [
+      {
+        "title": "已表现出的分析",
+        "text": "能选择分层指标，说明排查顺序和恢复边界。",
+        "refs": [
+          {
+            "kind": "attempt",
+            "ref_id": "5303"
+          }
+        ]
+      },
+      {
+        "title": "仍需补强",
+        "text": "SQL 最新正式记录 54 分，仍要补语义与性能对照验证。面试回答不覆盖该失败记录。",
+        "refs": [
+          {
+            "kind": "attempt",
+            "ref_id": "5313"
+          }
+        ]
+      }
+    ]
+  },
+  "resume_edits": [
+    {
+      "suggestion_id": "RESUME_MULTI_STREAM",
+      "before": "学习过 Flink，了解实时计算。",
+      "action": "优化学习成果",
+      "input_refs": [
+        "input:resume-python"
+      ],
+      "review_note": "从术语清单改为训练内容与分析边界，不声称生产经验。"
+    },
+    {
+      "suggestion_id": "RESUME_MULTI_SQL",
+      "before": "精通复杂 SQL 与性能优化。",
+      "action": "降低夸大措辞",
+      "input_refs": [
+        "input:resume-sql"
+      ],
+      "review_note": "基础经历取自原文；最新 54 分只说明高级优化仍需补学。"
+    },
+    {
+      "suggestion_id": "RESUME_MULTI_BLOCKED",
+      "before": "主导千万级实时平台建设，性能提升 80%。",
+      "action": "拦截无依据项目声明",
+      "input_refs": [],
+      "review_note": "不提供可复制的强化文本，建议先积累真实项目证据。"
+    }
+  ]
+}

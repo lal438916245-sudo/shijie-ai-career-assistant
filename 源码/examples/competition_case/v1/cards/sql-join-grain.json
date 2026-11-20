@@ -1,0 +1,258 @@
+{
+  "card_version": "beginner-card-v1",
+  "card_id": "CP-CARD-SQL-01",
+  "case_id": "competition-data-01",
+  "task_template_id": "CP-T01",
+  "source_kind": "curated_demo",
+  "evidence_use": "learning_content_only",
+  "topic_ids": [
+    "sql",
+    "model"
+  ],
+  "title": "连接后金额为什么变大了？",
+  "subtitle": "纸面也能跟着做：先看一行代表什么，再核对连接后的金额。",
+  "prerequisites": "会做整数加法即可；今天不需要数据库、编程环境或Power BI，也不用先会写SQL。",
+  "objectives": [
+    "说清订单表和明细表各一行的含义。",
+    "按订单ID手工配对，指出订单金额为何重复。",
+    "交付连接结果、正确总额与核对理由；不靠SUM(DISTINCT 金额)碰运气。"
+  ],
+  "basis": {
+    "position_ref": "CP-POS-01",
+    "jd_quote": "开发订单报表，核对多表连接、分组和金额口径。",
+    "gap_template_id": "CP-GAP-SQL",
+    "evidence_status": "partial",
+    "reason": "固定候选人自述有基础聚合，但复杂连接材料尚不足；先用小样本验证，不断言不会。"
+  },
+  "budget": {
+    "total_minutes": 60,
+    "learning_minutes": 30,
+    "core_minutes": 15,
+    "review_minutes": 5,
+    "optional_minutes": 10,
+    "reading_minutes_in_learning": 7,
+    "notice": "必做路线50分钟，选做另10分钟；阅读包含在讲解30分钟中，不额外叠加。时间是建议，不是必须耗满。"
+  },
+  "steps": [
+    {
+      "title": "准备纸笔，先写口径",
+      "minutes": 4,
+      "phase": "learning",
+      "instruction": "写下今天只统计订单总额，不统计商品件数、不做性能优化。"
+    },
+    {
+      "title": "看懂四个词",
+      "minutes": 9,
+      "phase": "learning",
+      "instruction": "对照下方中文概念，把订单表、明细表各读一行；用自己的话复述。"
+    },
+    {
+      "title": "带问题读一小段资料",
+      "minutes": 7,
+      "phase": "learning",
+      "instruction": "主、备选只读一份，不叠加：主资料2.6看JOIN配对与LEFT JOIN结果；英文吃力可改看中文备选的事实/维度两段。链接受限则用本卡中文引导与跟做表，不通读整章。"
+    },
+    {
+      "title": "跟做一个完整例子",
+      "minutes": 10,
+      "phase": "learning",
+      "instruction": "照着四条配对结果手算300，再回原订单表算150，圈出重复的是订单总额。"
+    },
+    {
+      "title": "独立练习再核对",
+      "minutes": 15,
+      "phase": "core",
+      "instruction": "先独立列行、算总额和说明理由，再展开提示和参考；把仍不懂的点写下来。"
+    },
+    {
+      "title": "自查与可选挑战",
+      "minutes": 15,
+      "phase": "review_optional",
+      "instruction": "先用5分钟按自查点复盘；仍有余力再用10分钟尝试无明细订单，不做选做也可完成必做目标。"
+    }
+  ],
+  "concepts": [
+    {
+      "term": "表、行和列",
+      "text": "把表看成一张清单：一行是一条记录，一列是一类信息。订单表一行代表一笔订单；明细表一行代表该订单中的一条商品明细。"
+    },
+    {
+      "term": "关联键",
+      "text": "订单ID是两张清单对照的标记。两边金额一样不代表是同一个订单；按订单ID找匹配，不按金额去重。"
+    },
+    {
+      "term": "连接（JOIN）",
+      "text": "按条件把两边匹配的行配在一起。一笔订单有两条明细，就会配出两行；每一行都可能带着同一份订单总额。"
+    },
+    {
+      "term": "粒度与聚合口径",
+      "text": "粒度就是“一行代表什么”。订单总额属于订单这一层；连接后逐明细行相加，可能把同一个订单的总额算多次。"
+    }
+  ],
+  "resource_selection": {
+    "primary_id": "PG18-JOIN",
+    "backup_id": "MS-STAR"
+  },
+  "resource_slot_policy": "主、备选二选一，使用同一个7分钟阅读时段；备选补充粒度概念，并不声称两份覆盖完全相同。",
+  "reading_questions": [
+    "JOIN按什么字段匹配？有两条匹配明细时会输出几行？",
+    "LEFT JOIN保留没有匹配的左表行，但是否自动防止重复求和？"
+  ],
+  "offline_fallback": "不必先搜教程：将左边每个订单ID与右边所有相同ID配对，一对就抄一行。抄完先数每个订单出现几次，再算钱。今天只需理解配对与口径；外链用于核对概念，平台中文说明和例子是原创，不是原文整篇缓存。",
+  "worked_example": {
+    "orders": {
+      "columns": [
+        "订单ID",
+        "订单金额"
+      ],
+      "rows": [
+        [
+          "O101",
+          100
+        ],
+        [
+          "O102",
+          50
+        ]
+      ]
+    },
+    "items": {
+      "columns": [
+        "明细ID",
+        "订单ID",
+        "明细金额"
+      ],
+      "rows": [
+        [
+          "I1",
+          "O101",
+          60
+        ],
+        [
+          "I2",
+          "O101",
+          40
+        ],
+        [
+          "I3",
+          "O102",
+          20
+        ],
+        [
+          "I4",
+          "O102",
+          30
+        ]
+      ]
+    },
+    "joined": {
+      "columns": [
+        "订单ID",
+        "订单金额",
+        "明细ID"
+      ],
+      "rows": [
+        [
+          "O101",
+          100,
+          "I1"
+        ],
+        [
+          "O101",
+          100,
+          "I2"
+        ],
+        [
+          "O102",
+          50,
+          "I3"
+        ],
+        [
+          "O102",
+          50,
+          "I4"
+        ]
+      ]
+    },
+    "explanation": [
+      "O101匹配I1和I2，订单金额100在结果中出现两次；O102同理。",
+      "逐连接结果累加订单金额：100+100+50+50=300。回到一行一订单：100+50=150。",
+      "数据没有多出订单，是同一笔订单的总额在明细行上重复了。若本来只要总额，直接按订单表统计；需要明细指标时，先把明细汇总到一行一订单再关联。"
+    ]
+  },
+  "exercise": {
+    "prompt": "订单A=80元、B=80元、C=40元；明细分别为A的30和50、B的80、C的40。按订单ID连接，列出结果行，计算连接结果的订单金额总和和真实订单总额；能否用“不同金额只加一次”修复？",
+    "orders": {
+      "columns": [
+        "订单ID",
+        "订单金额"
+      ],
+      "rows": [
+        [
+          "A",
+          80
+        ],
+        [
+          "B",
+          80
+        ],
+        [
+          "C",
+          40
+        ]
+      ]
+    },
+    "items": {
+      "columns": [
+        "明细ID",
+        "订单ID",
+        "明细金额"
+      ],
+      "rows": [
+        [
+          "D1",
+          "A",
+          30
+        ],
+        [
+          "D2",
+          "A",
+          50
+        ],
+        [
+          "D3",
+          "B",
+          80
+        ],
+        [
+          "D4",
+          "C",
+          40
+        ]
+      ]
+    },
+    "deliverable": "一张4行配对表、两种总额、一句错误原因和一句修正方法。可写在纸上；页面草稿仅临时保存。",
+    "hints": [
+      "先看A有几条明细，把A分别与D1、D2配成两行。",
+      "B和C各一行；把金额与订单ID分开，A、B虽然都是80，仍是两笔订单。"
+    ],
+    "reference_answer": "连接结果：(A,80,D1)、(A,80,D2)、(B,80,D3)、(C,40,D4)。连接后逐行相加=280；真实订单总额=80+80+40=200。A的80被算两次。按不同金额去重只得80+40=120，误合并了两笔等额订单，因此不能用SUM(DISTINCT 金额)作为通用修复。只求订单总额可直接汇总订单表；要带明细指标，先按订单ID把明细聚成一行，再关联并检查键唯一与行数。",
+    "checkpoints": [
+      "我能解释订单一行与明细一行不同。",
+      "我的连接表有4行，其中A出现两次；我没有把A、B当同一订单。",
+      "我写出280与200，并解释差异；知道按金额去重会得到错误的120。",
+      "我提出按业务粒度统计的方案，而非只换INNER/LEFT JOIN。"
+    ],
+    "reference_sql": "WITH orders(order_id, order_amount) AS (VALUES ('A',80),('B',80),('C',40)),\nitems(item_id, order_id) AS (VALUES ('D1','A'),('D2','A'),('D3','B'),('D4','C'))\nSELECT\n  (SELECT SUM(o.order_amount) FROM orders o JOIN items i ON o.order_id=i.order_id) AS amplified_total,\n  (SELECT SUM(DISTINCT o.order_amount) FROM orders o JOIN items i ON o.order_id=i.order_id) AS unsafe_distinct_total,\n  (SELECT SUM(order_amount) FROM orders) AS correct_total;",
+    "sql_notice": "可选阅读；这是一条完整的只读固定示例，已用本机SQLite内存库核对为280、120、200。平台不执行你输入的SQL。"
+  },
+  "optional": {
+    "prompt": "再加订单D=20元，但没有任何明细。若业务要全部订单，INNER JOIN与LEFT JOIN各会怎样？",
+    "answer": "真实总额变成220。INNER JOIN丢掉D，原连接求和仍为280；LEFT JOIN保留D但A仍重复，求和为300，所以LEFT JOIN不是防重复求和的万能修复。只求全部订单总额仍可直接按订单表汇总。",
+    "deliverable": "写出是否保留D以及为什么还需核对粒度；不做选做不妨碍必做完成。"
+  },
+  "fallback": "若15分钟仍列不出配对表，先只做订单A的两条明细，写出80为何重复；记录卡点，可保持学习中或暂缓，不标已掌握。",
+  "assessment_boundary": "练习可看资料、提示和参考；不评分、不生成答卷、不更新能力状态。日考核要离开参考、换一组数据独立完成；具体题目由确认范围决定。若当天还要做5～10分钟日考核，把最后10分钟留给独立检查，不叠加选做；超出可用时间可改日安排。",
+  "completion_check": "能独立交付必做材料即可自报本任务已完成；这只记录学习进度，不代表通过考核。",
+  "authorship": "学习路径、中文解释、订单数据和练习为人工编写的固定原创内容；官方资料仅作概念参考，不是模型生成的个性化教材。"
+}

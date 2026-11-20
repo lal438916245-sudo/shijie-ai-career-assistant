@@ -1,0 +1,6 @@
+{
+  "id": "agent",
+  "target_role": "Agent工程实习生",
+  "resume_text": "宋同学（虚构）\n教育背景：某本科计算机专业在读。\n技能：TypeScript、Python、JSON Schema。\n项目经历：完成课程工具调用助手；使用状态机安排工具调用，以Zod校验输入，记录trace_id与工具错误。\n个人贡献：实现本地Mock工具和超时分支，整理验证样例；尚无外部用户和生产部署。",
+  "jd_text": "Agent工程实习生\n岗位职责\n1、开发工具调用与结构化输出流程。\n2、记录trace，定位超时与错误，并验证失败降级。\n岗位要求\n1、掌握Python或TypeScript，了解JSON Schema。\n2、能说明模型能力边界和工程判断。\n加分项\n1、有可运行的Agent课程原型。"
+}

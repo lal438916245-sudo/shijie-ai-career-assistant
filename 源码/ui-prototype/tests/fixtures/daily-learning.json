@@ -1,0 +1,525 @@
+{
+  "notice": "固定替身学习样例，不评价能力",
+  "source_kind": "local_workflow_double",
+  "result": {
+    "plan": {
+      "plan_version": "daily-learning-v1",
+      "learning_preferences": {
+        "daily_minutes": 60,
+        "starting_level": "beginner"
+      },
+      "overall_goal": "固定入门样例：在每日时间内理解事件、窗口和恢复概念，不代表真实学习成绩",
+      "phases": [
+        {
+          "phase_name": "入门阶段1",
+          "phase_goal": "先理解再验证，不承诺生产胜任",
+          "tasks": [
+            {
+              "day": 1,
+              "task_type": "理论学习",
+              "content": "先理解事件时间",
+              "expected_outcome": "交付一份能自查的概念解释或小样本结果",
+              "source_gap_ids": [
+                "core"
+              ],
+              "time_budget": {
+                "learning_minutes": 20,
+                "core_minutes": 20,
+                "review_minutes": 10,
+                "optional_minutes": 10
+              },
+              "guide": {
+                "starting_point": "准备纸笔；前3次学习无需安装Kafka或Flink，最后可使用已有Python环境。",
+                "concepts": [
+                  {
+                    "term": "事件时间",
+                    "explanation": "事情实际发生的时刻，不是程序收到它的时刻。",
+                    "example": "订单10:00发生、10:02送达：事件时间10:00，处理时间10:02。"
+                  }
+                ],
+                "steps": [
+                  "先读概念，用自己的话解释。",
+                  "跟着例子手算，再完成必做题。",
+                  "对照参考与自查点，记录仍不理解的地方。"
+                ],
+                "worked_example": "订单10:00发生、10:02送达：事件时间10:00，处理时间10:02。 逐项核对时间或事件ID，再计算预期结果。",
+                "exercise": {
+                  "prompt": "给两条晚到订单各写出发生和收到时间。",
+                  "hints": [
+                    "不要把收到时间当发生时间。"
+                  ],
+                  "reference_answer": "两条订单都以发生时刻归属窗口，收到时刻只说明何时处理。",
+                  "checkpoints": [
+                    "能说明判断依据",
+                    "结果与参考一致，或能解释差异"
+                  ]
+                },
+                "fallback": "若困难，只复现给定例子并写出卡点；可将任务暂缓，不标记为已掌握。"
+              },
+              "tiers": [
+                {
+                  "tier": "core",
+                  "content": "给两条晚到订单各写出发生和收到时间。",
+                  "expected_outcome": "写出结果与一句判断依据"
+                },
+                {
+                  "tier": "optional",
+                  "content": "自行添加一个边界或重复事件，预测结果再核对。",
+                  "expected_outcome": "额外一个反例与解释；未做不影响必做完成"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase_name": "入门阶段2",
+          "phase_goal": "先理解再验证，不承诺生产胜任",
+          "tasks": [
+            {
+              "day": 2,
+              "task_type": "理论学习",
+              "content": "用小样本理解窗口",
+              "expected_outcome": "交付一份能自查的概念解释或小样本结果",
+              "source_gap_ids": [
+                "core"
+              ],
+              "time_budget": {
+                "learning_minutes": 20,
+                "core_minutes": 20,
+                "review_minutes": 10,
+                "optional_minutes": 10
+              },
+              "guide": {
+                "starting_point": "准备纸笔；前3次学习无需安装Kafka或Flink，最后可使用已有Python环境。",
+                "concepts": [
+                  {
+                    "term": "时间窗口",
+                    "explanation": "把指定时间范围内的数据分为一组计算。",
+                    "example": "[10:00,10:05)含10:04订单，不含10:05订单。"
+                  }
+                ],
+                "steps": [
+                  "先读概念，用自己的话解释。",
+                  "跟着例子手算，再完成必做题。",
+                  "对照参考与自查点，记录仍不理解的地方。"
+                ],
+                "worked_example": "[10:00,10:05)含10:04订单，不含10:05订单。 逐项核对时间或事件ID，再计算预期结果。",
+                "exercise": {
+                  "prompt": "把10:01、10:04、10:05三个订单分到五分钟窗口。",
+                  "hints": [
+                    "留意窗口右边界不包含。"
+                  ],
+                  "reference_answer": "前两条归[10:00,10:05)，最后一条归[10:05,10:10)。",
+                  "checkpoints": [
+                    "能说明判断依据",
+                    "结果与参考一致，或能解释差异"
+                  ]
+                },
+                "fallback": "若困难，只复现给定例子并写出卡点；可将任务暂缓，不标记为已掌握。"
+              },
+              "tiers": [
+                {
+                  "tier": "core",
+                  "content": "把10:01、10:04、10:05三个订单分到五分钟窗口。",
+                  "expected_outcome": "写出结果与一句判断依据"
+                },
+                {
+                  "tier": "optional",
+                  "content": "自行添加一个边界或重复事件，预测结果再核对。",
+                  "expected_outcome": "额外一个反例与解释；未做不影响必做完成"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase_name": "入门阶段3",
+          "phase_goal": "先理解再验证，不承诺生产胜任",
+          "tasks": [
+            {
+              "day": 3,
+              "task_type": "理论学习",
+              "content": "理解重复与恢复",
+              "expected_outcome": "交付一份能自查的概念解释或小样本结果",
+              "source_gap_ids": [
+                "core"
+              ],
+              "time_budget": {
+                "learning_minutes": 20,
+                "core_minutes": 20,
+                "review_minutes": 10,
+                "optional_minutes": 10
+              },
+              "guide": {
+                "starting_point": "准备纸笔；前3次学习无需安装Kafka或Flink，最后可使用已有Python环境。",
+                "concepts": [
+                  {
+                    "term": "事件唯一标识与状态",
+                    "explanation": "记录见过的事件ID和累计结果，恢复时从保存点接续。",
+                    "example": "A金额5、重复A金额5、B金额3：按ID去重总额8。"
+                  }
+                ],
+                "steps": [
+                  "先读概念，用自己的话解释。",
+                  "跟着例子手算，再完成必做题。",
+                  "对照参考与自查点，记录仍不理解的地方。"
+                ],
+                "worked_example": "A金额5、重复A金额5、B金额3：按ID去重总额8。 逐项核对时间或事件ID，再计算预期结果。",
+                "exercise": {
+                  "prompt": "纸面模拟A后保存状态，再收到重复A和B。",
+                  "hints": [
+                    "恢复后仍应记得已处理过A。"
+                  ],
+                  "reference_answer": "保存seen={A}及total=5，恢复后跳过A并加入B，得到8；这只是概念模拟。",
+                  "checkpoints": [
+                    "能说明判断依据",
+                    "结果与参考一致，或能解释差异"
+                  ]
+                },
+                "fallback": "若困难，只复现给定例子并写出卡点；可将任务暂缓，不标记为已掌握。"
+              },
+              "tiers": [
+                {
+                  "tier": "core",
+                  "content": "纸面模拟A后保存状态，再收到重复A和B。",
+                  "expected_outcome": "写出结果与一句判断依据"
+                },
+                {
+                  "tier": "optional",
+                  "content": "自行添加一个边界或重复事件，预测结果再核对。",
+                  "expected_outcome": "额外一个反例与解释；未做不影响必做完成"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase_name": "入门阶段4",
+          "phase_goal": "先理解再验证，不承诺生产胜任",
+          "tasks": [
+            {
+              "day": 4,
+              "task_type": "实战编码",
+              "content": "完成入门小验证",
+              "expected_outcome": "交付一份能自查的概念解释或小样本结果",
+              "source_gap_ids": [
+                "core"
+              ],
+              "time_budget": {
+                "learning_minutes": 20,
+                "core_minutes": 20,
+                "review_minutes": 10,
+                "optional_minutes": 10
+              },
+              "guide": {
+                "starting_point": "准备纸笔；前3次学习无需安装Kafka或Flink，最后可使用已有Python环境。",
+                "concepts": [
+                  {
+                    "term": "可重复验证",
+                    "explanation": "固定输入、预期输出和运行步骤，让别人能核对你的结果。",
+                    "example": "输入A:5,A:5,B:3；预期去重总额8。"
+                  }
+                ],
+                "steps": [
+                  "先读概念，用自己的话解释。",
+                  "跟着例子手算，再完成必做题。",
+                  "对照参考与自查点，记录仍不理解的地方。"
+                ],
+                "worked_example": "输入A:5,A:5,B:3；预期去重总额8。 逐项核对时间或事件ID，再计算预期结果。",
+                "exercise": {
+                  "prompt": "用已有Python基础写去重求和，写明输入和预期输出。",
+                  "hints": [
+                    "先用集合记ID，再决定是否累加。"
+                  ],
+                  "reference_answer": "seen=set(); total=0；逐条读取，首次出现ID才累加，输出8。",
+                  "checkpoints": [
+                    "能说明判断依据",
+                    "结果与参考一致，或能解释差异"
+                  ]
+                },
+                "fallback": "若困难，只复现给定例子并写出卡点；可将任务暂缓，不标记为已掌握。"
+              },
+              "tiers": [
+                {
+                  "tier": "core",
+                  "content": "用已有Python基础写去重求和，写明输入和预期输出。",
+                  "expected_outcome": "写出结果与一句判断依据"
+                },
+                {
+                  "tier": "optional",
+                  "content": "自行添加一个边界或重复事件，预测结果再核对。",
+                  "expected_outcome": "额外一个反例与解释；未做不影响必做完成"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "deferred_gaps": [
+        {
+          "gap_id": "later",
+          "reason": "当前时间优先用于入门验证，本轮不开展工程化训练。",
+          "revisit_when": "完成入门例子并有额外学习时间后，再单独安排。"
+        }
+      ]
+    }
+  },
+  "tasks": [
+    {
+      "day": 1,
+      "task_type": "理论学习",
+      "content": "先理解事件时间",
+      "expected_outcome": "交付一份能自查的概念解释或小样本结果",
+      "source_gap_ids": [
+        "core"
+      ],
+      "time_budget": {
+        "learning_minutes": 20,
+        "core_minutes": 20,
+        "review_minutes": 10,
+        "optional_minutes": 10
+      },
+      "guide": {
+        "starting_point": "准备纸笔；前3次学习无需安装Kafka或Flink，最后可使用已有Python环境。",
+        "concepts": [
+          {
+            "term": "事件时间",
+            "explanation": "事情实际发生的时刻，不是程序收到它的时刻。",
+            "example": "订单10:00发生、10:02送达：事件时间10:00，处理时间10:02。"
+          }
+        ],
+        "steps": [
+          "先读概念，用自己的话解释。",
+          "跟着例子手算，再完成必做题。",
+          "对照参考与自查点，记录仍不理解的地方。"
+        ],
+        "worked_example": "订单10:00发生、10:02送达：事件时间10:00，处理时间10:02。 逐项核对时间或事件ID，再计算预期结果。",
+        "exercise": {
+          "prompt": "给两条晚到订单各写出发生和收到时间。",
+          "hints": [
+            "不要把收到时间当发生时间。"
+          ],
+          "reference_answer": "两条订单都以发生时刻归属窗口，收到时刻只说明何时处理。",
+          "checkpoints": [
+            "能说明判断依据",
+            "结果与参考一致，或能解释差异"
+          ]
+        },
+        "fallback": "若困难，只复现给定例子并写出卡点；可将任务暂缓，不标记为已掌握。"
+      },
+      "tiers": [
+        {
+          "tier": "core",
+          "content": "给两条晚到订单各写出发生和收到时间。",
+          "expected_outcome": "写出结果与一句判断依据"
+        },
+        {
+          "tier": "optional",
+          "content": "自行添加一个边界或重复事件，预测结果再核对。",
+          "expected_outcome": "额外一个反例与解释；未做不影响必做完成"
+        }
+      ],
+      "id": 1,
+      "gap_ids": [
+        "core"
+      ],
+      "progress": {
+        "status": "deferred",
+        "reason": "时间冲突",
+        "revision": 1
+      }
+    },
+    {
+      "day": 2,
+      "task_type": "理论学习",
+      "content": "用小样本理解窗口",
+      "expected_outcome": "交付一份能自查的概念解释或小样本结果",
+      "source_gap_ids": [
+        "core"
+      ],
+      "time_budget": {
+        "learning_minutes": 20,
+        "core_minutes": 20,
+        "review_minutes": 10,
+        "optional_minutes": 10
+      },
+      "guide": {
+        "starting_point": "准备纸笔；前3次学习无需安装Kafka或Flink，最后可使用已有Python环境。",
+        "concepts": [
+          {
+            "term": "时间窗口",
+            "explanation": "把指定时间范围内的数据分为一组计算。",
+            "example": "[10:00,10:05)含10:04订单，不含10:05订单。"
+          }
+        ],
+        "steps": [
+          "先读概念，用自己的话解释。",
+          "跟着例子手算，再完成必做题。",
+          "对照参考与自查点，记录仍不理解的地方。"
+        ],
+        "worked_example": "[10:00,10:05)含10:04订单，不含10:05订单。 逐项核对时间或事件ID，再计算预期结果。",
+        "exercise": {
+          "prompt": "把10:01、10:04、10:05三个订单分到五分钟窗口。",
+          "hints": [
+            "留意窗口右边界不包含。"
+          ],
+          "reference_answer": "前两条归[10:00,10:05)，最后一条归[10:05,10:10)。",
+          "checkpoints": [
+            "能说明判断依据",
+            "结果与参考一致，或能解释差异"
+          ]
+        },
+        "fallback": "若困难，只复现给定例子并写出卡点；可将任务暂缓，不标记为已掌握。"
+      },
+      "tiers": [
+        {
+          "tier": "core",
+          "content": "把10:01、10:04、10:05三个订单分到五分钟窗口。",
+          "expected_outcome": "写出结果与一句判断依据"
+        },
+        {
+          "tier": "optional",
+          "content": "自行添加一个边界或重复事件，预测结果再核对。",
+          "expected_outcome": "额外一个反例与解释；未做不影响必做完成"
+        }
+      ],
+      "id": 2,
+      "gap_ids": [
+        "core"
+      ],
+      "progress": {
+        "status": "not_started",
+        "reason": "",
+        "revision": 0
+      }
+    },
+    {
+      "day": 3,
+      "task_type": "理论学习",
+      "content": "理解重复与恢复",
+      "expected_outcome": "交付一份能自查的概念解释或小样本结果",
+      "source_gap_ids": [
+        "core"
+      ],
+      "time_budget": {
+        "learning_minutes": 20,
+        "core_minutes": 20,
+        "review_minutes": 10,
+        "optional_minutes": 10
+      },
+      "guide": {
+        "starting_point": "准备纸笔；前3次学习无需安装Kafka或Flink，最后可使用已有Python环境。",
+        "concepts": [
+          {
+            "term": "事件唯一标识与状态",
+            "explanation": "记录见过的事件ID和累计结果，恢复时从保存点接续。",
+            "example": "A金额5、重复A金额5、B金额3：按ID去重总额8。"
+          }
+        ],
+        "steps": [
+          "先读概念，用自己的话解释。",
+          "跟着例子手算，再完成必做题。",
+          "对照参考与自查点，记录仍不理解的地方。"
+        ],
+        "worked_example": "A金额5、重复A金额5、B金额3：按ID去重总额8。 逐项核对时间或事件ID，再计算预期结果。",
+        "exercise": {
+          "prompt": "纸面模拟A后保存状态，再收到重复A和B。",
+          "hints": [
+            "恢复后仍应记得已处理过A。"
+          ],
+          "reference_answer": "保存seen={A}及total=5，恢复后跳过A并加入B，得到8；这只是概念模拟。",
+          "checkpoints": [
+            "能说明判断依据",
+            "结果与参考一致，或能解释差异"
+          ]
+        },
+        "fallback": "若困难，只复现给定例子并写出卡点；可将任务暂缓，不标记为已掌握。"
+      },
+      "tiers": [
+        {
+          "tier": "core",
+          "content": "纸面模拟A后保存状态，再收到重复A和B。",
+          "expected_outcome": "写出结果与一句判断依据"
+        },
+        {
+          "tier": "optional",
+          "content": "自行添加一个边界或重复事件，预测结果再核对。",
+          "expected_outcome": "额外一个反例与解释；未做不影响必做完成"
+        }
+      ],
+      "id": 3,
+      "gap_ids": [
+        "core"
+      ],
+      "progress": {
+        "status": "not_started",
+        "reason": "",
+        "revision": 0
+      }
+    },
+    {
+      "day": 4,
+      "task_type": "实战编码",
+      "content": "完成入门小验证",
+      "expected_outcome": "交付一份能自查的概念解释或小样本结果",
+      "source_gap_ids": [
+        "core"
+      ],
+      "time_budget": {
+        "learning_minutes": 20,
+        "core_minutes": 20,
+        "review_minutes": 10,
+        "optional_minutes": 10
+      },
+      "guide": {
+        "starting_point": "准备纸笔；前3次学习无需安装Kafka或Flink，最后可使用已有Python环境。",
+        "concepts": [
+          {
+            "term": "可重复验证",
+            "explanation": "固定输入、预期输出和运行步骤，让别人能核对你的结果。",
+            "example": "输入A:5,A:5,B:3；预期去重总额8。"
+          }
+        ],
+        "steps": [
+          "先读概念，用自己的话解释。",
+          "跟着例子手算，再完成必做题。",
+          "对照参考与自查点，记录仍不理解的地方。"
+        ],
+        "worked_example": "输入A:5,A:5,B:3；预期去重总额8。 逐项核对时间或事件ID，再计算预期结果。",
+        "exercise": {
+          "prompt": "用已有Python基础写去重求和，写明输入和预期输出。",
+          "hints": [
+            "先用集合记ID，再决定是否累加。"
+          ],
+          "reference_answer": "seen=set(); total=0；逐条读取，首次出现ID才累加，输出8。",
+          "checkpoints": [
+            "能说明判断依据",
+            "结果与参考一致，或能解释差异"
+          ]
+        },
+        "fallback": "若困难，只复现给定例子并写出卡点；可将任务暂缓，不标记为已掌握。"
+      },
+      "tiers": [
+        {
+          "tier": "core",
+          "content": "用已有Python基础写去重求和，写明输入和预期输出。",
+          "expected_outcome": "写出结果与一句判断依据"
+        },
+        {
+          "tier": "optional",
+          "content": "自行添加一个边界或重复事件，预测结果再核对。",
+          "expected_outcome": "额外一个反例与解释；未做不影响必做完成"
+        }
+      ],
+      "id": 4,
+      "gap_ids": [
+        "core"
+      ],
+      "progress": {
+        "status": "not_started",
+        "reason": "",
+        "revision": 0
+      }
+    }
+  ]
+}

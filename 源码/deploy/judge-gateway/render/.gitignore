@@ -1,0 +1,5 @@
+.env
+*.db
+*.db-*
+judge-access.json
+__pycache__/

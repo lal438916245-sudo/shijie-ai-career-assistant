@@ -1,0 +1,46 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background); --color-foreground: var(--foreground);
+  --color-card: var(--card); --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover); --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary); --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted); --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent); --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive); --color-border: var(--border);
+  --color-input: var(--input); --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px); --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius); --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: #faf8f4; --foreground: #213e30;
+  --card: #fffdf8; --card-foreground: #213e30;
+  --popover: #fffdf8; --popover-foreground: #213e30;
+  --primary: #245d49; --primary-foreground: #fffdf8;
+  --secondary: #eeeee2; --secondary-foreground: #435d45;
+  --muted: #f3f0e7; --muted-foreground: #6d7967;
+  --accent: #eaeddf; --accent-foreground: #245d49;
+  --destructive: #ad4c40; --border: #e1dfd1; --input: #d6d9c8; --ring: #91a17b;
+  --paper: #faf8f4; --paper-sidebar: #f5f3eb; --paper-soft: #f4f1e7;
+  --paper-line: #e1dfd1; --ink: #173b2e; --ink-soft: #52664e;
+  --ink-muted: #6b7963; --ink-faint: #8b947f;
+  --gold: #a38148; --gold-soft: #f1e9d7; --sage-soft: #edf0e2;
+  --font-display: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --font-wordmark: Georgia, "Times New Roman", serif;
+  --paper-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.13' filter='url(%23paper)'/%3E%3C/svg%3E");
+  font-family: "Inter", "Segoe UI", "Microsoft YaHei", sans-serif;
+  font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background text-foreground; margin: 0; }
+  button, input, textarea { font: inherit; }
+  button, a, input, textarea { -webkit-tap-highlight-color: transparent; }
+}

@@ -1,0 +1,20 @@
+<!doctype html><html lang="zh-CN"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>逐题练习浏览器验收</title><div id="root"></div><script type="module">
+// Test-only per-tab storage and fault injection. The user's localStorage is not touched.
+const prefix='__career_pilot_qa__:';const fault=new URLSearchParams(location.search).get('fault');const oldFetch=window.fetch.bind(window)
+Object.defineProperty(window,'localStorage',{value:{getItem:key=>sessionStorage.getItem(prefix+key),setItem:(key,value)=>sessionStorage.setItem(prefix+key,String(value)),removeItem:key=>sessionStorage.removeItem(prefix+key)},configurable:true})
+const tokenKey='career-pilot:offline-practice:session-token:v1',badToken='11111111-1111-4111-8111-111111111111'
+if(fault==='orphan'&&!sessionStorage.getItem(prefix+tokenKey))sessionStorage.setItem(prefix+tokenKey,badToken)
+const journeyTokenKey='career-pilot:journey:session-token:v1'
+if(fault==='journey-orphan'&&!sessionStorage.getItem(prefix+journeyTokenKey))sessionStorage.setItem(prefix+journeyTokenKey,badToken)
+let conflict=true
+window.fetch=async(input,options)=>{
+ const url=String(input);const headers=options?.headers||{};const token=headers['X-Practice-Token']
+ if(url.startsWith('/api/practice/')&&fault==='offline')throw Error('simulated offline')
+ if(url.startsWith('/api/practice/journey/')&&fault==='journey-orphan'&&token===badToken)return new Response(JSON.stringify({error:'不是有效的学习闭环演示会话',code:'invalid'}),{status:400,headers:{'Content-Type':'application/json'}})
+ if((url.startsWith('/api/practice/learning')||url.startsWith('/api/practice/journey/learning'))&&options?.method==='POST'&&fault==='conflict'&&conflict){conflict=false;return new Response(JSON.stringify({error:'模拟冲突',code:'conflict'}),{status:409,headers:{'Content-Type':'application/json'}})}
+ if(url.startsWith('/api/practice/state')&&fault==='orphan'&&token===badToken)return new Response(JSON.stringify({error:'会话不存在',code:'not_found'}),{status:404,headers:{'Content-Type':'application/json'}})
+ if(url.startsWith('/api/practice/session')&&fault==='orphan'&&token===badToken)return new Response(JSON.stringify({error:'不是有效的固定替身会话',code:'invalid'}),{status:400,headers:{'Content-Type':'application/json'}})
+ return oldFetch(input,options)
+}
+await import('/src/main.tsx')
+</script></html>

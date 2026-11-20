@@ -1,0 +1,42 @@
+# Windows reviewer bundle and distribution-only assets
+/_internal/
+/Shijie.exe
+/*.cmd
+/SHA256SUMS.json
+/README_先读我.md
+/A-D最短流程操作指南.md
+/评委服务部署/
+/web/
+/seed/
+/examples/
+/knowledge_base/
+
+# Internal handbooks and environment-specific acceptance logs
+/源码/docs/competition/
+/源码/*.xml
+/源码/*-check.json
+/源码/*-acceptance*.json
+/源码/complete-case-verification.json
+
+# Credentials, sessions and generated workspace state
+judge-access.json
+policy.json
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.sqlite
+*.sqlite3
+*.db
+*.db-*
+!/源码/seed/showcase_sessions_20261107/complete-v2/session_30ca9dec37775bb5b5cd1d1ec4d43ff6.db
+/.local-demo/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+node_modules/
+dist/
+*.tsbuildinfo
+*.log

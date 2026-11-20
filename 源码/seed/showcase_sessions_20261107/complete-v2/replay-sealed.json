@@ -1,0 +1,47 @@
+{
+  "case_id": "career-pilot-showcase-20261107",
+  "initial_resume_id": "RESUME_e0dbc42022435c0b82c06179",
+  "final_resume_id": "RESUME_5b2b2e4e04745cb1856b2fc9",
+  "interview_id": "INTERVIEW_21ff981830e754fea030d78f",
+  "learning_tasks": 10,
+  "day_runs": 16,
+  "week_runs": 2,
+  "answer_count": 47,
+  "retest_runs": 4,
+  "record_count": 193,
+  "ready_learning_tasks": 10,
+  "revision": 137,
+  "capabilities": [
+    {
+      "topic_key": "sql",
+      "state": "mastered",
+      "latest_score": 80,
+      "real_state": "unassessed"
+    },
+    {
+      "topic_key": "stream",
+      "state": "mastered",
+      "latest_score": 84,
+      "real_state": "unassessed"
+    },
+    {
+      "topic_key": "model",
+      "state": "mastered",
+      "latest_score": 81,
+      "real_state": "unassessed"
+    },
+    {
+      "topic_key": "engineering",
+      "state": "mastered",
+      "latest_score": 85,
+      "real_state": "unassessed"
+    }
+  ],
+  "real_model_requests": 0,
+  "simulated": true,
+  "all_references_same_session": true,
+  "database_sha256": "92d12607d1219ed3bc42bfd0eb331df9d93dd7a9bf536c211db49d164588dfa4",
+  "complete_version": 2,
+  "calendar_days": 14,
+  "retest_topics": 4
+}

@@ -1,0 +1,2 @@
+# The offline launcher validates the exact bytes of the sealed replay.
+/源码/seed/**/replay-sealed.json -text

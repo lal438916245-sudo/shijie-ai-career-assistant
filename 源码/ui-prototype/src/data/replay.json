@@ -1,0 +1,277 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "mode": "demo_replay",
+    "scenario_id": "data-engineer-growth-v1",
+    "generated_at": "2026-10-26T00:00:00+08:00",
+    "origin": "curated_pre_recorded_demo",
+    "disclosure": {
+      "generator_type": "curated_demo",
+      "model_name": null,
+      "note": "人工整理的脱敏固定演示快照，用于零网络回放；不代表本轮刚刚调用模型得到的结果。"
+    }
+  },
+  "inputs": {
+    "target_role": "数据开发工程师（大数据方向）",
+    "initial_match_score": 68,
+    "resume_summary": "具备批处理、SQL 与数据仓库基础，缺少可验证的实时数据链路经验。",
+    "jd_summary": "岗位要求掌握流式计算、状态管理、窗口、容错与生产排障。",
+    "source_id": "resume:demo-8c91a2",
+    "bundle_id": "bundle:demo-30c50e"
+  },
+  "trace": {
+    "trace_id": "TRACE_DEMO_GROWTH_01",
+    "report_id": "GAP_DEMO_STREAM_01",
+    "plan_id": "PLAN_DEMO_STREAM_01"
+  },
+  "gaps": [
+    {
+      "gap_id": "GAP_DEMO_STREAM_01#4a32f1c9b701",
+      "title": "实时数据链路经验不足",
+      "description": "简历能证明离线数仓基础，但没有窗口、状态、迟到数据和故障恢复的可核验证据。",
+      "priority": "high",
+      "evidence": "目标 JD 明确要求实时计算与容错；脱敏简历仅出现离线批处理经历。"
+    }
+  ],
+  "learning_tasks": [
+    {
+      "task_id": 1001,
+      "day": 2,
+      "title": "构建可恢复的实时聚合链路",
+      "content": "学习事件时间窗口、Watermark、状态后端与 Checkpoint，并解释它们在故障恢复中的关系。",
+      "gap_ids": ["GAP_DEMO_STREAM_01#4a32f1c9b701"],
+      "provenance_status": "linked"
+    }
+  ],
+  "questions": [
+    {
+      "task_id": 2001,
+      "question": "一个订单流每 5 分钟聚合一次成交额。请解释事件时间窗口、Watermark 和迟到数据处理，并说明节点失败后的恢复依据。",
+      "focus": "窗口、Watermark、状态与容错",
+      "source_task_ids": [1001],
+      "gap_ids": ["GAP_DEMO_STREAM_01#4a32f1c9b701"],
+      "provenance_status": "exam_linked",
+      "question_fingerprint": "question:demo-2001-7ab1",
+      "parent_task_id": null,
+      "retest_round": 0
+    },
+    {
+      "task_id": 2002,
+      "question": "实时告警系统允许最多 90 秒乱序。请设计窗口关闭与补偿策略，并说明 Checkpoint 失败后怎样避免状态和输出不一致。",
+      "focus": "乱序处理与一致性恢复",
+      "source_task_ids": [1001],
+      "gap_ids": ["GAP_DEMO_STREAM_01#4a32f1c9b701"],
+      "provenance_status": "exam_retest_linked",
+      "question_fingerprint": "question:demo-2002-c842",
+      "parent_task_id": 2001,
+      "retest_round": 1
+    },
+    {
+      "task_id": 2003,
+      "question": "某实时排行榜在扩容后出现重复计数。请从状态分区、Checkpoint 与下游幂等三个层次给出排查和恢复方案。",
+      "focus": "状态迁移、容错与端到端一致性",
+      "source_task_ids": [1001],
+      "gap_ids": ["GAP_DEMO_STREAM_01#4a32f1c9b701"],
+      "provenance_status": "exam_retest_linked",
+      "question_fingerprint": "question:demo-2003-e129",
+      "parent_task_id": 2001,
+      "retest_round": 2
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": 3001,
+      "task_id": 2001,
+      "attempt_no": 1,
+      "score": 55,
+      "score_source": "rubric_weighted",
+      "status": "failed",
+      "feedback": "能解释窗口概念，但没有说明 Watermark 如何推进、迟到数据如何分流，也未把 Checkpoint 与状态恢复连起来。",
+      "rubric": [
+        {"dimension": "概念准确性", "score": 65, "weight": 0.4},
+        {"dimension": "场景应用", "score": 50, "weight": 0.35},
+        {"dimension": "容错推理", "score": 46, "weight": 0.25}
+      ]
+    },
+    {
+      "attempt_id": 3002,
+      "task_id": 2002,
+      "attempt_no": 1,
+      "score": 72,
+      "score_source": "rubric_weighted",
+      "status": "completed",
+      "feedback": "能够把乱序边界、侧输出和 Checkpoint 联系起来，但端到端一致性的故障边界还不够清晰。",
+      "rubric": [
+        {"dimension": "概念准确性", "score": 78, "weight": 0.4},
+        {"dimension": "场景应用", "score": 74, "weight": 0.35},
+        {"dimension": "容错推理", "score": 60, "weight": 0.25}
+      ]
+    },
+    {
+      "attempt_id": 3003,
+      "task_id": 2003,
+      "attempt_no": 1,
+      "score": 82,
+      "score_source": "rubric_weighted",
+      "status": "completed",
+      "feedback": "能从状态分区、恢复点和下游幂等逐层定位问题，并明确区分至少一次与精确一次语义。",
+      "rubric": [
+        {"dimension": "概念准确性", "score": 84, "weight": 0.4},
+        {"dimension": "场景应用", "score": 82, "weight": 0.35},
+        {"dimension": "容错推理", "score": 79, "weight": 0.25}
+      ]
+    }
+  ],
+  "mastery_states": [
+    {
+      "gap_id": "GAP_DEMO_STREAM_01#4a32f1c9b701",
+      "state": "needs_retest",
+      "rule_code": "LATEST_TRUSTED_BELOW_PASS",
+      "explanation": "首次正式 rubric 得分 55，低于统一及格线。",
+      "task_ids": [2001],
+      "attempt_ids": [3001]
+    },
+    {
+      "gap_id": "GAP_DEMO_STREAM_01#4a32f1c9b701",
+      "state": "provisional_pass",
+      "rule_code": "ONE_DISTINCT_TRUSTED_PASS",
+      "explanation": "第一道不同题面的变式题得分 72，只能暂时通过。",
+      "task_ids": [2001, 2002],
+      "attempt_ids": [3001, 3002]
+    },
+    {
+      "gap_id": "GAP_DEMO_STREAM_01#4a32f1c9b701",
+      "state": "mastered",
+      "rule_code": "TWO_DISTINCT_TRUSTED_PASSES",
+      "explanation": "失败后连续通过两道不同题面的正式 rubric 变式题。",
+      "task_ids": [2001, 2002, 2003],
+      "attempt_ids": [3001, 3002, 3003]
+    }
+  ],
+  "interview_evidence": [
+    {
+      "evidence_id": "INTERVIEW_DEMO_01",
+      "gap_id": "GAP_DEMO_STREAM_01#4a32f1c9b701",
+      "mastery_state": "mastered",
+      "question": "线上窗口聚合延迟突然升高，但吞吐没有下降，你会如何区分 Watermark、状态膨胀和下游反压问题？",
+      "result": "能够提出分层指标、验证顺序和回滚策略，并回答一次追问。",
+      "evidence_note": "这是预存的模型评估证据，不是标准化面试成绩。"
+    }
+  ],
+  "resume_suggestions": [
+    {
+      "suggestion_id": "RESUME_DEMO_ACCEPTED_01",
+      "status": "accepted",
+      "requested_claim": "补充实时链路学习成果",
+      "suggestion": "完成实时窗口与状态容错专题训练，能针对乱序、状态恢复和端到端一致性分析故障边界。",
+      "reason": "存在 gap、学习任务、两次通过的正式 rubric 变式题和面试迁移证据。",
+      "evidence_refs": [
+        {"kind": "gap", "ref_id": "GAP_DEMO_STREAM_01#4a32f1c9b701"},
+        {"kind": "task", "ref_id": "1001"},
+        {"kind": "attempt", "ref_id": "3002"},
+        {"kind": "attempt", "ref_id": "3003"},
+        {"kind": "interview", "ref_id": "INTERVIEW_DEMO_01"}
+      ]
+    },
+    {
+      "suggestion_id": "RESUME_DEMO_BLOCKED_01",
+      "status": "blocked",
+      "requested_claim": "主导千万级实时数据平台建设",
+      "suggestion": null,
+      "reason": "没有真实项目、规模、职责或业务结果证据；只允许建议先补项目，不能编造经历。",
+      "evidence_refs": []
+    }
+  ],
+  "tool_events": [
+    {
+      "event_id": "EVENT_01",
+      "category": "input_diagnosis",
+      "tool_name": "input_provenance.build_input_bundle",
+      "status": "recorded",
+      "input_refs": ["resume:demo-8c91a2"],
+      "output_refs": ["bundle:demo-30c50e"],
+      "label": "生成脱敏输入指纹"
+    },
+    {
+      "event_id": "EVENT_02",
+      "category": "input_diagnosis",
+      "tool_name": "Agent_A.deep_audit",
+      "status": "recorded",
+      "input_refs": ["bundle:demo-30c50e"],
+      "output_refs": ["GAP_DEMO_STREAM_01#4a32f1c9b701"],
+      "label": "识别实时链路能力差距"
+    },
+    {
+      "event_id": "EVENT_03",
+      "category": "learning_support",
+      "tool_name": "Agent_B.plan_from_trace",
+      "status": "recorded",
+      "input_refs": ["GAP_DEMO_STREAM_01#4a32f1c9b701"],
+      "output_refs": ["1001"],
+      "label": "生成关联 gap 的学习任务"
+    },
+    {
+      "event_id": "EVENT_04",
+      "category": "learning_support",
+      "tool_name": "Agent_F.critique",
+      "status": "recorded",
+      "input_refs": ["PLAN_DEMO_STREAM_01"],
+      "output_refs": ["1001"],
+      "label": "审查计划的针对性与可执行性"
+    },
+    {
+      "event_id": "EVENT_05",
+      "category": "validation_action",
+      "tool_name": "Agent_C.grade_answer",
+      "status": "recorded",
+      "input_refs": ["2001"],
+      "output_refs": ["3001"],
+      "label": "首次 rubric 阅卷：55 分"
+    },
+    {
+      "event_id": "EVENT_06",
+      "category": "learning_support",
+      "tool_name": "variant_retest.generate",
+      "status": "recorded",
+      "input_refs": ["2001", "3001"],
+      "output_refs": ["2002", "2003"],
+      "label": "生成两轮不同题面的变式复测"
+    },
+    {
+      "event_id": "EVENT_07",
+      "category": "validation_action",
+      "tool_name": "mastery_policy.project",
+      "status": "recorded",
+      "input_refs": ["3001", "3002", "3003"],
+      "output_refs": ["mastered"],
+      "label": "用确定性规则投影能力状态"
+    },
+    {
+      "event_id": "EVENT_08",
+      "category": "validation_action",
+      "tool_name": "Agent_E.transfer_interview",
+      "status": "recorded",
+      "input_refs": ["mastered"],
+      "output_refs": ["INTERVIEW_DEMO_01"],
+      "label": "验证岗位场景迁移能力"
+    },
+    {
+      "event_id": "EVENT_09",
+      "category": "validation_action",
+      "tool_name": "Agent_D.evidence_resume",
+      "status": "recorded",
+      "input_refs": ["3002", "3003", "INTERVIEW_DEMO_01"],
+      "output_refs": ["RESUME_DEMO_ACCEPTED_01"],
+      "label": "生成有证据的学习成果表达"
+    },
+    {
+      "event_id": "EVENT_10",
+      "category": "validation_action",
+      "tool_name": "Agent_D.evidence_guard",
+      "status": "blocked",
+      "input_refs": [],
+      "output_refs": ["RESUME_DEMO_BLOCKED_01"],
+      "label": "拦截无项目证据的夸大表达"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+.beginner-card{display:grid;gap:1rem;color:var(--forest,#294f42)}
+.beginner-card h2,.beginner-card h3,.beginner-card h4,.beginner-card p{margin:0}
+.beginner-card p,.beginner-card li{line-height:1.85}
+.beginner-card small{line-height:1.75;color:#697361}
+.beginner-card>details{border:1px solid #dce1d1;border-radius:18px;padding:1.2rem;background:#fcfbf5}
+.beginner-card details>summary{cursor:pointer;font-weight:650;line-height:1.7}
+.beginner-card details[open]>summary{margin-bottom:1rem}
+.beginner-card details>p,.beginner-card details>div,.beginner-card details>details{margin-top:1rem}
+.beginner-card details details{padding:.9rem 1rem;border:1px solid #e1e4d9;border-radius:12px}
+.beginner-card .beginner-budget{display:grid;gap:.4rem;padding:1rem 1.2rem;border-radius:16px;background:#edf2e7}
+.beginner-card .beginner-source{font-size:.88rem;color:#697361;margin-top:.7rem}
+.beginner-route{padding-left:1.25rem}.beginner-route li{padding:.5rem 0}
+.beginner-route h4{display:flex;justify-content:space-between;gap:1rem}.beginner-route h4 span{font:400 .85rem/1.8 sans-serif;white-space:nowrap;color:#6e765f}
+.beginner-concepts,.beginner-resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.beginner-concepts section,.beginner-reading{border-radius:14px;padding:1rem;background:#f2f3e9;min-width:0}
+.beginner-reading h4{margin:.55rem 0}.beginner-reading a{color:#285b46;text-decoration:underline;text-underline-offset:4px}
+.beginner-reading p{font-size:.91rem}.beginner-reading small{display:block;margin-top:.6rem}
+.beginner-fallback{border-left:3px solid #adb99e;padding:.6rem 1rem;background:#f7f4e8}
+.beginner-table-scroll{overflow-x:auto;margin-top:.5rem}.beginner-data table{border-collapse:collapse;width:100%;font-size:.94rem}
+.beginner-data th,.beginner-data td{text-align:left;white-space:nowrap;border-bottom:1px solid #dce1d1;padding:.65rem .8rem}
+.beginner-data th{background:#edf1e6;color:#315d47}.beginner-card pre{white-space:pre-wrap;overflow-wrap:anywhere;border-radius:12px;background:#edf1e7;padding:1rem;font-size:.86rem;line-height:1.7}
+@media(max-width:760px){.beginner-concepts,.beginner-resource-grid{grid-template-columns:1fr}.beginner-card>details{padding:1rem}.beginner-route h4{flex-wrap:wrap}}

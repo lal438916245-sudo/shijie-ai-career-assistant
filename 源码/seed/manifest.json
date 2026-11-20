@@ -1,0 +1,8 @@
+{
+  "build": "career-pilot-windows-20261113-v1",
+  "notice": "仅公开的虚构只读回放；不含密钥或个人会话。",
+  "files": {
+    "showcase_sessions_20261107/complete-v2/replay-sealed.json": "e1502b82747debf544623e68716c92da31b80e7be164a42bbdce756f6b5765ea",
+    "showcase_sessions_20261107/complete-v2/session_30ca9dec37775bb5b5cd1d1ec4d43ff6.db": "92d12607d1219ed3bc42bfd0eb331df9d93dd7a9bf536c211db49d164588dfa4"
+  }
+}

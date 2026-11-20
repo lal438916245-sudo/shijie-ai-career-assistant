@@ -1,0 +1,621 @@
+{
+  "before": {
+    "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+    "status": "active",
+    "mode": "full",
+    "context_selection": {
+      "answer_text_included": false,
+      "include_learning_evidence": false,
+      "notes_included": false
+    },
+    "created_at": "2026-11-03T07:55:54Z",
+    "ended_at": null,
+    "followups_used": 0,
+    "max_followups": 2,
+    "position": {
+      "jd_text": "初级数据开发工程师（应届/初级）\n岗位职责\n1、开发订单报表，核对多表连接、分组和金额口径。\n2、参与数仓建模，明确事实粒度与维度关系，设计质量检查。\n3、学习和参与实时数据处理，解释事件时间、窗口和恢复边界。\n4、为数据处理设计测试和日志，协作排查问题。\n岗位要求\n1、具备Python和基础SQL能力，能用小样本说明结果。\n2、能说明方案假设、核对依据和未验证边界，愿意学习工程方法。\n加分项\n1、有可复现的流处理或自动化测试练习。\n面试安排\n远程技术交流；不作为技能要求。",
+      "position_id": "CP-POS-01",
+      "source_kind": "synthetic_input",
+      "title": "初级数据开发工程师（应届/初级）"
+    },
+    "candidate_name": "小林（虚构）",
+    "persona": {
+      "name": "岗位面试官",
+      "style": "专业、平和；追问依据、个人贡献与未验证边界，不做人身评价。"
+    },
+    "planned_main": 5,
+    "context_summary": null,
+    "coverage_plan": [
+      {
+        "title": "项目经历与岗位理解",
+        "planned": true
+      },
+      {
+        "title": "SQL、粒度与结果口径",
+        "planned": true
+      },
+      {
+        "title": "事件时间与故障恢复",
+        "planned": true
+      },
+      {
+        "title": "测试、日志与工程验证",
+        "planned": true
+      },
+      {
+        "title": "需求对齐、协作与边界说明",
+        "planned": true
+      }
+    ],
+    "turns": [
+      {
+        "created_at": "2026-11-03T07:55:54Z",
+        "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+        "is_followup": false,
+        "main_index": 0,
+        "parent_answer_id": null,
+        "question_key": "project",
+        "requirement_ids": [
+          "JD-06",
+          "JD-07"
+        ],
+        "role": "assistant",
+        "routing_notice": "按岗位覆盖计划进入下一个方向。",
+        "scope": {
+          "case_id": "competition-data-01",
+          "plan_id": "PLAN_fa6aff156dab5de4",
+          "session_id": "fa6aff156dab5de48a484084b7945fc9",
+          "trace_id": "TRACE_fa6aff156dab5de4"
+        },
+        "seq": 1,
+        "text": "我们面试的是初级数据开发岗位。请用一个你实际做过的订单报表或数据处理练习，说明目标、你个人做了什么、如何核对结果，以及哪些环节尚未验证。",
+        "title": "项目经历与岗位理解",
+        "topic_ids": [],
+        "turn_id": "ITURN_f6ff28499db35d3ba2551d83"
+      }
+    ],
+    "current_question": {
+      "created_at": "2026-11-03T07:55:54Z",
+      "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+      "is_followup": false,
+      "main_index": 0,
+      "parent_answer_id": null,
+      "question_key": "project",
+      "requirement_ids": [
+        "JD-06",
+        "JD-07"
+      ],
+      "role": "assistant",
+      "routing_notice": "按岗位覆盖计划进入下一个方向。",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_fa6aff156dab5de4",
+        "session_id": "fa6aff156dab5de48a484084b7945fc9",
+        "trace_id": "TRACE_fa6aff156dab5de4"
+      },
+      "seq": 1,
+      "text": "我们面试的是初级数据开发岗位。请用一个你实际做过的订单报表或数据处理练习，说明目标、你个人做了什么、如何核对结果，以及哪些环节尚未验证。",
+      "title": "项目经历与岗位理解",
+      "topic_ids": [],
+      "turn_id": "ITURN_f6ff28499db35d3ba2551d83"
+    },
+    "examples": {
+      "clear": "这是课程练习。我用Python读取CSV，清理空值并按订单ID去重，再用基础SQL汇总；用固定小样本核对订单数与金额。我个人完成清洗和核对，没有生产上线或真实性能提升的证据。",
+      "needs_detail": "我做过一些订单报表，大概是清洗一下再汇总，效果还不错。"
+    },
+    "report": null,
+    "notice": "岗位级固定对话；追问按预设分支，示例分析只匹配内置示例，自定义回答不做语义评价。不评分、不更新能力、不自动改学习计划。"
+  },
+  "report": {
+    "answered_count": 7,
+    "answered_main": 5,
+    "clear_sample_count": 2,
+    "context_selection": {
+      "answer_text_included": false,
+      "include_learning_evidence": false,
+      "notes_included": false
+    },
+    "contract_version": "competition-job-interview-v1",
+    "coverage": [
+      {
+        "answered": true,
+        "asked": true,
+        "key": "project",
+        "planned": true,
+        "requirement_ids": [
+          "JD-06",
+          "JD-07"
+        ],
+        "title": "项目经历与岗位理解"
+      },
+      {
+        "answered": true,
+        "asked": true,
+        "key": "data",
+        "planned": true,
+        "requirement_ids": [
+          "JD-02",
+          "JD-03"
+        ],
+        "title": "SQL、粒度与结果口径"
+      },
+      {
+        "answered": true,
+        "asked": true,
+        "key": "stream",
+        "planned": true,
+        "requirement_ids": [
+          "JD-04"
+        ],
+        "title": "事件时间与故障恢复"
+      },
+      {
+        "answered": true,
+        "asked": true,
+        "key": "engineering",
+        "planned": true,
+        "requirement_ids": [
+          "JD-05",
+          "JD-08"
+        ],
+        "title": "测试、日志与工程验证"
+      },
+      {
+        "answered": true,
+        "asked": true,
+        "key": "communication",
+        "planned": true,
+        "requirement_ids": [
+          "JD-07"
+        ],
+        "title": "需求对齐、协作与边界说明"
+      }
+    ],
+    "ended_at": "2026-11-03T07:55:54Z",
+    "findings": [
+      {
+        "analysis_kind": "needs_detail",
+        "answer_turn_id": "ITURN_c43725f0c0db5203987cd7ab",
+        "finding_id": "ITURN_c43725f0c0db5203987cd7ab:feedback",
+        "issue": "项目结果缺少核对依据与个人贡献（示例）",
+        "observation": "这段内置示例没有把可核对的材料说完整。",
+        "question_turn_id": "ITURN_f6ff28499db35d3ba2551d83",
+        "quote": "效果还不错",
+        "reference_outline": "说明课程/练习背景与个人操作，给出输入和预期结果，区分已验证范围与尚无证据的生产经验。",
+        "requirement_ids": [
+          "JD-06",
+          "JD-07"
+        ],
+        "suggestion": "按“输入—个人操作—输出—核对—边界”说明，至少给一组可以手算的样本。",
+        "title": "项目经历与岗位理解",
+        "topic_ids": []
+      },
+      {
+        "analysis_kind": "custom_unreviewed",
+        "answer_turn_id": "ITURN_74bbebbc52255c0a8bef0d7b",
+        "finding_id": "ITURN_74bbebbc52255c0a8bef0d7b:feedback",
+        "issue": null,
+        "observation": "自定义回答已保存；固定替身未进行语义分析。",
+        "question_turn_id": "ITURN_e5cfa7812a2b555686bff42a",
+        "quote": "",
+        "reference_outline": "用两三条数据说明去重键、预期行数与总额，并点明个人操作和样本边界。",
+        "requirement_ids": [
+          "JD-06",
+          "JD-07"
+        ],
+        "suggestion": "请按参考结构自查结论、依据、个人贡献及未验证边界；待真实面试分析接入后再评价这段回答。",
+        "title": "项目依据追问",
+        "topic_ids": []
+      },
+      {
+        "analysis_kind": "needs_detail",
+        "answer_turn_id": "ITURN_e100484609a05bc0ba3310cd",
+        "finding_id": "ITURN_e100484609a05bc0ba3310cd:feedback",
+        "issue": "按金额去重可能合并不同订单（示例）",
+        "observation": "这段内置示例没有把可核对的材料说完整。",
+        "question_turn_id": "ITURN_4c1e586eb6055bc597256e32",
+        "quote": "SUM(DISTINCT 金额)",
+        "reference_outline": "目标口径→连接基数→订单ID/粒度→修正→小样本对照；数据质量至少核对唯一键、空值或金额守恒。",
+        "requirement_ids": [
+          "JD-02",
+          "JD-03"
+        ],
+        "suggestion": "构造两笔金额相同、ID不同的订单；先确认一行代表什么，再按订单ID和目标粒度核对总额。",
+        "title": "SQL、粒度与结果口径",
+        "topic_ids": [
+          "TOPIC_e8b40cf434c8524d9f9eb4f9",
+          "TOPIC_7c458c8b11395793b7194689"
+        ]
+      },
+      {
+        "analysis_kind": "clear",
+        "answer_turn_id": "ITURN_d2e5d1d052405466816dfd82",
+        "finding_id": "ITURN_d2e5d1d052405466816dfd82:feedback",
+        "issue": null,
+        "observation": "这段内置示例给出了具体依据，并说明实践边界。",
+        "question_turn_id": "ITURN_4f7bcc8a8252533b899c08b1",
+        "quote": "正确总额是160",
+        "reference_outline": "80与160形成反例，说明订单身份、事实粒度和关联基数，而非金额取值本身。",
+        "requirement_ids": [
+          "JD-02",
+          "JD-03"
+        ],
+        "suggestion": "继续用真实小样本或可复现材料支持这段表述，不把课程练习改写成生产经历。",
+        "title": "相同金额反例追问",
+        "topic_ids": [
+          "TOPIC_e8b40cf434c8524d9f9eb4f9",
+          "TOPIC_7c458c8b11395793b7194689"
+        ]
+      },
+      {
+        "analysis_kind": "custom_unreviewed",
+        "answer_turn_id": "ITURN_d35c183fced65df3876e8e35",
+        "finding_id": "ITURN_d35c183fced65df3876e8e35:feedback",
+        "issue": null,
+        "observation": "自定义回答已保存；固定替身未进行语义分析。",
+        "question_turn_id": "ITURN_46cac341d1bc5aa88a660489",
+        "quote": "",
+        "reference_outline": "分别讨论时间语义、窗口/迟到配置、状态与源位置、外部提交边界；不凭检查点承诺完整生产SLA。",
+        "requirement_ids": [
+          "JD-04"
+        ],
+        "suggestion": "请按参考结构自查结论、依据、个人贡献及未验证边界；待真实面试分析接入后再评价这段回答。",
+        "title": "事件时间与故障恢复",
+        "topic_ids": [
+          "TOPIC_8ab786018aec570ab8550237"
+        ]
+      },
+      {
+        "analysis_kind": "clear",
+        "answer_turn_id": "ITURN_437777588b7450679d76d0c1",
+        "finding_id": "ITURN_437777588b7450679d76d0c1:feedback",
+        "issue": null,
+        "observation": "这段内置示例给出了具体依据，并说明实践边界。",
+        "question_turn_id": "ITURN_e8a752cd4ea8535e916f34be",
+        "quote": "不能证明生产可靠性",
+        "reference_outline": "可重复输入、明确断言、异常边界、关联日志与最小复现；没有自动化实践时承认未知，不夸大加分项。",
+        "requirement_ids": [
+          "JD-05",
+          "JD-08"
+        ],
+        "suggestion": "继续用真实小样本或可复现材料支持这段表述，不把课程练习改写成生产经历。",
+        "title": "测试、日志与工程验证",
+        "topic_ids": [
+          "TOPIC_a776e2c6a6e95355a3cc2bac"
+        ]
+      },
+      {
+        "analysis_kind": "needs_detail",
+        "answer_turn_id": "ITURN_c6ecb67f042656b1846514a9",
+        "finding_id": "ITURN_c6ecb67f042656b1846514a9:feedback",
+        "issue": "需求口径与验证责任没有对齐（示例）",
+        "observation": "这段内置示例没有把可核对的材料说完整。",
+        "question_turn_id": "ITURN_51597f9fd25d546590302eed",
+        "quote": "直接提交",
+        "reference_outline": "先澄清再排查，给出可共享的依据和边界；AI使用与否都不免除工程验证责任。",
+        "requirement_ids": [
+          "JD-07"
+        ],
+        "suggestion": "先确认指标、时间范围、去重键和对照样本，再做最小复现；AI建议也要核对假设、运行结果与反例。",
+        "title": "需求对齐、协作与边界说明",
+        "topic_ids": [
+          "TOPIC_a776e2c6a6e95355a3cc2bac"
+        ]
+      }
+    ],
+    "followup_count": 2,
+    "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+    "issue_count": 3,
+    "mode": "full",
+    "notice": "本报告只对完全匹配内置示例的回答展示预设分析；自定义回答不被判对错。不是模型评价、面试成绩或岗位胜任证明，不更新能力状态。",
+    "planned_main": 5,
+    "position_title": "初级数据开发工程师（应届/初级）",
+    "scope": {
+      "case_id": "competition-data-01",
+      "plan_id": "PLAN_fa6aff156dab5de4",
+      "session_id": "fa6aff156dab5de48a484084b7945fc9",
+      "trace_id": "TRACE_fa6aff156dab5de4"
+    },
+    "status": "completed",
+    "unreviewed_count": 2
+  },
+  "transcript": [
+    {
+      "created_at": "2026-11-03T07:55:54Z",
+      "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+      "is_followup": false,
+      "main_index": 0,
+      "parent_answer_id": null,
+      "question_key": "project",
+      "requirement_ids": [
+        "JD-06",
+        "JD-07"
+      ],
+      "role": "assistant",
+      "routing_notice": "按岗位覆盖计划进入下一个方向。",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_fa6aff156dab5de4",
+        "session_id": "fa6aff156dab5de48a484084b7945fc9",
+        "trace_id": "TRACE_fa6aff156dab5de4"
+      },
+      "seq": 1,
+      "text": "我们面试的是初级数据开发岗位。请用一个你实际做过的订单报表或数据处理练习，说明目标、你个人做了什么、如何核对结果，以及哪些环节尚未验证。",
+      "title": "项目经历与岗位理解",
+      "topic_ids": [],
+      "turn_id": "ITURN_f6ff28499db35d3ba2551d83"
+    },
+    {
+      "answer_origin": "user_entered_text",
+      "created_at": "2026-11-03T07:55:54Z",
+      "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+      "question_turn_id": "ITURN_f6ff28499db35d3ba2551d83",
+      "role": "user",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_fa6aff156dab5de4",
+        "session_id": "fa6aff156dab5de48a484084b7945fc9",
+        "trace_id": "TRACE_fa6aff156dab5de4"
+      },
+      "seq": 2,
+      "text": "我做过一些订单报表，大概是清洗一下再汇总，效果还不错。",
+      "turn_id": "ITURN_c43725f0c0db5203987cd7ab"
+    },
+    {
+      "created_at": "2026-11-03T07:55:54Z",
+      "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+      "is_followup": true,
+      "main_index": 0,
+      "parent_answer_id": "ITURN_c43725f0c0db5203987cd7ab",
+      "question_key": "project_followup",
+      "requirement_ids": [
+        "JD-06",
+        "JD-07"
+      ],
+      "role": "assistant",
+      "routing_notice": "预设位置的澄清追问，不判断回答对错。",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_fa6aff156dab5de4",
+        "session_id": "fa6aff156dab5de48a484084b7945fc9",
+        "trace_id": "TRACE_fa6aff156dab5de4"
+      },
+      "seq": 3,
+      "text": "请补充一组你能手算的输入与预期结果，以及哪一步由你个人完成；如果还没有核对材料，也可以直接说明。",
+      "title": "项目依据追问",
+      "topic_ids": [],
+      "turn_id": "ITURN_e5cfa7812a2b555686bff42a"
+    },
+    {
+      "answer_origin": "user_entered_text",
+      "created_at": "2026-11-03T07:55:54Z",
+      "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+      "question_turn_id": "ITURN_e5cfa7812a2b555686bff42a",
+      "role": "user",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_fa6aff156dab5de4",
+        "session_id": "fa6aff156dab5de48a484084b7945fc9",
+        "trace_id": "TRACE_fa6aff156dab5de4"
+      },
+      "seq": 4,
+      "text": "这段回答是自定义文字，固定替身不能据此判断能力。",
+      "turn_id": "ITURN_74bbebbc52255c0a8bef0d7b"
+    },
+    {
+      "created_at": "2026-11-03T07:55:54Z",
+      "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+      "is_followup": false,
+      "main_index": 1,
+      "parent_answer_id": "ITURN_74bbebbc52255c0a8bef0d7b",
+      "question_key": "data",
+      "requirement_ids": [
+        "JD-02",
+        "JD-03"
+      ],
+      "role": "assistant",
+      "routing_notice": "按岗位覆盖计划进入下一个方向。",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_fa6aff156dab5de4",
+        "session_id": "fa6aff156dab5de48a484084b7945fc9",
+        "trace_id": "TRACE_fa6aff156dab5de4"
+      },
+      "seq": 5,
+      "text": "订单表一行一订单，明细表一行一商品。关联后订单金额变大了，你会怎样确认目标统计口径、定位原因并验证修正？再说明一个数据质量检查。",
+      "title": "SQL、粒度与结果口径",
+      "topic_ids": [
+        "TOPIC_e8b40cf434c8524d9f9eb4f9",
+        "TOPIC_7c458c8b11395793b7194689"
+      ],
+      "turn_id": "ITURN_4c1e586eb6055bc597256e32"
+    },
+    {
+      "answer_origin": "user_entered_text",
+      "created_at": "2026-11-03T07:55:54Z",
+      "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+      "question_turn_id": "ITURN_4c1e586eb6055bc597256e32",
+      "role": "user",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_fa6aff156dab5de4",
+        "session_id": "fa6aff156dab5de48a484084b7945fc9",
+        "trace_id": "TRACE_fa6aff156dab5de4"
+      },
+      "seq": 6,
+      "text": "我会把重复的金额去掉，SUM(DISTINCT 金额)应该就可以了。",
+      "turn_id": "ITURN_e100484609a05bc0ba3310cd"
+    },
+    {
+      "created_at": "2026-11-03T07:55:54Z",
+      "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+      "is_followup": true,
+      "main_index": 1,
+      "parent_answer_id": "ITURN_e100484609a05bc0ba3310cd",
+      "question_key": "data_followup",
+      "requirement_ids": [
+        "JD-02",
+        "JD-03"
+      ],
+      "role": "assistant",
+      "routing_notice": "预设位置的澄清追问，不判断回答对错。",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_fa6aff156dab5de4",
+        "session_id": "fa6aff156dab5de48a484084b7945fc9",
+        "trace_id": "TRACE_fa6aff156dab5de4"
+      },
+      "seq": 7,
+      "text": "若两笔不同订单的金额恰好都是80，按不同金额只加一次会得到多少？正确总额应是多少？这对你的修正方案意味着什么？",
+      "title": "相同金额反例追问",
+      "topic_ids": [
+        "TOPIC_e8b40cf434c8524d9f9eb4f9",
+        "TOPIC_7c458c8b11395793b7194689"
+      ],
+      "turn_id": "ITURN_4f7bcc8a8252533b899c08b1"
+    },
+    {
+      "answer_origin": "user_entered_text",
+      "created_at": "2026-11-03T07:55:54Z",
+      "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+      "question_turn_id": "ITURN_4f7bcc8a8252533b899c08b1",
+      "role": "user",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_fa6aff156dab5de4",
+        "session_id": "fa6aff156dab5de48a484084b7945fc9",
+        "trace_id": "TRACE_fa6aff156dab5de4"
+      },
+      "seq": 8,
+      "text": "按不同金额只加一次是80，但两笔不同订单的正确总额是160。金额不是订单身份，要按订单ID与目标粒度核对，不能用金额DISTINCT修复。",
+      "turn_id": "ITURN_d2e5d1d052405466816dfd82"
+    },
+    {
+      "created_at": "2026-11-03T07:55:54Z",
+      "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+      "is_followup": false,
+      "main_index": 2,
+      "parent_answer_id": "ITURN_d2e5d1d052405466816dfd82",
+      "question_key": "stream",
+      "requirement_ids": [
+        "JD-04"
+      ],
+      "role": "assistant",
+      "routing_notice": "按岗位覆盖计划进入下一个方向。",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_fa6aff156dab5de4",
+        "session_id": "fa6aff156dab5de48a484084b7945fc9",
+        "trace_id": "TRACE_fa6aff156dab5de4"
+      },
+      "seq": 9,
+      "text": "支付事件10:00发生、10:04被收到；处理链在检查点之后故障。请说明按事件时间统计时如何处理迟到，以及为什么恢复状态不等于所有外部下游永不重复。",
+      "title": "事件时间与故障恢复",
+      "topic_ids": [
+        "TOPIC_8ab786018aec570ab8550237"
+      ],
+      "turn_id": "ITURN_46cac341d1bc5aa88a660489"
+    },
+    {
+      "answer_origin": "user_entered_text",
+      "created_at": "2026-11-03T07:55:54Z",
+      "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+      "question_turn_id": "ITURN_46cac341d1bc5aa88a660489",
+      "role": "user",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_fa6aff156dab5de4",
+        "session_id": "fa6aff156dab5de48a484084b7945fc9",
+        "trace_id": "TRACE_fa6aff156dab5de4"
+      },
+      "seq": 10,
+      "text": "这段回答是自定义文字，固定替身不能据此判断能力。",
+      "turn_id": "ITURN_d35c183fced65df3876e8e35"
+    },
+    {
+      "created_at": "2026-11-03T07:55:54Z",
+      "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+      "is_followup": false,
+      "main_index": 3,
+      "parent_answer_id": "ITURN_d35c183fced65df3876e8e35",
+      "question_key": "engineering",
+      "requirement_ids": [
+        "JD-05",
+        "JD-08"
+      ],
+      "role": "assistant",
+      "routing_notice": "按岗位覆盖计划进入下一个方向。",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_fa6aff156dab5de4",
+        "session_id": "fa6aff156dab5de48a484084b7945fc9",
+        "trace_id": "TRACE_fa6aff156dab5de4"
+      },
+      "seq": 11,
+      "text": "你准备交付一份订单金额处理脚本。会选哪些正常/异常样本与断言？偶发失败时用什么日志定位？如果尚未做自动化测试，也请直接说明。可复现自动测试属于加分材料，不要求生产规模经历。",
+      "title": "测试、日志与工程验证",
+      "topic_ids": [
+        "TOPIC_a776e2c6a6e95355a3cc2bac"
+      ],
+      "turn_id": "ITURN_e8a752cd4ea8535e916f34be"
+    },
+    {
+      "answer_origin": "user_entered_text",
+      "created_at": "2026-11-03T07:55:54Z",
+      "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+      "question_turn_id": "ITURN_e8a752cd4ea8535e916f34be",
+      "role": "user",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_fa6aff156dab5de4",
+        "session_id": "fa6aff156dab5de48a484084b7945fc9",
+        "trace_id": "TRACE_fa6aff156dab5de4"
+      },
+      "seq": 12,
+      "text": "先固定正常样本及重复订单、空值反例，断言订单数和金额；自动测试是我接下来要补的材料。日志记录运行/关联ID、阶段、错误类别与必要计数，不写Key和完整个人信息。课程小样本跑通还不能证明生产可靠性。",
+      "turn_id": "ITURN_437777588b7450679d76d0c1"
+    },
+    {
+      "created_at": "2026-11-03T07:55:54Z",
+      "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+      "is_followup": false,
+      "main_index": 4,
+      "parent_answer_id": "ITURN_437777588b7450679d76d0c1",
+      "question_key": "communication",
+      "requirement_ids": [
+        "JD-07"
+      ],
+      "role": "assistant",
+      "routing_notice": "按岗位覆盖计划进入下一个方向。",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_fa6aff156dab5de4",
+        "session_id": "fa6aff156dab5de48a484084b7945fc9",
+        "trace_id": "TRACE_fa6aff156dab5de4"
+      },
+      "seq": 13,
+      "text": "业务同学说“报表数字对不上”，但没有说比较的是哪个口径。你会如何澄清、给出排查顺序并说明结论的边界？若使用AI辅助排查，你会怎样验证它的建议？AI辅助是可选讨论，不新增岗位硬门槛。",
+      "title": "需求对齐、协作与边界说明",
+      "topic_ids": [
+        "TOPIC_a776e2c6a6e95355a3cc2bac"
+      ],
+      "turn_id": "ITURN_51597f9fd25d546590302eed"
+    },
+    {
+      "answer_origin": "user_entered_text",
+      "created_at": "2026-11-03T07:55:54Z",
+      "interview_id": "INTERVIEW_6897d4221dd3570e8b4e4c69",
+      "question_turn_id": "ITURN_51597f9fd25d546590302eed",
+      "role": "user",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_fa6aff156dab5de4",
+        "session_id": "fa6aff156dab5de48a484084b7945fc9",
+        "trace_id": "TRACE_fa6aff156dab5de4"
+      },
+      "seq": 14,
+      "text": "我会先按自己的理解改SQL，AI说能用的方案就直接提交。",
+      "turn_id": "ITURN_c6ecb67f042656b1846514a9"
+    }
+  ]
+}

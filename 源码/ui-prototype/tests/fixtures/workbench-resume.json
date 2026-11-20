@@ -1,0 +1,617 @@
+{
+  "empty": {
+    "approved_texts": [
+      "在离线订单报表课程练习中，使用Python读取CSV、清理空值并按订单ID去重，完成基础SQL聚合；能够说明样本输入和汇总结果。"
+    ],
+    "contract_version": "competition-resume-fixed-v1",
+    "coverage_notice": "只使用开始生成前已保存的学习进度、答卷和已结束面试；进行中的面试不作反馈依据。没有记录的方向明确留空。",
+    "created_at": "2026-11-03T10:10:10Z",
+    "input_digest": "a0fec59eb5bc1a7a0fcaf841626eb95440585bea1580038190fa5ebf54053c3b",
+    "items": [
+      {
+        "evidence_level": "简历原文自述，未经独立核验",
+        "item_id": "original-project",
+        "next_action": "使用前自行确认每个动作确实由本人完成；如有材料，可另补脚本、输入及预期输出。",
+        "original_quote": "用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习；能说明样本输入和汇总结果。",
+        "reason": "调整语序，保留课程、小样本与自述边界；没有新增规模、指标、个人主导或生产经历。",
+        "source_ids": [
+          "51ecee3081b35b729ee99f46d746c05c:input",
+          "51ecee3081b35b729ee99f46d746c05c:diagnosis"
+        ],
+        "status": "suggested",
+        "suggested_text": "在离线订单报表课程练习中，使用Python读取CSV、清理空值并按订单ID去重，完成基础SQL聚合；能够说明样本输入和汇总结果。",
+        "title": "把已有课程练习写得具体"
+      },
+      {
+        "evidence_level": "原文明确边界",
+        "item_id": "production-boundary",
+        "next_action": "保留事实，不添加生产Flink、商业上线或性能提升数字；未来有真实材料再核实。",
+        "original_quote": "没有生产Flink链路、商业上线和真实性能提升经历。",
+        "reason": "原文明示没有相关经历；诊断待验证、演示高分及面试清晰表达都不能推翻这个边界。",
+        "source_ids": [
+          "51ecee3081b35b729ee99f46d746c05c:input",
+          "51ecee3081b35b729ee99f46d746c05c:diagnosis"
+        ],
+        "status": "withheld",
+        "suggested_text": "",
+        "title": "生产与性能成果保持留白"
+      }
+    ],
+    "notice": "固定替身建议，仅使用本会话冻结的资料；简历自述未经独立核验，学习完成、固定评分和面试表达均不能证明生产经历。不调用模型，不改写简历原文或能力状态。",
+    "position_title": "初级数据开发工程师（应届/初级）",
+    "resume_text": "计算机相关专业应届生。用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习；能说明样本输入和汇总结果。未提供复杂连接、执行计划、事实粒度、自动测试与监控的验证材料。没有生产Flink链路、商业上线和真实性能提升经历。用过AI解释报错，尚未提供系统性验证记录。",
+    "scope": {
+      "case_id": "competition-data-01",
+      "plan_id": "PLAN_51ecee3081b35b72",
+      "session_id": "51ecee3081b35b729ee99f46d746c05c",
+      "trace_id": "TRACE_51ecee3081b35b72"
+    },
+    "snapshot_revision": 6,
+    "source_counts": {
+      "assessment": 0,
+      "diagnosis": 1,
+      "input": 1,
+      "interview": 0,
+      "learning_progress": 0,
+      "retest": 0
+    },
+    "sources": [
+      {
+        "kind": "input",
+        "record_id": "51ecee3081b35b729ee99f46d746c05c:input",
+        "seq": 1,
+        "title": "创建统一比赛会话",
+        "view": {
+          "evidence": "虚构候选人原文 / 自述，不是核验事实",
+          "jd_text": "初级数据开发工程师（应届/初级）\n岗位职责\n1、开发订单报表，核对多表连接、分组和金额口径。\n2、参与数仓建模，明确事实粒度与维度关系，设计质量检查。\n3、学习和参与实时数据处理，解释事件时间、窗口和恢复边界。\n4、为数据处理设计测试和日志，协作排查问题。\n岗位要求\n1、具备Python和基础SQL能力，能用小样本说明结果。\n2、能说明方案假设、核对依据和未验证边界，愿意学习工程方法。\n加分项\n1、有可复现的流处理或自动化测试练习。\n面试安排\n远程技术交流；不作为技能要求。",
+          "resume_text": "计算机相关专业应届生。用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习；能说明样本输入和汇总结果。未提供复杂连接、执行计划、事实粒度、自动测试与监控的验证材料。没有生产Flink链路、商业上线和真实性能提升经历。用过AI解释报错，尚未提供系统性验证记录。"
+        }
+      },
+      {
+        "kind": "diagnosis",
+        "record_id": "51ecee3081b35b729ee99f46d746c05c:diagnosis",
+        "seq": 2,
+        "title": "A · 保存岗位证据与专题绑定",
+        "view": {
+          "evidence": "A固定证据判断，不证明新增技能",
+          "requirements": [
+            {
+              "action": "none",
+              "evidence_status": "not_applicable",
+              "follow_up": "",
+              "label": "岗位背景",
+              "priority": "none",
+              "rationale": "岗位背景或面试安排，不作为学习差距。",
+              "requirement_id": "JD-01",
+              "resume_quotes": []
+            },
+            {
+              "action": "verify",
+              "evidence_status": "partial",
+              "follow_up": "用订单小样本补充可核对的结果和说明。",
+              "label": "连接与金额口径验证",
+              "priority": "P1",
+              "rationale": "基础SQL有自述，连接后的金额口径尚需小样本验证；不是确认不会。",
+              "requirement_id": "JD-02",
+              "resume_quotes": [
+                "做过基础SQL聚合和离线订单报表课程练习"
+              ]
+            },
+            {
+              "action": "verify",
+              "evidence_status": "not_provided",
+              "follow_up": "用订单小样本补充可核对的结果和说明。",
+              "label": "事实粒度与数据质量",
+              "priority": "P1",
+              "rationale": "未提供足够验证材料，先核对，不断言不会。",
+              "requirement_id": "JD-03",
+              "resume_quotes": []
+            },
+            {
+              "action": "verify",
+              "evidence_status": "not_provided",
+              "follow_up": "用订单小样本补充可核对的结果和说明。",
+              "label": "事件时间与恢复边界",
+              "priority": "P1",
+              "rationale": "未提供足够验证材料，先核对，不断言不会。",
+              "requirement_id": "JD-04",
+              "resume_quotes": []
+            },
+            {
+              "action": "verify",
+              "evidence_status": "not_provided",
+              "follow_up": "用订单小样本补充可核对的结果和说明。",
+              "label": "工程测试与日志",
+              "priority": "P1",
+              "rationale": "未提供足够验证材料，先核对，不断言不会。",
+              "requirement_id": "JD-05",
+              "resume_quotes": []
+            },
+            {
+              "action": "maintain",
+              "evidence_status": "supported",
+              "follow_up": "",
+              "label": "Python与基础SQL",
+              "priority": "P3",
+              "rationale": "有有限课程实践自述；未经独立考核，不等于精通。",
+              "requirement_id": "JD-06",
+              "resume_quotes": [
+                "用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习"
+              ]
+            },
+            {
+              "action": "verify",
+              "evidence_status": "partial",
+              "follow_up": "用订单小样本补充可核对的结果和说明。",
+              "label": "说明验证依据与边界",
+              "priority": "P1",
+              "rationale": "能说明已有样本；完整假设、核对与未验证边界仍应通过交付说明核对。",
+              "requirement_id": "JD-07",
+              "resume_quotes": [
+                "能说明样本输入和汇总结果"
+              ]
+            },
+            {
+              "action": "verify",
+              "evidence_status": "not_provided",
+              "follow_up": "用订单小样本补充可核对的结果和说明。",
+              "label": "可复现流处理或自动测试",
+              "priority": "P2",
+              "rationale": "未提供足够验证材料，先核对，不断言不会。",
+              "requirement_id": "JD-08",
+              "resume_quotes": []
+            },
+            {
+              "action": "none",
+              "evidence_status": "not_applicable",
+              "follow_up": "",
+              "label": "面试安排",
+              "priority": "none",
+              "rationale": "岗位背景或面试安排，不作为学习差距。",
+              "requirement_id": "JD-09",
+              "resume_quotes": []
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "source_kind": "competition_workbench_double",
+  "run_mode": "demo",
+  "simulated": true,
+  "real_dispatch_enabled": false,
+  "model_requests": 0,
+  "notice": "本会话全部为固定替身，未调用模型；诊断/计划不是个人能力测评。",
+  "scope": {
+    "case_id": "competition-data-01",
+    "session_id": "51ecee3081b35b729ee99f46d746c05c",
+    "trace_id": "TRACE_51ecee3081b35b72",
+    "plan_id": "PLAN_51ecee3081b35b72"
+  },
+  "resume_id": "RESUME_6d0c154a6b545c2f9d5d75f3",
+  "report": {
+    "approved_texts": [
+      "在离线订单报表课程练习中，使用Python读取CSV、清理空值并按订单ID去重，完成基础SQL聚合；能够说明样本输入和汇总结果。"
+    ],
+    "contract_version": "competition-resume-fixed-v1",
+    "coverage_notice": "只使用开始生成前已保存的学习进度、答卷和已结束面试；进行中的面试不作反馈依据。没有记录的方向明确留空。",
+    "created_at": "2026-11-03T10:10:10Z",
+    "input_digest": "a0fec59eb5bc1a7a0fcaf841626eb95440585bea1580038190fa5ebf54053c3b",
+    "items": [
+      {
+        "evidence_level": "简历原文自述，未经独立核验",
+        "item_id": "original-project",
+        "next_action": "使用前自行确认每个动作确实由本人完成；如有材料，可另补脚本、输入及预期输出。",
+        "original_quote": "用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习；能说明样本输入和汇总结果。",
+        "reason": "调整语序，保留课程、小样本与自述边界；没有新增规模、指标、个人主导或生产经历。",
+        "source_ids": [
+          "51ecee3081b35b729ee99f46d746c05c:input",
+          "51ecee3081b35b729ee99f46d746c05c:diagnosis"
+        ],
+        "status": "suggested",
+        "suggested_text": "在离线订单报表课程练习中，使用Python读取CSV、清理空值并按订单ID去重，完成基础SQL聚合；能够说明样本输入和汇总结果。",
+        "title": "把已有课程练习写得具体"
+      },
+      {
+        "evidence_level": "原文明确边界",
+        "item_id": "production-boundary",
+        "next_action": "保留事实，不添加生产Flink、商业上线或性能提升数字；未来有真实材料再核实。",
+        "original_quote": "没有生产Flink链路、商业上线和真实性能提升经历。",
+        "reason": "原文明示没有相关经历；诊断待验证、演示高分及面试清晰表达都不能推翻这个边界。",
+        "source_ids": [
+          "51ecee3081b35b729ee99f46d746c05c:input",
+          "51ecee3081b35b729ee99f46d746c05c:diagnosis"
+        ],
+        "status": "withheld",
+        "suggested_text": "",
+        "title": "生产与性能成果保持留白"
+      },
+      {
+        "evidence_level": "固定替身评分 / 仅演示",
+        "item_id": "ATTEMPT_456791f7b66958ba8ec8ebc0:saved",
+        "next_action": "围绕该题整理本人可复现的解法与反例，核实后再考虑补入练习经历；当前不生成成果表述。",
+        "original_quote": "",
+        "reason": "题目与原始答卷有保存，但评分来自预设路线，不评价自由输入的真实能力；不据此新增简历能力。",
+        "source_ids": [
+          "ATTEMPT_456791f7b66958ba8ec8ebc0:saved"
+        ],
+        "status": "supplement",
+        "suggested_text": "",
+        "title": "日周考核只支持定位补证方向"
+      },
+      {
+        "evidence_level": "固定替身评分 / 仅演示",
+        "item_id": "ATTEMPT_9df2b4e8e7e95780931b9eb3:saved",
+        "next_action": "围绕该题整理本人可复现的解法与反例，核实后再考虑补入练习经历；当前不生成成果表述。",
+        "original_quote": "",
+        "reason": "题目与原始答卷有保存，但评分来自预设路线，不评价自由输入的真实能力；不据此新增简历能力。",
+        "source_ids": [
+          "ATTEMPT_9df2b4e8e7e95780931b9eb3:saved"
+        ],
+        "status": "supplement",
+        "suggested_text": "",
+        "title": "日周考核只支持定位补证方向"
+      },
+      {
+        "evidence_level": "面试自述 / 示例反馈，不是已发生项目的证明",
+        "item_id": "INTERVIEW_6d9f97f3edfd5e4492438e6d:report",
+        "next_action": "按“输入—个人操作—输出—核对—边界”说明，至少给一组可以手算的样本。 不自动把面试回答移入简历。",
+        "original_quote": "效果还不错",
+        "reason": "内置示例反馈：这段内置示例没有把可核对的材料说完整。",
+        "source_ids": [
+          "INTERVIEW_6d9f97f3edfd5e4492438e6d:report",
+          "ITURN_549c3fe20a105a189a151e8b:saved"
+        ],
+        "status": "supplement",
+        "suggested_text": "",
+        "title": "把面试表达问题转成补证清单"
+      }
+    ],
+    "notice": "固定替身建议，仅使用本会话冻结的资料；简历自述未经独立核验，学习完成、固定评分和面试表达均不能证明生产经历。不调用模型，不改写简历原文或能力状态。",
+    "position_title": "初级数据开发工程师（应届/初级）",
+    "resume_text": "计算机相关专业应届生。用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习；能说明样本输入和汇总结果。未提供复杂连接、执行计划、事实粒度、自动测试与监控的验证材料。没有生产Flink链路、商业上线和真实性能提升经历。用过AI解释报错，尚未提供系统性验证记录。",
+    "scope": {
+      "case_id": "competition-data-01",
+      "plan_id": "PLAN_51ecee3081b35b72",
+      "session_id": "51ecee3081b35b729ee99f46d746c05c",
+      "trace_id": "TRACE_51ecee3081b35b72"
+    },
+    "snapshot_revision": 16,
+    "source_counts": {
+      "assessment": 2,
+      "diagnosis": 1,
+      "input": 1,
+      "interview": 1,
+      "learning_progress": 0,
+      "retest": 0
+    },
+    "sources": [
+      {
+        "kind": "input",
+        "record_id": "51ecee3081b35b729ee99f46d746c05c:input",
+        "seq": 1,
+        "title": "创建统一比赛会话",
+        "view": {
+          "evidence": "虚构候选人原文 / 自述，不是核验事实",
+          "jd_text": "初级数据开发工程师（应届/初级）\n岗位职责\n1、开发订单报表，核对多表连接、分组和金额口径。\n2、参与数仓建模，明确事实粒度与维度关系，设计质量检查。\n3、学习和参与实时数据处理，解释事件时间、窗口和恢复边界。\n4、为数据处理设计测试和日志，协作排查问题。\n岗位要求\n1、具备Python和基础SQL能力，能用小样本说明结果。\n2、能说明方案假设、核对依据和未验证边界，愿意学习工程方法。\n加分项\n1、有可复现的流处理或自动化测试练习。\n面试安排\n远程技术交流；不作为技能要求。",
+          "resume_text": "计算机相关专业应届生。用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习；能说明样本输入和汇总结果。未提供复杂连接、执行计划、事实粒度、自动测试与监控的验证材料。没有生产Flink链路、商业上线和真实性能提升经历。用过AI解释报错，尚未提供系统性验证记录。"
+        }
+      },
+      {
+        "kind": "diagnosis",
+        "record_id": "51ecee3081b35b729ee99f46d746c05c:diagnosis",
+        "seq": 2,
+        "title": "A · 保存岗位证据与专题绑定",
+        "view": {
+          "evidence": "A固定证据判断，不证明新增技能",
+          "requirements": [
+            {
+              "action": "none",
+              "evidence_status": "not_applicable",
+              "follow_up": "",
+              "label": "岗位背景",
+              "priority": "none",
+              "rationale": "岗位背景或面试安排，不作为学习差距。",
+              "requirement_id": "JD-01",
+              "resume_quotes": []
+            },
+            {
+              "action": "verify",
+              "evidence_status": "partial",
+              "follow_up": "用订单小样本补充可核对的结果和说明。",
+              "label": "连接与金额口径验证",
+              "priority": "P1",
+              "rationale": "基础SQL有自述，连接后的金额口径尚需小样本验证；不是确认不会。",
+              "requirement_id": "JD-02",
+              "resume_quotes": [
+                "做过基础SQL聚合和离线订单报表课程练习"
+              ]
+            },
+            {
+              "action": "verify",
+              "evidence_status": "not_provided",
+              "follow_up": "用订单小样本补充可核对的结果和说明。",
+              "label": "事实粒度与数据质量",
+              "priority": "P1",
+              "rationale": "未提供足够验证材料，先核对，不断言不会。",
+              "requirement_id": "JD-03",
+              "resume_quotes": []
+            },
+            {
+              "action": "verify",
+              "evidence_status": "not_provided",
+              "follow_up": "用订单小样本补充可核对的结果和说明。",
+              "label": "事件时间与恢复边界",
+              "priority": "P1",
+              "rationale": "未提供足够验证材料，先核对，不断言不会。",
+              "requirement_id": "JD-04",
+              "resume_quotes": []
+            },
+            {
+              "action": "verify",
+              "evidence_status": "not_provided",
+              "follow_up": "用订单小样本补充可核对的结果和说明。",
+              "label": "工程测试与日志",
+              "priority": "P1",
+              "rationale": "未提供足够验证材料，先核对，不断言不会。",
+              "requirement_id": "JD-05",
+              "resume_quotes": []
+            },
+            {
+              "action": "maintain",
+              "evidence_status": "supported",
+              "follow_up": "",
+              "label": "Python与基础SQL",
+              "priority": "P3",
+              "rationale": "有有限课程实践自述；未经独立考核，不等于精通。",
+              "requirement_id": "JD-06",
+              "resume_quotes": [
+                "用Python读取CSV、清理空值并按订单ID去重，做过基础SQL聚合和离线订单报表课程练习"
+              ]
+            },
+            {
+              "action": "verify",
+              "evidence_status": "partial",
+              "follow_up": "用订单小样本补充可核对的结果和说明。",
+              "label": "说明验证依据与边界",
+              "priority": "P1",
+              "rationale": "能说明已有样本；完整假设、核对与未验证边界仍应通过交付说明核对。",
+              "requirement_id": "JD-07",
+              "resume_quotes": [
+                "能说明样本输入和汇总结果"
+              ]
+            },
+            {
+              "action": "verify",
+              "evidence_status": "not_provided",
+              "follow_up": "用订单小样本补充可核对的结果和说明。",
+              "label": "可复现流处理或自动测试",
+              "priority": "P2",
+              "rationale": "未提供足够验证材料，先核对，不断言不会。",
+              "requirement_id": "JD-08",
+              "resume_quotes": []
+            },
+            {
+              "action": "none",
+              "evidence_status": "not_applicable",
+              "follow_up": "",
+              "label": "面试安排",
+              "priority": "none",
+              "rationale": "岗位背景或面试安排，不作为学习差距。",
+              "requirement_id": "JD-09",
+              "resume_quotes": []
+            }
+          ]
+        }
+      },
+      {
+        "kind": "assessment",
+        "record_id": "ATTEMPT_456791f7b66958ba8ec8ebc0:saved",
+        "seq": 10,
+        "title": "日考核 · 第1题答卷",
+        "view": {
+          "answer": "我先列出样本，检查粒度与结果。",
+          "attempt_id": "ATTEMPT_456791f7b66958ba8ec8ebc0",
+          "evidence": "固定评分不证明答题能力",
+          "grade": {
+            "feedback": "固定示例：先核对结果，再补依据和边界。分数由所选演示路线决定，与输入答案内容无关。",
+            "scores": [
+              {
+                "dimensions": {
+                  "basis": 55,
+                  "result": 55
+                },
+                "score": 55,
+                "topic_key": "sql"
+              }
+            ],
+            "status": "scored",
+            "version": "competition-fixed-rubric-v1"
+          },
+          "question": "订单A=60元、B=40元，A有两条明细，B有一条。按订单ID连接后，直接累加订单金额是多少？真实订单总额是多少？写出修正办法。"
+        }
+      },
+      {
+        "kind": "assessment",
+        "record_id": "ATTEMPT_9df2b4e8e7e95780931b9eb3:saved",
+        "seq": 13,
+        "title": "日考核 · 第2题答卷",
+        "view": {
+          "answer": "我先列出样本，检查粒度与结果。",
+          "attempt_id": "ATTEMPT_9df2b4e8e7e95780931b9eb3",
+          "evidence": "固定评分不证明答题能力",
+          "grade": {
+            "feedback": "固定示例：先核对结果，再补依据和边界。分数由所选演示路线决定，与输入答案内容无关。",
+            "scores": [
+              {
+                "dimensions": {
+                  "basis": 76,
+                  "result": 76
+                },
+                "score": 76,
+                "topic_key": "model"
+              }
+            ],
+            "status": "scored",
+            "version": "competition-fixed-rubric-v1"
+          },
+          "question": "同一订单有两条商品明细。订单表、明细表和连接结果分别一行代表什么？为什么不能把订单总额在每条明细上相加？"
+        }
+      },
+      {
+        "kind": "interview",
+        "record_id": "INTERVIEW_6d9f97f3edfd5e4492438e6d:report",
+        "seq": 24,
+        "title": "岗位面试复盘 · 已完成",
+        "view": {
+          "answered_count": 4,
+          "findings": [
+            {
+              "analysis_kind": "needs_detail",
+              "answer_record_id": "ITURN_549c3fe20a105a189a151e8b:saved",
+              "answer_text": "我做过一些订单报表，大概是清洗一下再汇总，效果还不错。",
+              "answer_turn_id": "ITURN_549c3fe20a105a189a151e8b",
+              "finding_id": "ITURN_549c3fe20a105a189a151e8b:feedback",
+              "issue": "项目结果缺少核对依据与个人贡献（示例）",
+              "observation": "这段内置示例没有把可核对的材料说完整。",
+              "question_turn_id": "ITURN_d8772ec6cd51506a9cc81fce",
+              "quote": "效果还不错",
+              "reference_outline": "说明课程/练习背景与个人操作，给出输入和预期结果，区分已验证范围与尚无证据的生产经验。",
+              "requirement_ids": [
+                "JD-06",
+                "JD-07"
+              ],
+              "suggestion": "按“输入—个人操作—输出—核对—边界”说明，至少给一组可以手算的样本。",
+              "title": "项目经历与岗位理解",
+              "topic_ids": []
+            },
+            {
+              "analysis_kind": "needs_detail",
+              "answer_record_id": "ITURN_53fee3fbe894592dbdb6f4fa:saved",
+              "answer_text": "样本我现在记不清，反正结果能出来。",
+              "answer_turn_id": "ITURN_53fee3fbe894592dbdb6f4fa",
+              "finding_id": "ITURN_53fee3fbe894592dbdb6f4fa:feedback",
+              "issue": "补充说明仍没有可核对样本（示例）",
+              "observation": "这段内置示例没有把可核对的材料说完整。",
+              "question_turn_id": "ITURN_705432baaee55e9f86c20cf2",
+              "quote": "样本我现在记不清",
+              "reference_outline": "用两三条数据说明去重键、预期行数与总额，并点明个人操作和样本边界。",
+              "requirement_ids": [
+                "JD-06",
+                "JD-07"
+              ],
+              "suggestion": "可以从两笔订单开始，明确原始记录、去重前后行数及目标金额；不必编造项目规模。",
+              "title": "项目依据追问",
+              "topic_ids": []
+            },
+            {
+              "analysis_kind": "needs_detail",
+              "answer_record_id": "ITURN_0cb85a239be45a57900a92c7:saved",
+              "answer_text": "我会把重复的金额去掉，SUM(DISTINCT 金额)应该就可以了。",
+              "answer_turn_id": "ITURN_0cb85a239be45a57900a92c7",
+              "finding_id": "ITURN_0cb85a239be45a57900a92c7:feedback",
+              "issue": "按金额去重可能合并不同订单（示例）",
+              "observation": "这段内置示例没有把可核对的材料说完整。",
+              "question_turn_id": "ITURN_292d9c6a30ef5e6783b5f6f9",
+              "quote": "SUM(DISTINCT 金额)",
+              "reference_outline": "目标口径→连接基数→订单ID/粒度→修正→小样本对照；数据质量至少核对唯一键、空值或金额守恒。",
+              "requirement_ids": [
+                "JD-02",
+                "JD-03"
+              ],
+              "suggestion": "构造两笔金额相同、ID不同的订单；先确认一行代表什么，再按订单ID和目标粒度核对总额。",
+              "title": "SQL、粒度与结果口径",
+              "topic_ids": [
+                "TOPIC_b48602f7cd1757efa2d1bc3e",
+                "TOPIC_561019a75b3b5896afc85525"
+              ]
+            },
+            {
+              "analysis_kind": "needs_detail",
+              "answer_record_id": "ITURN_38a640d67c9f585289d69f46:saved",
+              "answer_text": "收到就处理，恢复检查点以后应该不会重复，也不用额外检查。",
+              "answer_turn_id": "ITURN_38a640d67c9f585289d69f46",
+              "finding_id": "ITURN_38a640d67c9f585289d69f46:feedback",
+              "issue": "状态恢复与外部提交边界混在一起（示例）",
+              "observation": "这段内置示例没有把可核对的材料说完整。",
+              "question_turn_id": "ITURN_280d634a99485dd19e39aa47",
+              "quote": "应该不会重复",
+              "reference_outline": "分别讨论时间语义、窗口/迟到配置、状态与源位置、外部提交边界；不凭检查点承诺完整生产SLA。",
+              "requirement_ids": [
+                "JD-04"
+              ],
+              "suggestion": "分别说明事件时间/处理时间、迟到策略、源重放和下游事务或幂等；用故障前后小样本核对结果。",
+              "title": "事件时间与故障恢复",
+              "topic_ids": [
+                "TOPIC_33b0ad55b7e7577eb9e32183"
+              ]
+            }
+          ],
+          "interview_id": "INTERVIEW_6d9f97f3edfd5e4492438e6d",
+          "status": "completed"
+        }
+      }
+    ]
+  },
+  "checks": [
+    {
+      "check_id": "RCHECK_318d58db75815b7a91d34c13",
+      "created_at": "2026-11-03T10:10:10Z",
+      "result": {
+        "accepted_text": "",
+        "reason": "固定替身无法对自定义表述作语义核验；未进入有来源建议白名单，已阻止作为可用改写。请提供可核对材料后人工核实，不能据此认定内容虚假。",
+        "source_ids": [],
+        "status": "needs_verification"
+      },
+      "resume_id": "RESUME_6d0c154a6b545c2f9d5d75f3",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_51ecee3081b35b72",
+        "session_id": "51ecee3081b35b729ee99f46d746c05c",
+        "trace_id": "TRACE_51ecee3081b35b72"
+      },
+      "text": "自定义文字，请核实"
+    },
+    {
+      "check_id": "RCHECK_25cf071488c25c49b1efb6c1",
+      "created_at": "2026-11-03T10:10:10Z",
+      "result": {
+        "accepted_text": "",
+        "reason": "内置夸大示例：生产上线、千万级规模、主导职责及80%提升均无来源，且生产经历与简历原文明示边界冲突。",
+        "source_ids": [
+          "51ecee3081b35b729ee99f46d746c05c:input"
+        ],
+        "status": "blocked"
+      },
+      "resume_id": "RESUME_6d0c154a6b545c2f9d5d75f3",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_51ecee3081b35b72",
+        "session_id": "51ecee3081b35b729ee99f46d746c05c",
+        "trace_id": "TRACE_51ecee3081b35b72"
+      },
+      "text": "主导生产Flink链路上线，处理千万级订单，性能提升80%。"
+    },
+    {
+      "check_id": "RCHECK_dc6e5377d4aa5c3cb970b1a2",
+      "created_at": "2026-11-03T10:10:10Z",
+      "result": {
+        "accepted_text": "在离线订单报表课程练习中，使用Python读取CSV、清理空值并按订单ID去重，完成基础SQL聚合；能够说明样本输入和汇总结果。",
+        "reason": "与本报告有原文来源的建议逐字一致；仅作自述语序整理，仍需本人确认，未独立验证事实。",
+        "source_ids": [
+          "51ecee3081b35b729ee99f46d746c05c:input",
+          "51ecee3081b35b729ee99f46d746c05c:diagnosis"
+        ],
+        "status": "bounded_suggestion"
+      },
+      "resume_id": "RESUME_6d0c154a6b545c2f9d5d75f3",
+      "scope": {
+        "case_id": "competition-data-01",
+        "plan_id": "PLAN_51ecee3081b35b72",
+        "session_id": "51ecee3081b35b729ee99f46d746c05c",
+        "trace_id": "TRACE_51ecee3081b35b72"
+      },
+      "text": "在离线订单报表课程练习中，使用Python读取CSV、清理空值并按订单ID去重，完成基础SQL聚合；能够说明样本输入和汇总结果。"
+    }
+  ]
+}

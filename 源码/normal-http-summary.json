@@ -1,0 +1,29 @@
+{
+  "careers": [
+    "data",
+    "game",
+    "agent"
+  ],
+  "mock_dispatches": 15,
+  "real_model_requests": 0,
+  "frontend_api_validation": true,
+  "repeat_and_refresh_no_redispatch": true,
+  "new_interview_sources_refresh_resume": true,
+  "stages": [
+    "a_diagnosis",
+    "d_revision",
+    "e_turn",
+    "e_report",
+    "d_revision",
+    "a_diagnosis",
+    "d_revision",
+    "e_turn",
+    "e_report",
+    "d_revision",
+    "a_diagnosis",
+    "d_revision",
+    "e_turn",
+    "e_report",
+    "d_revision"
+  ]
+}

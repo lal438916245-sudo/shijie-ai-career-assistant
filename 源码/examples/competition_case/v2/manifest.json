@@ -1,0 +1,13 @@
+{
+  "manifest_version": 1,
+  "contract_version": "competition-case-v1",
+  "case_id": "career-pilot-showcase-20261107",
+  "version": 2,
+  "files": {
+    "examples/competition_case/v2/case.json": "6ec813720f622a8602864731149022ec128ccb3a6fb17aa43e8855831ae949aa",
+    "examples/competition_case/v2/cards/sql-join-grain.json": "f313ab5b08f54c0f1355f067053c0a081c006a5fb902207338608896ccdbc7c8",
+    "examples/competition_case/v2/cards/follow-along-v1.json": "ffdfa4286b1c3d7131a8ffa487c3f026c9eb57141ee65827da0bf00223b8595b",
+    "knowledge_base/curated_resources/v1/catalog.json": "d96a417c3c455bcb888005c94ba1576c575bd0453341c07f595dd8d2ffa02a0e"
+  },
+  "notice": "虚构固定演示；资料沿用2026-11-03人工核对版本，本轮未新增联网核对。"
+}

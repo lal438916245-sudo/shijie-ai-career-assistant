@@ -1,0 +1,665 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "mode": "demo_replay",
+    "scenario_id": "data-engineer-multi-v2",
+    "generated_at": "2026-10-28T10:00:00+08:00",
+    "origin": "curated_pre_recorded_demo",
+    "disclosure": {
+      "generator_type": "curated_demo",
+      "model_name": null,
+      "note": "人工整理的合成固定案例；输入、答卷、评分和面试对话均用于演示，不是真实求职者或本轮模型结果。"
+    }
+  },
+  "inputs": {
+    "target_role": "初级数据开发工程师（综合方向）",
+    "initial_match_score": 62,
+    "resume_summary": "熟悉 Python 数据清洗、基础 SQL 和离线报表练习，缺少复杂查询优化、实时链路、建模质量和工程测试的验证材料。",
+    "jd_summary": "岗位要求复杂 SQL、数仓建模、流式容错、数据质量、测试与监控；能说明方案取舍并沟通故障排查。",
+    "source_id": "resume:multi-synthetic-02",
+    "bundle_id": "bundle:multi-synthetic-02"
+  },
+  "trace": {
+    "trace_id": "TRACE_MULTI_02",
+    "report_id": "REPORT_MULTI_02",
+    "plan_id": "PLAN_MULTI_02"
+  },
+  "gaps": [
+    {
+      "gap_id": "GAP_MULTI_STREAM",
+      "title": "实时计算与故障恢复",
+      "description": "缺少窗口、迟到数据和故障恢复成果。",
+      "priority": "high",
+      "evidence": "JD 要求流式计算与容错，简历只有离线练习。"
+    },
+    {
+      "gap_id": "GAP_MULTI_SQL",
+      "title": "复杂 SQL 与性能分析",
+      "description": "具备基础查询经历，但执行计划与数据倾斜分析证据不足。",
+      "priority": "high",
+      "evidence": "JD 要求查询优化；简历只描述聚合和报表。"
+    },
+    {
+      "gap_id": "GAP_MULTI_MODEL",
+      "title": "数仓建模与数据质量",
+      "description": "报表开发有基础，粒度、维度与数据质量仍需验证。",
+      "priority": "medium",
+      "evidence": "JD 要求建模与质量校验，简历没有设计说明。"
+    },
+    {
+      "gap_id": "GAP_MULTI_ENGINEERING",
+      "title": "工程测试与可观测性",
+      "description": "自动化测试、指标和告警的可核查成果不足。",
+      "priority": "medium",
+      "evidence": "JD 要求链路测试与监控，简历未提供验收记录。"
+    }
+  ],
+  "learning_tasks": [
+    {
+      "task_id": 5101,
+      "day": 1,
+      "title": "复杂查询与结果正确性",
+      "content": "用窗口函数处理订单去重、分组排名，说明边界。",
+      "gap_ids": [
+        "GAP_MULTI_SQL"
+      ],
+      "provenance_status": "linked"
+    },
+    {
+      "task_id": 5102,
+      "day": 2,
+      "title": "事件时间与迟到数据",
+      "content": "画出窗口、Watermark、迟到数据分流的时间线。",
+      "gap_ids": [
+        "GAP_MULTI_STREAM"
+      ],
+      "provenance_status": "linked"
+    },
+    {
+      "task_id": 5103,
+      "day": 3,
+      "title": "事实粒度与维度关系",
+      "content": "明确订单与订单明细的粒度，说明慢变维选择。",
+      "gap_ids": [
+        "GAP_MULTI_MODEL"
+      ],
+      "provenance_status": "linked"
+    },
+    {
+      "task_id": 5104,
+      "day": 4,
+      "title": "执行计划与性能瓶颈",
+      "content": "比较扫描、Join 和聚合代价，说明如何验证倾斜。",
+      "gap_ids": [
+        "GAP_MULTI_SQL"
+      ],
+      "provenance_status": "linked"
+    },
+    {
+      "task_id": 5105,
+      "day": 5,
+      "title": "状态、Checkpoint 与恢复",
+      "content": "区分状态恢复、输出重复和端到端一致性边界。",
+      "gap_ids": [
+        "GAP_MULTI_STREAM"
+      ],
+      "provenance_status": "linked"
+    },
+    {
+      "task_id": 5106,
+      "day": 6,
+      "title": "测试案例与验收清单",
+      "content": "为去重、迟到、失败恢复设计输入与预期结果。",
+      "gap_ids": [
+        "GAP_MULTI_ENGINEERING"
+      ],
+      "provenance_status": "linked"
+    },
+    {
+      "task_id": 5107,
+      "day": 8,
+      "title": "实时聚合方案与故障分析",
+      "content": "串联窗口、状态、恢复点与下游幂等。",
+      "gap_ids": [
+        "GAP_MULTI_STREAM"
+      ],
+      "provenance_status": "linked"
+    },
+    {
+      "task_id": 5108,
+      "day": 9,
+      "title": "数据倾斜与优化取舍",
+      "content": "补学热点键与去重的瓶颈，先验证再优化。",
+      "gap_ids": [
+        "GAP_MULTI_SQL"
+      ],
+      "provenance_status": "linked"
+    },
+    {
+      "task_id": 5109,
+      "day": 10,
+      "title": "数据质量与模型变更",
+      "content": "设计唯一性、完整性、对账及字段变更校验。",
+      "gap_ids": [
+        "GAP_MULTI_MODEL"
+      ],
+      "provenance_status": "linked"
+    },
+    {
+      "task_id": 5110,
+      "day": 11,
+      "title": "指标、日志、告警与验证",
+      "content": "选择延迟、状态大小、积压与吞吐指标，编写排查顺序。",
+      "gap_ids": [
+        "GAP_MULTI_ENGINEERING"
+      ],
+      "provenance_status": "linked"
+    }
+  ],
+  "questions": [
+    {
+      "task_id": 5201,
+      "question": "订单流每 5 分钟汇总成交额。解释迟到订单如何处理，以及故障后如何恢复。",
+      "focus": "窗口、Watermark 与恢复",
+      "source_task_ids": [
+        5102,
+        5105,
+        5107
+      ],
+      "gap_ids": [
+        "GAP_MULTI_STREAM"
+      ],
+      "provenance_status": "exam_linked",
+      "question_fingerprint": "question:multi:5201",
+      "parent_task_id": null,
+      "retest_round": 0
+    },
+    {
+      "task_id": 5202,
+      "question": "实时告警允许 90 秒乱序。设计关闭与补偿策略，并解释 Checkpoint 失败后的处理。",
+      "focus": "乱序与一致性边界",
+      "source_task_ids": [
+        5102,
+        5105,
+        5107
+      ],
+      "gap_ids": [
+        "GAP_MULTI_STREAM"
+      ],
+      "provenance_status": "exam_retest_linked",
+      "question_fingerprint": "question:multi:5202",
+      "parent_task_id": 5201,
+      "retest_round": 1
+    },
+    {
+      "task_id": 5203,
+      "question": "实时排行榜扩容后重复计数，从状态分区、恢复点和下游幂等给出排查方案。",
+      "focus": "扩容后的状态与幂等",
+      "source_task_ids": [
+        5102,
+        5105,
+        5107
+      ],
+      "gap_ids": [
+        "GAP_MULTI_STREAM"
+      ],
+      "provenance_status": "exam_retest_linked",
+      "question_fingerprint": "question:multi:5203",
+      "parent_task_id": 5201,
+      "retest_round": 2
+    },
+    {
+      "task_id": 5211,
+      "question": "订单关联用户后数据量暴增，少数用户占大量订单。如何确认结果正确并定位瓶颈？",
+      "focus": "查询正确性与倾斜识别",
+      "source_task_ids": [
+        5101,
+        5104,
+        5108
+      ],
+      "gap_ids": [
+        "GAP_MULTI_SQL"
+      ],
+      "provenance_status": "exam_linked",
+      "question_fingerprint": "question:multi:5211",
+      "parent_task_id": null,
+      "retest_round": 0
+    },
+    {
+      "task_id": 5212,
+      "question": "相同 SQL 更换日期后突然变慢，说明如何用执行计划和数据分布验证热点。",
+      "focus": "执行计划与热点验证",
+      "source_task_ids": [
+        5101,
+        5104,
+        5108
+      ],
+      "gap_ids": [
+        "GAP_MULTI_SQL"
+      ],
+      "provenance_status": "exam_retest_linked",
+      "question_fingerprint": "question:multi:5212",
+      "parent_task_id": 5211,
+      "retest_round": 1
+    },
+    {
+      "task_id": 5213,
+      "question": "有人建议随机加盐优化 Join，同时用 distinct 去重。你如何核验语义、扩容代价与收益？",
+      "focus": "优化取舍与结果保护",
+      "source_task_ids": [
+        5101,
+        5104,
+        5108
+      ],
+      "gap_ids": [
+        "GAP_MULTI_SQL"
+      ],
+      "provenance_status": "exam_retest_linked",
+      "question_fingerprint": "question:multi:5213",
+      "parent_task_id": 5211,
+      "retest_round": 2
+    },
+    {
+      "task_id": 5221,
+      "question": "订单与订单明细如何定义事实粒度？补充两条质量规则，并说明字段变更如何验收。",
+      "focus": "粒度、质量与变更",
+      "source_task_ids": [
+        5103,
+        5109
+      ],
+      "gap_ids": [
+        "GAP_MULTI_MODEL"
+      ],
+      "provenance_status": "exam_linked",
+      "question_fingerprint": "question:multi:5221",
+      "parent_task_id": null,
+      "retest_round": 0
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": 5301,
+      "task_id": 5201,
+      "attempt_no": 1,
+      "score": 55,
+      "score_source": "rubric_weighted",
+      "status": "failed",
+      "feedback": "知道窗口，但没有说明水位线推进与恢复依据。",
+      "rubric": [
+        {
+          "dimension": "概念准确性",
+          "score": 65,
+          "weight": 0.4
+        },
+        {
+          "dimension": "场景应用",
+          "score": 50,
+          "weight": 0.35
+        },
+        {
+          "dimension": "验证与故障推理",
+          "score": 46,
+          "weight": 0.25
+        }
+      ]
+    },
+    {
+      "attempt_id": 5302,
+      "task_id": 5202,
+      "attempt_no": 1,
+      "score": 72,
+      "score_source": "rubric_weighted",
+      "status": "completed",
+      "feedback": "已能关联乱序、侧输出和恢复，但下游输出的语义边界仍不充分。",
+      "rubric": [
+        {
+          "dimension": "概念准确性",
+          "score": 78,
+          "weight": 0.4
+        },
+        {
+          "dimension": "场景应用",
+          "score": 74,
+          "weight": 0.35
+        },
+        {
+          "dimension": "验证与故障推理",
+          "score": 60,
+          "weight": 0.25
+        }
+      ]
+    },
+    {
+      "attempt_id": 5303,
+      "task_id": 5203,
+      "attempt_no": 1,
+      "score": 82,
+      "score_source": "rubric_weighted",
+      "status": "completed",
+      "feedback": "能分层验证恢复点、键分区和输出去重，说明失败边界。",
+      "rubric": [
+        {
+          "dimension": "概念准确性",
+          "score": 84,
+          "weight": 0.4
+        },
+        {
+          "dimension": "场景应用",
+          "score": 82,
+          "weight": 0.35
+        },
+        {
+          "dimension": "验证与故障推理",
+          "score": 79,
+          "weight": 0.25
+        }
+      ]
+    },
+    {
+      "attempt_id": 5311,
+      "task_id": 5211,
+      "attempt_no": 1,
+      "score": 58,
+      "score_source": "rubric_weighted",
+      "status": "failed",
+      "feedback": "有基础 Join 思路，但未验证唯一性与热点分布。",
+      "rubric": [
+        {
+          "dimension": "概念准确性",
+          "score": 70,
+          "weight": 0.4
+        },
+        {
+          "dimension": "场景应用",
+          "score": 54,
+          "weight": 0.35
+        },
+        {
+          "dimension": "验证与故障推理",
+          "score": 44,
+          "weight": 0.25
+        }
+      ]
+    },
+    {
+      "attempt_id": 5312,
+      "task_id": 5212,
+      "attempt_no": 1,
+      "score": 66,
+      "score_source": "rubric_weighted",
+      "status": "completed",
+      "feedback": "能检查扫描和数据分布，但验证顺序与优化副作用不完整。",
+      "rubric": [
+        {
+          "dimension": "概念准确性",
+          "score": 74,
+          "weight": 0.4
+        },
+        {
+          "dimension": "场景应用",
+          "score": 66,
+          "weight": 0.35
+        },
+        {
+          "dimension": "验证与故障推理",
+          "score": 53,
+          "weight": 0.25
+        }
+      ]
+    },
+    {
+      "attempt_id": 5313,
+      "task_id": 5213,
+      "attempt_no": 1,
+      "score": 54,
+      "score_source": "rubric_weighted",
+      "status": "failed",
+      "feedback": "最新回答再次跳过结果语义和代价验证，需返回补学。",
+      "rubric": [
+        {
+          "dimension": "概念准确性",
+          "score": 65,
+          "weight": 0.4
+        },
+        {
+          "dimension": "场景应用",
+          "score": 51,
+          "weight": 0.35
+        },
+        {
+          "dimension": "验证与故障推理",
+          "score": 40,
+          "weight": 0.25
+        }
+      ]
+    },
+    {
+      "attempt_id": 5321,
+      "task_id": 5221,
+      "attempt_no": 1,
+      "score": 73,
+      "score_source": "rubric_weighted",
+      "status": "completed",
+      "feedback": "粒度与基本校验清楚，维度历史和变更回溯仍需独立验证。",
+      "rubric": [
+        {
+          "dimension": "概念准确性",
+          "score": 79,
+          "weight": 0.4
+        },
+        {
+          "dimension": "场景应用",
+          "score": 72,
+          "weight": 0.35
+        },
+        {
+          "dimension": "验证与故障推理",
+          "score": 65,
+          "weight": 0.25
+        }
+      ]
+    }
+  ],
+  "mastery_states": [
+    {
+      "gap_id": "GAP_MULTI_STREAM",
+      "state": "needs_retest",
+      "rule_code": "LATEST_TRUSTED_BELOW_PASS",
+      "explanation": "最新正式 rubric 得分 55，低于统一及格线。",
+      "task_ids": [
+        5102,
+        5105,
+        5107,
+        5201,
+        5202,
+        5203
+      ],
+      "attempt_ids": [
+        5301
+      ]
+    },
+    {
+      "gap_id": "GAP_MULTI_STREAM",
+      "state": "provisional_pass",
+      "rule_code": "ONE_DISTINCT_TRUSTED_PASS",
+      "explanation": "当前只有一道独立题面的正式 rubric 通过证据，暂时通过并等待变式复测。",
+      "task_ids": [
+        5102,
+        5105,
+        5107,
+        5201,
+        5202,
+        5203
+      ],
+      "attempt_ids": [
+        5301,
+        5302
+      ]
+    },
+    {
+      "gap_id": "GAP_MULTI_STREAM",
+      "state": "mastered",
+      "rule_code": "TWO_DISTINCT_TRUSTED_PASSES",
+      "explanation": "最近一次正式失败后，已通过两道不同题面的正式 rubric 评测。",
+      "task_ids": [
+        5102,
+        5105,
+        5107,
+        5201,
+        5202,
+        5203
+      ],
+      "attempt_ids": [
+        5301,
+        5302,
+        5303
+      ]
+    },
+    {
+      "gap_id": "GAP_MULTI_SQL",
+      "state": "needs_retest",
+      "rule_code": "LATEST_TRUSTED_BELOW_PASS",
+      "explanation": "最新正式 rubric 得分 58，低于统一及格线。",
+      "task_ids": [
+        5101,
+        5104,
+        5108,
+        5211,
+        5212,
+        5213
+      ],
+      "attempt_ids": [
+        5311
+      ]
+    },
+    {
+      "gap_id": "GAP_MULTI_SQL",
+      "state": "provisional_pass",
+      "rule_code": "ONE_DISTINCT_TRUSTED_PASS",
+      "explanation": "当前只有一道独立题面的正式 rubric 通过证据，暂时通过并等待变式复测。",
+      "task_ids": [
+        5101,
+        5104,
+        5108,
+        5211,
+        5212,
+        5213
+      ],
+      "attempt_ids": [
+        5311,
+        5312
+      ]
+    },
+    {
+      "gap_id": "GAP_MULTI_SQL",
+      "state": "needs_retest",
+      "rule_code": "LATEST_TRUSTED_BELOW_PASS",
+      "explanation": "最新正式 rubric 得分 54，低于统一及格线。",
+      "task_ids": [
+        5101,
+        5104,
+        5108,
+        5211,
+        5212,
+        5213
+      ],
+      "attempt_ids": [
+        5311,
+        5312,
+        5313
+      ]
+    },
+    {
+      "gap_id": "GAP_MULTI_MODEL",
+      "state": "provisional_pass",
+      "rule_code": "ONE_DISTINCT_TRUSTED_PASS",
+      "explanation": "当前只有一道独立题面的正式 rubric 通过证据，暂时通过并等待变式复测。",
+      "task_ids": [
+        5103,
+        5109,
+        5221
+      ],
+      "attempt_ids": [
+        5321
+      ]
+    },
+    {
+      "gap_id": "GAP_MULTI_ENGINEERING",
+      "state": "learning",
+      "rule_code": "LEARNING_WITHOUT_TRUSTED_ATTEMPT",
+      "explanation": "已有学习或考题记录，但尚无可用于判定的正式 rubric 作答。",
+      "task_ids": [
+        5106,
+        5110
+      ],
+      "attempt_ids": []
+    }
+  ],
+  "interview_evidence": [
+    {
+      "evidence_id": "INTERVIEW_MULTI_01",
+      "gap_id": "GAP_MULTI_STREAM",
+      "mastery_state": "mastered",
+      "question": "订单高峰期看板延迟升高，吞吐没有下降，你先看哪些指标，按什么顺序排查？",
+      "result": "能选择水位线、状态与下游积压分层验证；追问下能收缩回滚方案，但 SQL 结果核验仍需补强。",
+      "evidence_note": "人工整理的一问一追问，不是实时面试或客观招聘分数。"
+    }
+  ],
+  "resume_suggestions": [
+    {
+      "suggestion_id": "RESUME_MULTI_STREAM",
+      "status": "accepted",
+      "requested_claim": "优化实时链路学习成果表述",
+      "suggestion": "完成实时窗口与状态恢复专题训练，能结合水位线、恢复点与下游幂等分析故障边界。",
+      "reason": "表述限于专题训练与可核查分析，不扩大为真实生产职责。",
+      "evidence_refs": [
+        {
+          "kind": "gap",
+          "ref_id": "GAP_MULTI_STREAM"
+        },
+        {
+          "kind": "task",
+          "ref_id": "5107"
+        },
+        {
+          "kind": "attempt",
+          "ref_id": "5302"
+        },
+        {
+          "kind": "attempt",
+          "ref_id": "5303"
+        },
+        {
+          "kind": "interview",
+          "ref_id": "INTERVIEW_MULTI_01"
+        }
+      ]
+    },
+    {
+      "suggestion_id": "RESUME_MULTI_SQL",
+      "status": "accepted",
+      "requested_claim": "精通 SQL 性能优化",
+      "suggestion": "具备基础 SQL 查询与离线报表练习经历，正在补强执行计划分析和优化验证。",
+      "reason": "保留合成简历中的基础经历；最新专题考核不足以支持“精通”。",
+      "evidence_refs": [
+        {
+          "kind": "gap",
+          "ref_id": "GAP_MULTI_SQL"
+        },
+        {
+          "kind": "attempt",
+          "ref_id": "5313"
+        }
+      ]
+    },
+    {
+      "suggestion_id": "RESUME_MULTI_BLOCKED",
+      "status": "blocked",
+      "requested_claim": "主导千万级实时平台建设，性能提升 80%",
+      "suggestion": null,
+      "reason": "缺少真实职责、业务规模和对照指标证据，不能生成该项目声明。",
+      "evidence_refs": []
+    }
+  ],
+  "tool_events": []
+}

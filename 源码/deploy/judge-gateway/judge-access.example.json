@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "gateway_url": "https://judge.example.org",
+  "access_pass": "REPLACE-WITH-OWNER-ISSUED-LIMITED-JUDGE-PASS"
+}

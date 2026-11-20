@@ -1,0 +1,5 @@
+import {defaultLearningPreferences} from '@/lib/learning-preferences.mjs'
+export type LearningPreferenceDraft={daily_minutes:number|string;starting_level:'beginner'|'foundation'}
+export default function LearningPreferencesFields({value,onChange,disabled=false}:{value?:LearningPreferenceDraft;onChange:(value:LearningPreferenceDraft|undefined)=>void;disabled?:boolean}){
+ return <fieldset className="daily-preferences"><legend>每日学习安排</legend><p><strong>每天固定 60 分钟</strong>：阅读20、必做25、复盘5、收尾10（选做与日考核择一）。时间由程序安排，AI负责学习内容。</p><label className="ab-consent"><input type="checkbox" checked={Boolean(value)} disabled={disabled} onChange={e=>onChange(e.target.checked?defaultLearningPreferences():undefined)}/><span>启用零基础引导和分层任务</span></label>{value&&<label>学习起点<select value={value.starting_level} disabled={disabled} onChange={e=>onChange({daily_minutes:60,starting_level:e.target.value as LearningPreferenceDraft['starting_level']})}><option value="beginner">零基础 · 先看概念和例子</option><option value="foundation">已有基础 · 对照例子再练习</option></select></label>}<p>可调整日期、学习中、已完成或暂缓状态。旧计划保留原样；勾选完成不代表已掌握。</p></fieldset>
+}

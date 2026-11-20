@@ -1,0 +1,12 @@
+{
+  "provider": "DeepSeek",
+  "base_url": "https://api.deepseek.com",
+  "model": "deepseek-flash",
+  "input_price_per_million": 2,
+  "output_price_per_million": 8,
+  "budget_micro_cny": 1000000,
+  "max_calls": 20,
+  "expires_at": "2026-11-16T23:59:59+08:00",
+  "max_input_chars": 16000,
+  "max_output_tokens": 4096
+}

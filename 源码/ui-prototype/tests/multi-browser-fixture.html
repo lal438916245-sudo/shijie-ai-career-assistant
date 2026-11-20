@@ -1,0 +1,11 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>多专题本地验收</title><div id="root"></div><script type="module">
+import extra from '/src/data/multi-presentation.json'
+import {MULTI_KEY,initialMultiSchedule} from '/src/lib/multi.mjs'
+import {SCHEDULE_KEY,createSchedule} from '/src/lib/schedule.mjs'
+const fault=new URLSearchParams(location.search).get('fault'),records=new Map()
+const legacy=createSchedule();legacy.entries[0].note='原案例保留笔记';legacy.entries[0].status='in_progress';records.set(SCHEDULE_KEY,JSON.stringify(legacy))
+if(fault==='corrupt')records.set(MULTI_KEY,'{broken')
+if(fault==='empty'){const schedule=initialMultiSchedule(extra);schedule.entries.forEach(i=>i.status='completed');records.set(MULTI_KEY,JSON.stringify(schedule))}
+Object.defineProperty(window,'localStorage',{value:{getItem:key=>records.get(key)??null,setItem:(key,value)=>{if(fault==='quota')throw new DOMException('Simulated test quota','QuotaExceededError');records.set(key,String(value))},removeItem:key=>records.delete(key)},configurable:true})
+await import('/src/main.tsx')
+</script></html>

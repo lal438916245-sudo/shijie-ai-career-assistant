@@ -1,0 +1,27 @@
+services:
+  gateway:
+    build: .
+    restart: unless-stopped
+    environment:
+      SHIJIE_PROVIDER_KEY: ${SHIJIE_PROVIDER_KEY:?owner API Key required}
+      SHIJIE_JUDGE_PASS: ${SHIJIE_JUDGE_PASS:?separate restricted judge pass required}
+    volumes:
+      - gateway_data:/data
+    expose:
+      - "8080"
+  tls:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      SHIJIE_DOMAIN: ${SHIJIE_DOMAIN:?public domain required}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+    depends_on:
+      - gateway
+volumes:
+  gateway_data:
+  caddy_data:

@@ -1,0 +1,70 @@
+/* One set of feedback, spacing and focus rules for the complete demo workflow. */
+.skip-content { position:fixed; left:250px; top:8px; transform:translateY(-160%); z-index:100; padding:10px 16px; background:var(--primary); color:var(--primary-foreground); border-radius:7px; font-size:13px; }
+.skip-content:focus { transform:none; }
+.main-content:focus { outline:none; }
+.workflow-strip { display:flex; gap:15px; align-items:center; padding:11px 34px; border-bottom:1px solid var(--paper-line); background:#f5f3eaf0; }
+.workflow-strip>span { display:flex; gap:6px; align-items:center; font-size:10px; color:#8a7c4d; white-space:nowrap; }
+.workflow-strip ol { display:flex; align-items:center; gap:7px; min-width:0; overflow-x:auto; scrollbar-width:thin; }
+.workflow-strip li { display:flex; align-items:center; gap:7px; flex-shrink:0; }
+.workflow-strip li>svg { color:#bbc0a9; }
+.workflow-strip button { display:flex; align-items:center; gap:5px; padding:4px 7px; border-radius:5px; color:var(--ink-muted); font-size:10px; white-space:nowrap; }
+.workflow-strip button b { display:grid; place-items:center; width:17px; height:17px; border:1px solid #dedfcb; border-radius:50%; font:10px Georgia,serif; }
+.workflow-strip button[aria-current] { background:#e6ebd9; color:var(--primary); }
+.workflow-strip button[aria-current] b { background:#fffdf8; border-color:#bfcba5; }
+.workflow-strip>small { color:var(--ink-muted); font-size:9px; margin-left:auto; white-space:nowrap; }
+.flow-footer { display:flex; align-items:center; justify-content:space-between; gap:15px; padding:19px 0 25px; border-top:1px solid var(--paper-line); margin-top:4px; }
+.flow-footer>button:first-child { display:flex; gap:7px; align-items:center; font-size:11px; color:var(--ink-muted); }
+.flow-footer>span { font-size:10px; color:var(--ink-faint); }
+.flow-footer>button:last-child { font-size:11px; height:34px; background:var(--card); }
+.workspace-notice,.input-storage-feedback { padding:12px 15px; margin-bottom:16px; border:1px solid #e4d9bb; border-radius:8px; background:#f5efdf; color:#8a6e36; font-size:12px; line-height:1.9; }
+.workspace-notice { display:flex; align-items:center; gap:12px; }
+.workspace-notice button { display:flex; flex-shrink:0; margin-left:auto; gap:5px; align-items:center; font-size:10px; }
+.input-storage-feedback { margin:0 24px 18px; }
+.input-storage-feedback.error { border-color:#e7ccbd; color:#9e4e37; background:#f8eee6; }
+.draft-save-state { display:flex; gap:7px; align-items:center; font-size:10px; color:var(--ink-muted); padding:0 24px 14px; }
+.draft-save-state.dirty { color:#967338; }
+.guard-dialog,.sample-confirm-dialog { background:var(--card); border-color:var(--paper-line); padding:27px!important; max-width:470px!important; }
+.guard-dialog [data-slot="dialog-title"],.sample-confirm-dialog [data-slot="dialog-title"] { font-family:var(--font-display); color:var(--primary); font-size:24px; line-height:1.6; }
+.guard-dialog [data-slot="dialog-description"],.sample-confirm-dialog [data-slot="dialog-description"] { color:var(--ink-muted); font-size:12px; line-height:2; }
+.guard-dialog-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:5px; }
+.guard-dialog-actions button { font-size:11px; }
+.page-recovery { padding:38px 30px; border:1px solid var(--paper-line); border-radius:12px; background:var(--card); min-height:280px; }
+.page-recovery>span { display:grid; place-items:center; width:50px; height:50px; border-radius:50%; background:#f2ead6; color:#a18446; }
+.page-recovery h2 { font:25px var(--font-display); font-synthesis:weight; color:var(--primary); margin:20px 0 13px; }
+.page-recovery p { font-size:13px; color:var(--ink-muted); line-height:2; max-width:530px; }
+.page-recovery>div { display:flex; flex-wrap:wrap; gap:12px; margin-top:25px; }
+.page-recovery button { font-size:12px; }
+.schedule-empty-panel { background:var(--card); border:1px dashed #cbd5b5; border-radius:10px; padding:35px 25px; color:var(--ink-soft); }
+.schedule-empty-panel h3 { font:23px var(--font-display); color:var(--primary); margin-bottom:14px; }
+.schedule-empty-panel p { font-size:12px; line-height:2; margin-bottom:20px; }
+.schedule-empty-panel button { font-size:11px; }
+.schedule-board.empty { grid-template-columns:1fr; }
+.schedule-board.empty .schedule-days { display:none; }
+.quality-loading { padding:32px 20px; border:1px solid var(--paper-line); border-radius:10px; color:var(--ink-muted); font-size:13px; background:var(--card); }
+button:disabled { cursor:not-allowed; }
+button:not(:disabled):active { filter:brightness(.98); }
+.question-card-actions { flex-wrap:wrap; row-gap:12px; }
+.question-card-actions>button { min-height:28px; }
+.app-content .page-intro { margin-bottom:21px; }
+.app-content .page-intro h1 { font-size:30px; }
+.app-content .page-intro p { font-size:12px; line-height:1.9; }
+.replay-banner { padding-top:10px; padding-bottom:10px; margin-bottom:19px; }
+.learning-plan-page.daily-view .plan-summary { display:none; }
+.learning-plan-page.daily-view .plan-detail-grid { grid-template-columns:minmax(0,1fr); }
+.learning-plan-page.daily-view .plan-sidebar { display:none; }
+.learning-plan-page.daily-view .schedule-board { grid-template-columns:150px minmax(0,1fr); }
+.learning-plan-page.daily-view .schedule-focus { padding:22px 25px; }
+.learning-plan-page.daily-view .schedule-progress { padding-top:17px; padding-bottom:14px; }
+.learning-plan-page.daily-view .schedule-progress h3 { font-size:21px; }
+.learning-plan-page.daily-view .schedule-progress-metric strong { font-size:32px; }
+.learning-plan-page.daily-view .schedule-progress>[data-slot="progress"] { margin-top:14px; }
+.learning-plan-page.daily-view .schedule-disclosure { margin-bottom:12px; }
+.learning-plan-page.daily-view .schedule-toolbar { margin-top:15px; }
+.outcome-card { padding-top:23px; padding-bottom:23px; }
+@media(max-width:1200px) { .workflow-strip { padding-left:25px; padding-right:25px; gap:10px; } .workflow-strip>small { display:none; } }
+@media(max-width:860px) { .skip-content { left:15px; } .workflow-strip { padding:9px 19px; } .workflow-strip>span { display:none; } .workflow-strip ol { flex:1; } }
+@media(max-width:600px) { .workflow-strip { padding:8px 16px; } .workflow-strip ol { gap:4px; } .workflow-strip li { gap:3px; } .workflow-strip button { font-size:10px; padding:5px; } .workflow-strip button b { display:none; } .app-content .page-intro h1 { font-size:27px; } .app-content .page-intro { gap:12px; margin-bottom:19px; } .app-content .page-intro p { font-size:11px; } .flow-footer { flex-wrap:wrap; row-gap:15px; } .flow-footer>span { margin-left:auto; } .flow-footer>button:last-child { width:100%; } .learning-plan-page.daily-view .schedule-board { grid-template-columns:1fr; } .learning-plan-page.daily-view .schedule-focus { padding:19px 16px; } .learning-plan-page.daily-view .schedule-progress h3 { font-size:19px; } .draft-save-state { padding-left:19px; padding-right:19px; } .input-storage-feedback { margin-left:19px; margin-right:19px; font-size:11px; } .guard-dialog,.sample-confirm-dialog { padding:23px!important; } .guard-dialog-actions { flex-wrap:wrap; } .guard-dialog-actions button { flex:1; } .workspace-notice { align-items:flex-start; font-size:11px; } }
+
+.plan-tabs [data-slot="tabs-content"][hidden] { display:none!important; }
+
+.learning-plan-page.daily-view .schedule-board.empty{grid-template-columns:1fr}

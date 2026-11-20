@@ -1,0 +1,5 @@
+*
+!Dockerfile
+!requirements.txt
+!judge_gateway.py
+!policy.json
