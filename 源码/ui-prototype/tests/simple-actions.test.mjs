@@ -21,7 +21,8 @@ function setup({existing=false,failExecute=false}={}){
   if(path==='abf_adoption_preview')return {already_applied:applied,application:applied?{}:null,can_apply:!applied,candidate_digest:'b'.repeat(64)}
   throw Error(path)
  }
- return {calls,s,actions:createSimpleActions({token:'c'.repeat(64),storage:storage(),request,abf,uuid:()=>pid,lock:async fn=>fn()})}
+ const store=storage()
+ return {calls,s,store,actions:createSimpleActions({token:'c'.repeat(64),storage:store,request,abf,uuid:()=>pid,lock:async fn=>fn()})}
 }
 test('one explicit diagnosis action opens a hidden runtime, dispatches once and saves; reopening does not resend',async()=>{
  const f=setup();assert.equal(f.calls.length,0)
@@ -47,4 +48,16 @@ test('resume preview follows Unicode offsets, preserves unselected originals and
  assert.equal(resumePreview(original,[a],[]),original)
  assert.equal(resumePreview(original,[a],['a']),'🧭已有经历。课程练习。')
  assert.throws(()=>resumePreview(original,[a,{...a,item_id:'b'}],['a','b']),/位置需要/)
+})
+
+test('a model configuration change drops an unsent old preview and creates a fresh request',async()=>{
+ const f=setup()
+ f.s.runtime_capabilities.config_revision=2
+ f.store.setItem('shijie:normal-flow:v1:'+'c'.repeat(64)+':model:a_diagnosis:0',JSON.stringify({
+  stage:'a_diagnosis',target:0,configRevision:1,previewId:'stale-preview',digest:'old',authorizationId:null,executeRequested:false,
+ }))
+ await f.actions.diagnosis()
+ assert.equal(f.calls.filter(path=>path==='abf_preview').length,1)
+ assert.equal(f.calls.filter(path=>path==='abf_execute').length,1)
+ assert.ok(f.s.diagnosis)
 })

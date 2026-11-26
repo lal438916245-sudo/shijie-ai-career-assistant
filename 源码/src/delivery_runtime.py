@@ -6,7 +6,7 @@ from pathlib import Path
 from urllib.parse import urlsplit,unquote
 import argparse,hashlib,http.client,json,mimetypes,os,secrets,shutil,subprocess,sys,threading,time,uuid,webbrowser
 
-BUILD='career-pilot-agent-20261126-v1'
+BUILD='career-pilot-unified-model-20261126-v2'
 APPROOT=Path(sys.executable).resolve().parent if getattr(sys,'frozen',False) else Path(__file__).resolve().parents[1]
 BODY_LIMIT=400000
 SAFE_CONFIG={'provider':'本地体验（模拟计价，非服务商验证）','base_url':'https://api.deepseek.com','model':'deepseek-flash','max_input_chars':16000,'max_output_tokens':16000,'timeout_seconds':60,'currency':'CNY','input_price_per_million':2,'output_price_per_million':8,'output_token_parameter':'max_tokens','temperature':0.7}
@@ -24,7 +24,7 @@ def write_json(path,value):
 def seed_data(data,root=APPROOT):
     """Copy only allowlisted fictional replay; never settings, personal DBs or keys."""
     manifest=read_json(root/'seed'/'manifest.json')
-    assert manifest['build'] in (BUILD,'career-pilot-windows-20261113-v1') and len(manifest['files'])==2
+    assert manifest['build'] in (BUILD,'career-pilot-windows-20261113-v1','career-pilot-agent-20261126-v1') and len(manifest['files'])==2
     for name,expected in manifest['files'].items():
         rel=Path(name)
         if rel.is_absolute() or '..' in rel.parts or rel.parts[0]!='showcase_sessions_20261107':raise ValueError('Invalid seed manifest')
@@ -34,11 +34,9 @@ def seed_data(data,root=APPROOT):
             if hashlib.sha256(destination.read_bytes()).hexdigest()!=expected:raise ValueError('演示快照变化，原数据保留，请联系维护者。')
         else:
             destination.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source,destination)
-    from model_preparation import ModelPreparation
-    preparation=ModelPreparation(data)
-    if not preparation.path.exists():
-        # A valid, explicit simulation configuration; no credential and no egress.
-        preparation.save({'config':SAFE_CONFIG,'api_key':'','key_action':'keep','expected_revision':0})
+    from unified_model import UnifiedModelPreparation
+    preparation=UnifiedModelPreparation(data)
+    preparation._read()
     from showcase_replay import prepare_replay
     return prepare_replay(data)
 
@@ -228,7 +226,7 @@ def command(action,data,port=0,allow_real_calls=False,offline=False,browser=True
 def configure(data):
     """Local operator setup, no credential in argv, logs, frontend or distribution."""
     import getpass
-    from model_preparation import ModelPreparation
+    from unified_model import UnifiedModelPreparation as ModelPreparation
     if healthy(data):raise RuntimeError('请先正常停止本提交版，再修改模型配置，旧会话与费用保留。')
     print('仅在本机保存配置，不测试服务商，不调用模型。Key经当前Windows用户DPAPI加密。')
     print('已有会话绑定原配置，配置变化后请新建会话。请按服务商控制台填写模型和单价。')
@@ -256,6 +254,13 @@ def main():
     if not 0<=a.port<=65535:p.error('端口无效')
     if a.offline_verification and a.allow_real_calls:p.error('离线验证不允许真实外发')
     try:
+        if not a.judge_access and a.action in ('start','serve') and a.allow_real_calls and not a.offline_verification:
+            from unified_model import UnifiedModelPreparation
+            preparation=UnifiedModelPreparation(data)
+            if preparation.status()['model_source']=='platform' and (APPROOT/'judge-access.json').is_file():
+                from judge_client import import_access
+                try:import_access(data,APPROOT/'judge-access.json')
+                except (ValueError,OSError):print('平台连接暂不可用，可在成长概览填写自己的模型连接。',flush=True)
         if a.judge_access:
             if a.offline_verification or a.action not in ('start','serve'):raise ValueError('评委连接仅用于联网启动；不调用模型的离线模式不可启用。')
             from judge_client import import_access

@@ -102,8 +102,11 @@ class WorkbenchSessionRuntime:
             from fixed_learning_time import prepare_request as prepare_fixed_time
             request=prepare_fixed_time(request)
         req=self._session_bridge(p['execution_mode']).freeze(request)
-        expect(req['config_revision']==p['config_revision'] and digest(req['config'])==p['config_digest'],
+        unified=getattr(self.session_preparation,'unified',False)
+        expect(unified or req['config_revision']==p['config_revision'] and digest(req['config'])==p['config_digest'],
             '模型配置或单价已变化，旧会话额度不可换价使用；请保留记录并新建会话。')
+        input_rate=req['config']['input_price_per_million'] if unified else p['input_rate']
+        output_rate=req['config']['output_price_per_million'] if unified else p['output_rate']
         allowance=len(encode(req['payload']).encode('utf-8'))+2048
         cap=req['contract_sdk']['output_limit']
         slot=(str(req['target_version']) if req['stage'] in ('a_diagnosis','b_plan','f_review') else self._adoption_key(req))
@@ -111,7 +114,8 @@ class WorkbenchSessionRuntime:
         req['contract_sdk']['http_intercepted']=self.session_http_client_factory is not None
         req['session_runtime']={'version':VERSION,'scope':req['scope'],'policy_digest':digest(p),'execution_mode':p['execution_mode'],
             'simulated':simulated,'input_token_allowance':allowance,'output_limit':cap,'slot_key':slot,
-            'reserve_micro_cny':charge(allowance,p['input_rate'])+charge(cap,p['output_rate'])}
+            'reserve_micro_cny':charge(allowance,input_rate)+charge(cap,output_rate)}
+        if unified:req['session_runtime'].update(pricing_version='per-request-v1',input_rate=input_rate,output_rate=output_rate)
         return req
 
     def _abf_request(self,c,meta,stage,version):
@@ -169,6 +173,7 @@ class WorkbenchSessionRuntime:
         return {'source_kind':'competition_workbench_session','scope':req['scope'],'run_mode':'real' if real else 'demo',
             'mode':'session_real_model' if real else 'session_sdk_rehearsal','simulated':simulated,
             'execution_mode':r['execution_mode'],'session_runtime':deepcopy(r),'authorization_field':'accept_session_once',
+            'config_revision':req['config_revision'],
             'real_dispatch_enabled':real and self.session_outbound_enabled,'external_network_allowed':real and self.session_outbound_enabled and not simulated,
             'actual_model_cost':0 if simulated else None,'model_requests':0 if simulated else None,
             'sdk_rehearsal':simulated,'transport_destination':'本地HTTP替身，不读取用户Key' if simulated else req['config']['base_url'],
@@ -189,9 +194,15 @@ class WorkbenchSessionRuntime:
         if not r:
             expect(not self._has_runtime(c),'新模式会话不允许未计入账本的旧授权。');return
         meta=self._meta_base_for_runtime(c);p=self._session_policy(c,meta)
+        per_request=r.get('pricing_version')=='per-request-v1'
         expect(p and r['version']==VERSION and r['policy_digest']==digest(p) and r['execution_mode']==p['execution_mode']
-            and req['scope']==p['scope'] and req['config_revision']==p['config_revision'] and digest(req['config'])==p['config_digest'],
+            and req['scope']==p['scope'] and (per_request or req['config_revision']==p['config_revision'] and digest(req['config'])==p['config_digest']),
             '调用与会话模式/单价不一致。')
+        input_rate=r['input_rate'] if per_request else p['input_rate']
+        output_rate=r['output_rate'] if per_request else p['output_rate']
+        if per_request:
+            expect(input_rate==req['config']['input_price_per_million'] and output_rate==req['config']['output_price_per_million'],
+                   '调用冻结单价与本次模型配置不一致。')
         expect(req['sdk_policy']=={'rehearsal':p['execution_mode']=='local_sdk_rehearsal'}
             and r['simulated']==(req['sdk_policy']['rehearsal'] or req['contract_sdk'].get('http_intercepted',False))
             and req['transport_kind']==('sdk_http_rehearsal' if req['sdk_policy']['rehearsal'] else 'session_sdk'),
@@ -200,7 +211,7 @@ class WorkbenchSessionRuntime:
         allowance=len(encode(req['payload']).encode('utf-8'))+2048;cap=req['contract_sdk']['output_limit']
         expect(reserve and reserve['family']==family and reserve['stage']==req['stage'] and reserve['request_digest']==digest(req)==row['request_digest']
             and reserve['slot_key']==r['slot_key'] and allowance==r['input_token_allowance'] and cap==r['output_limit']
-            and reserve['reserve_micro_cny']==r['reserve_micro_cny']==charge(allowance,p['input_rate'])+charge(cap,p['output_rate']),
+            and reserve['reserve_micro_cny']==r['reserve_micro_cny']==charge(allowance,input_rate)+charge(cap,output_rate),
             '授权预留缺失、来源变化或费用未完整计入。')
 
     def _meta_base_for_runtime(self,c):
@@ -217,7 +228,8 @@ class WorkbenchSessionRuntime:
                 row=dict(raw);req=json.loads(row['request_json']);self._session_check_saved(c,row,req,family)
                 r=req['session_runtime'];usage=None;cost=None
                 if not row['dispatch_count']:
-                    state='held_unconsumed' if row['status']=='authorized' and row['expires_at']>self.call_clock() else 'released_unconsumed'
+                    configuration_current=not getattr(self.session_preparation,'unified',False) or req['config_revision']==self.session_preparation._read()['revision']
+                    state='held_unconsumed' if configuration_current and row['status']=='authorized' and row['expires_at']>self.call_clock() else 'released_unconsumed'
                     exposure=r['reserve_micro_cny'] if state=='held_unconsumed' else 0;held+=exposure
                 else:
                     expect(row['dispatch_count']==1,'单次授权派发次数异常。')
@@ -226,7 +238,7 @@ class WorkbenchSessionRuntime:
                     usage=self._ce_usage(req,response)
                     if usage is None:state='consumed_usage_unconfirmed';exposure=r['reserve_micro_cny'];unknown+=exposure
                     else:
-                        cost=charge(usage['prompt_tokens'],p['input_rate'])+charge(usage['completion_tokens'],p['output_rate'])
+                        cost=charge(usage['prompt_tokens'],r.get('input_rate',p['input_rate']))+charge(usage['completion_tokens'],r.get('output_rate',p['output_rate']))
                         exposure=cost;spent+=cost;state='settled_simulated_usage' if r['simulated'] else 'settled_provider_usage'
                         if usage['prompt_tokens']>r['input_token_allowance'] or usage['completion_tokens']>r['output_limit'] or cost>r['reserve_micro_cny']:
                             overrun+=max(1,cost-r['reserve_micro_cny']);state='usage_exceeds_reservation'
@@ -247,6 +259,9 @@ class WorkbenchSessionRuntime:
         for prefix in ('wbf','wbc'):
             if c.execute('SELECT 1 FROM sqlite_master WHERE name=?',(prefix+'_grants',)).fetchone():
                 c.execute(f"UPDATE {prefix}_grants SET status='invalidated' WHERE dispatch_count=0 AND status='authorized' AND (boot_id<>? OR preview_id IN (SELECT preview_id FROM {prefix}_previews WHERE expires_at<=?))",(self.call_boot_id,self.call_clock()))
+                if getattr(self.session_preparation,'unified',False):
+                    revision=self.session_preparation._read()['revision']
+                    c.execute(f"UPDATE {prefix}_grants SET status='invalidated' WHERE dispatch_count=0 AND status='authorized' AND preview_id IN (SELECT preview_id FROM {prefix}_previews WHERE json_extract(request_json,'$.config_revision')<>?)",(revision,))
         b=self._session_ledger(c,self._meta_base_for_runtime(c));r=req['session_runtime']
         expect(not b['overrun_micro_cny'] and not b['overspent_micro_cny'],'用量或预算异常，停止新增授权。')
         expect(not any(e['stage']==req['stage'] and e['slot_key']==r['slot_key'] and e['status']!='released_unconsumed' for e in b['entries']),
@@ -307,7 +322,7 @@ class WorkbenchSessionRuntime:
                 'sdk_available':self.session_preparation is not None,
                 'model_configured':bool(current['encrypted_key'] and config.get('model') and config.get('base_url')
                     and config.get('currency')=='CNY' and all(type(config.get(name)) in (int,float) and config[name]>0 for name in ('input_price_per_million','output_price_per_million'))),
-                'provider':config.get('provider',''),'model':config.get('model','')}
+                'provider':config.get('provider',''),'model':config.get('model',''),'config_revision':current['revision'] if self.session_preparation else None}
             from judge_client import sponsored_policy
             v['runtime_capabilities']['sponsored_gateway']=sponsored_policy(self.session_preparation) if self.session_preparation else None
         b=self._session_ledger(c,meta)

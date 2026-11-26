@@ -7,6 +7,7 @@ from model_preparation import ModelPreparation,validate_config
 def fingerprint(v):return hashlib.sha256(json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 
 def sponsored_policy(preparation):
+    if hasattr(preparation,'platform_policy'):return preparation.platform_policy()
     # Existing in-memory preparation adapters have no on-disk sponsorship file.
     if getattr(preparation,'path',None) is None:return None
     path=preparation.path.parent/'judge-policy.json'
@@ -40,11 +41,10 @@ def import_access(directory,path,*,client_factory=None,allow_local_test=False):
     if not valid or meta.get('sponsored') is not True or meta.get('currency')!='CNY':raise ValueError('评委服务合同不兼容。')
     from model_preparation import DEFAULT
     conf=validate_config({**DEFAULT,'provider':('评委网关v2 · ' if version=='judge-gateway-v2' else '评委免配置 · ')+meta['provider'],'base_url':url.rstrip('/')+'/v1','model':meta['model'],'input_price_per_million':meta['input_price_per_million'],'output_price_per_million':meta['output_price_per_million'],'max_input_chars':meta['max_input_chars'],'max_output_tokens':meta['max_output_tokens'],'timeout_seconds':100,**({'temperature':None} if version=='judge-gateway-v2' else {})})
-    prep=ModelPreparation(directory);old=prep._read()
-    if old['encrypted_key']:
-        if old['config']!=conf or prep.vault.open(old['encrypted_key'])!=token:raise ValueError('已有评委配置不同；请使用新的独立评委数据目录，旧记录和费用保留。')
-    else:
-        prep.save({'config':conf,'api_key':token,'key_action':'replace','expected_revision':old['revision']})
-    from delivery_runtime import write_json
-    write_json(prep.path.parent/'judge-policy.json',{k:meta[k] for k in ('version','sponsored','supported_stages','expires_at','budget_micro_cny','notice')}|({'session_budget_micro_cny':meta['session_budget_micro_cny']} if 'session_budget_micro_cny' in meta else {})|{'config_digest':fingerprint(conf)})
-    return sponsored_policy(prep)
+    from unified_model import UnifiedModelPreparation
+    prep=UnifiedModelPreparation(directory)
+    sponsor={k:meta[k] for k in ('version','sponsored','supported_stages','expires_at','budget_micro_cny','notice')}
+    if 'session_budget_micro_cny' in meta:sponsor['session_budget_micro_cny']=meta['session_budget_micro_cny']
+    sponsor['tool_calls_supported']=meta.get('tool_calls_supported',False)
+    prep.install_platform(conf,token,sponsor)
+    return sponsor

@@ -21,6 +21,7 @@
 # Credentials, sessions and generated workspace state
 judge-access.json
 policy.json
+!/源码/deploy/judge-gateway/render/policy.json
 .env
 .env.*
 !.env.example

@@ -23,6 +23,7 @@ from competition_sessions import (SessionBusy, SessionError, SessionPlanError, S
 from db_manager import DBManager
 from mastery_service import json_list
 from model_preparation import ModelPreparation, PreparationError, PreparationConflict
+from unified_model import UnifiedModelPreparation
 from workflow_lease import DirectoryLease
 from authorized_ab import AuthorizedAB, FixedABTransport, ABConflict
 
@@ -79,7 +80,7 @@ class LocalWorkflowServer(ThreadingHTTPServer):
         self.contract_sdk_rehearsal=contract_sdk_rehearsal
         if type(session_outbound_enabled) is not bool:raise ValueError("Invalid session outbound flag")
         self.session_outbound_enabled=session_outbound_enabled
-        self.preparation = ModelPreparation(Path(directory).resolve(), configuration_vault)
+        self.preparation = UnifiedModelPreparation(Path(directory).resolve(), configuration_vault)
         self.lease = DirectoryLease(directory)
         try:
             super().__init__(address, self.handler_class or LocalWorkflowHandler)

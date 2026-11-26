@@ -21,9 +21,45 @@ def encode(v):return json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(
 def digest(v):return hashlib.sha256(encode(v).encode()).hexdigest()
 def charge(n,price):return int((Decimal(n)*Decimal(str(price))).to_integral_value(rounding=ROUND_CEILING))
 
+
+def validate_agent_messages(body):
+    tools=body.get('tools')
+    names={'read_context','search_history','search_resources','check_resume_quotes','save_plan'}
+    if body.get('tool_choice')!='auto' or not isinstance(tools,list) or not 1<=len(tools)<=5:raise ValueError()
+    declared=set()
+    for tool in tools:
+        if not isinstance(tool,dict) or tool.get('type')!='function' or set(tool)!={'type','function'}:raise ValueError()
+        function=tool['function']
+        if not isinstance(function,dict) or function.get('name') not in names or not isinstance(function.get('parameters'),dict):raise ValueError()
+        if function['name'] in declared:raise ValueError()
+        declared.add(function['name'])
+    pending=set();used=set()
+    for message in body['messages']:
+        if not isinstance(message,dict) or set(message)-{'role','content','tool_calls','tool_call_id'}:raise ValueError()
+        role=message.get('role')
+        content=message.get('content')
+        if role=='tool':
+            identity=message.get('tool_call_id')
+            if identity not in pending or not isinstance(content,str) or 'tool_calls' in message:raise ValueError()
+            pending.remove(identity)
+            continue
+        if pending or role not in ('system','user','assistant') or 'tool_call_id' in message:raise ValueError()
+        calls=message.get('tool_calls',[])
+        if content is not None and not isinstance(content,str):raise ValueError()
+        if not calls and not isinstance(content,str):raise ValueError()
+        if calls:
+            if role!='assistant' or not isinstance(calls,list) or not 1<=len(calls)<=4:raise ValueError()
+            for call in calls:
+                if not isinstance(call,dict) or call.get('type')!='function':raise ValueError()
+                identity=call.get('id');function=call.get('function')
+                if not isinstance(identity,str) or not 1<=len(identity)<=200 or identity in used:raise ValueError()
+                if not isinstance(function,dict) or function.get('name') not in declared or not isinstance(function.get('arguments'),str):raise ValueError()
+                used.add(identity);pending.add(identity)
+    if pending:raise ValueError()
+
 def policy(value):
     fields={'provider','base_url','model','input_price_per_million','output_price_per_million','budget_micro_cny','max_calls','expires_at','max_input_chars','max_output_tokens'}
-    optional={'supported_stages','session_budget_micro_cny'}
+    optional={'supported_stages','session_budget_micro_cny','tool_calls_supported'}
     if not isinstance(value,dict) or not fields<=set(value)<=fields|optional:raise ValueError('Gateway policy fields invalid')
     p=dict(value);u=urlsplit(p['base_url'])
     if u.scheme!='https' or not u.hostname or u.username or u.password or u.query or u.fragment:raise ValueError('HTTPS upstream required')
@@ -35,11 +71,12 @@ def policy(value):
         if type(p[name]) not in (int,float) or not Decimal(str(p[name])).is_finite() or not 0<p[name]<=100000:raise ValueError('Positive configured prices required')
     expiry=datetime.fromisoformat(p['expires_at'].replace('Z','+00:00'))
     if expiry.tzinfo is None:raise ValueError('Expiry timezone required')
-    if set(p)&optional:
+    if set(p)&{'supported_stages','session_budget_micro_cny'}:
         stages=p.get('supported_stages');limit=p.get('session_budget_micro_cny')
         if not isinstance(stages,list) or len(stages)!=len(set(stages)) or not set(LEGACY_STAGES)<=set(stages)<=set(STAGES):raise ValueError('Invalid sponsored stages')
         if ('e_turn' in stages)!=('e_report' in stages):raise ValueError('Both interview stages must be enabled together')
         if type(limit) is not int or not 0<limit<=p['budget_micro_cny']:raise ValueError('Invalid session allowance')
+    if 'tool_calls_supported' in p and type(p['tool_calls_supported']) is not bool:raise ValueError('Invalid tool calling capability')
     return p
 
 class JudgeGateway:
@@ -55,9 +92,10 @@ class JudgeGateway:
         if previous_settings is not None:
             old_policy=policy(previous_settings)
             changed={k for k in set(old_policy)|set(self.policy) if old_policy.get(k)!=self.policy.get(k)}
-            allowed={'budget_micro_cny','max_calls','expires_at'}
+            allowed={'budget_micro_cny','max_calls','expires_at','max_input_chars','tool_calls_supported'}
             if not changed<=allowed or self.policy['budget_micro_cny']<old_policy['budget_micro_cny'] or self.policy['max_calls']<old_policy['max_calls'] or datetime.fromisoformat(self.policy['expires_at'])<datetime.fromisoformat(old_policy['expires_at']):
                 raise ValueError('Only explicitly approved limit increases may migrate the original ledger')
+            if self.policy['max_input_chars']<old_policy['max_input_chars'] or old_policy.get('tool_calls_supported',False) and not self.policy.get('tool_calls_supported',False):raise ValueError('Capability migrations must preserve existing limits')
             previous_fingerprint=digest({'settings':old_policy,'token_hash':self.token_hash})
             migration=encode({'version':'limit-increase-v1','previous_policy':old_policy,'new_policy':self.policy,'notice':'All calls, responses, settled charges and unknown holds are retained.'})
         self.ledger.initialize(digest({'settings':self.policy,'token_hash':self.token_hash}),probe_only=probe_only,previous_fingerprint=previous_fingerprint,migration=migration)
@@ -71,7 +109,7 @@ class JudgeGateway:
     def configuration(self,authorization):
         self.authenticate(authorization);p=self.policy
         stages=p.get('supported_stages',list(LEGACY_STAGES))
-        return {'version':'judge-gateway-v2' if 'supported_stages' in p else 'judge-gateway-v1','provider':p['provider'],'model':p['model'],'currency':'CNY','input_price_per_million':p['input_price_per_million'],'output_price_per_million':p['output_price_per_million'],'max_input_chars':p['max_input_chars'],'max_output_tokens':p['max_output_tokens'],'expires_at':p['expires_at'],'supported_stages':stages,'sponsored':True,'budget_micro_cny':p['budget_micro_cny'],**({'probe_only':True} if self.probe_only else {}),**({'session_budget_micro_cny':p['session_budget_micro_cny']} if 'session_budget_micro_cny' in p else {}),'notice':'作者承担模型费用；每次仍须预览与授权。资料经作者托管网关转发至模型服务商。全体评委共享服务端总额度，失败与未知用量保留占额。'}
+        return {'version':'judge-gateway-v2' if 'supported_stages' in p else 'judge-gateway-v1','provider':p['provider'],'model':p['model'],'currency':'CNY','input_price_per_million':p['input_price_per_million'],'output_price_per_million':p['output_price_per_million'],'max_input_chars':p['max_input_chars'],'max_output_tokens':p['max_output_tokens'],'expires_at':p['expires_at'],'supported_stages':stages,'sponsored':True,'budget_micro_cny':p['budget_micro_cny'],**({'tool_calls_supported':True} if p.get('tool_calls_supported') else {}),**({'probe_only':True} if self.probe_only else {}),**({'session_budget_micro_cny':p['session_budget_micro_cny']} if 'session_budget_micro_cny' in p else {}),'notice':'作者承担模型费用；每次仍须预览与授权。资料经作者托管网关转发至模型服务商。全体评委共享服务端总额度，失败与未知用量保留占额。'}
 
     def status(self,authorization):
         self.authenticate(authorization)
@@ -79,7 +117,8 @@ class JudgeGateway:
         return {'budget_micro_cny':self.policy['budget_micro_cny'],'calls':n,'max_calls':self.policy['max_calls'],'committed_micro_cny':total,'unknown_held_micro_cny':unknown,'available_micro_cny':max(0,self.policy['budget_micro_cny']-total),'expires_at':self.policy['expires_at']}
 
     def validate(self,raw,stage,rid):
-        if stage not in self.policy.get('supported_stages',LEGACY_STAGES) or not re.fullmatch(r'[0-9a-f]{64}',rid):raise GatewayError(400,'invalid_stage_or_request')
+        agent=stage=='career_agent' and self.policy.get('tool_calls_supported') is True
+        if not (agent or stage in self.policy.get('supported_stages',LEGACY_STAGES)) or not re.fullmatch(r'[0-9a-f]{64}',rid):raise GatewayError(400,'invalid_stage_or_request')
         try:
             def pairs(rows):
                 result={}
@@ -89,14 +128,16 @@ class JudgeGateway:
                 return result
             body=json.loads(raw,object_pairs_hook=pairs,parse_constant=lambda _:(_ for _ in ()).throw(ValueError()))
             allowed={'model','messages','max_tokens','max_completion_tokens','temperature','response_format','thinking','reasoning_effort'}
+            if agent:allowed|={'tools','tool_choice'}
             if not isinstance(body,dict) or not {'model','messages'}<=set(body)<=allowed:raise ValueError()
             p=self.policy
             if body['model']!=p['model'] or len(raw.decode('utf-8'))>p['max_input_chars']:raise ValueError()
             caps=[body[k] for k in ('max_tokens','max_completion_tokens') if k in body]
             if len(caps)!=1 or type(caps[0]) is not int or not 1<=caps[0]<=p['max_output_tokens']:raise ValueError()
             messages=body['messages']
-            if not isinstance(messages,list) or not 1<=len(messages)<=4:raise ValueError()
-            if any(not isinstance(m,dict) or set(m)!={'role','content'} or m['role'] not in ('system','user','assistant') or not isinstance(m['content'],str) for m in messages):raise ValueError()
+            if not isinstance(messages,list) or not 1<=len(messages)<=(64 if agent else 4):raise ValueError()
+            if agent:validate_agent_messages(body)
+            elif any(not isinstance(m,dict) or set(m)!={'role','content'} or m['role'] not in ('system','user','assistant') or not isinstance(m['content'],str) for m in messages):raise ValueError()
             if 'thinking' in body and body['thinking']!={'type':'disabled'}:raise ValueError()
             if 'response_format' in body and body['response_format']!={'type':'json_object'}:raise ValueError()
             if 'temperature' in body and (type(body['temperature']) not in (int,float) or not 0<=body['temperature']<=2):raise ValueError()

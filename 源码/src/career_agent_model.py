@@ -5,12 +5,13 @@ from urllib.parse import urlsplit
 
 import httpx
 
-from model_preparation import DEFAULT, ModelPreparation, PreparationError
+from model_preparation import DEFAULT, PreparationError
+from unified_model import UnifiedModelPreparation
 
 
 class AgentModel:
     def __init__(self, directory, *, preparation=None, client_factory=None):
-        self.preparation = preparation or ModelPreparation(directory / 'agent-model')
+        self.preparation = preparation or UnifiedModelPreparation(directory)
         self.client_factory = client_factory
 
     def status(self):
@@ -19,14 +20,18 @@ class AgentModel:
         return {'configured': status['key_state'] == 'saved', 'revision': status['revision'],
                 'base_url': config['base_url'], 'model': config['model'],
                 'input_price': config['input_price_per_million'],
-                'output_price': config['output_price_per_million']}
+                'output_price': config['output_price_per_million'],
+                'source': status.get('model_source','user'),
+                'platform_available': status.get('platform_available',False),
+                'user_key_saved': status.get('user_key_saved',True),
+                'tools_supported': status.get('tools_supported',True)}
 
     def configure(self, body):
         if not isinstance(body, dict) or set(body) != {
                 'base_url', 'model', 'api_key', 'input_price', 'output_price', 'revision'}:
             raise PreparationError('请填写模型地址、名称、密钥和单价。')
-        config = {**DEFAULT, 'provider': 'Career Agent', 'base_url': body['base_url'],
-                  'model': body['model'], 'max_input_chars': 60000, 'max_output_tokens': 3000,
+        config = {**DEFAULT, 'provider': '用户自定义模型', 'base_url': body['base_url'],
+                  'model': body['model'], 'max_input_chars': 100000, 'max_output_tokens': 16000,
                   'timeout_seconds': 45, 'input_price_per_million': body['input_price'],
                   'output_price_per_million': body['output_price'], 'currency': 'CNY'}
         for name in ('input_price', 'output_price'):
@@ -43,32 +48,42 @@ class AgentModel:
             value = self.preparation._read()
             if not value['encrypted_key']:
                 raise PreparationError('请先配置支持工具调用的模型。')
+            if self.preparation.status().get('tools_supported') is False:
+                raise PreparationError('平台网关正在升级工具调用支持，请稍后重试或填写自己的API。')
             return deepcopy(value)
 
     def payload(self, messages, tools, settings):
         config = settings['config']
         body = {'model': config['model'], 'messages': messages, 'tools': tools,
-                'tool_choice': 'auto', 'max_tokens': config['max_output_tokens']}
+                'tool_choice': 'auto', 'max_tokens': min(config['max_output_tokens'],3000)}
         host = urlsplit(config['base_url']).hostname
-        if host == 'api.deepseek.com':
+        from judge_client import sponsored_policy
+        if host == 'api.deepseek.com' or sponsored_policy(self.preparation):
             body['thinking'] = {'type': 'disabled'}
         if len(json.dumps(body, ensure_ascii=False)) > config['max_input_chars']:
             raise PreparationError('本次上下文超过上限，请缩短目标或反馈内容后新建一轮。')
         return body
 
-    def complete(self, payload, settings):
+    def complete(self, payload, settings, *, request_id=None):
         with self.preparation.lock:
             current = self.preparation._read()
             if current != settings:
                 raise PreparationError('模型配置已变化，请保留当前记录后重新开始一轮。')
             key = self.preparation.vault.open(current['encrypted_key'])
         config = settings['config']
+        from judge_client import sponsored_policy
+        sponsor = sponsored_policy(self.preparation)
+        headers = {'Authorization': 'Bearer ' + key}
+        if sponsor:
+            if not sponsor.get('tool_calls_supported'):
+                raise PreparationError('平台网关正在升级工具调用支持，请稍后重试或填写自己的API。')
+            headers.update({'X-Shijie-Stage':'career_agent','X-Shijie-Request-ID':request_id})
         factory = self.client_factory or (lambda: httpx.Client(
             transport=httpx.HTTPTransport(retries=0), follow_redirects=False, trust_env=False,
             timeout=config['timeout_seconds']))
         with factory() as client:
             with client.stream('POST', config['base_url'] + '/chat/completions', json=payload,
-                               headers={'Authorization': 'Bearer ' + key}) as response:
+                               headers=headers) as response:
                 response.raise_for_status()
                 raw = bytearray()
                 for chunk in response.iter_bytes():

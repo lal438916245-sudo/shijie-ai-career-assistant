@@ -4,9 +4,9 @@
   "model": "deepseek-flash",
   "input_price_per_million": 2,
   "output_price_per_million": 8,
-  "budget_micro_cny": 5000000,
-  "max_calls": 40,
-  "expires_at": "2026-11-20T23:59:00+08:00",
+  "budget_micro_cny": 7000000,
+  "max_calls": 200,
+  "expires_at": "2026-12-10T23:59:00+08:00",
   "max_input_chars": 16000,
   "max_output_tokens": 4096,
   "supported_stages": [

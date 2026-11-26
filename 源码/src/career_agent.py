@@ -241,7 +241,7 @@ class CareerAgent:
     def _call(self, token, run_id, payload, settings):
         config = settings['config']
         reserve = charge(len(encode(payload).encode()) + 2048, config['input_price_per_million']) + charge(
-            config['max_output_tokens'], config['output_price_per_million'])
+            payload['max_tokens'], config['output_price_per_million'])
         call_id = uuid.uuid4().hex
         with self.guard, closing(self._open(token)) as conn, conn:
             run = conn.execute('SELECT status,budget FROM runs WHERE run_id=?', (run_id,)).fetchone()
@@ -252,7 +252,7 @@ class CareerAgent:
                 raise PreparationError('本轮费用预占达到上限，任务和已执行结果已保存。')
             conn.execute('INSERT INTO calls VALUES(?,?,?,?,NULL,NULL)', (call_id, run_id, 'dispatching', reserve))
         try:
-            result = self.model.complete(payload, settings)
+            result = self.model.complete(payload, settings, request_id=hashlib.sha256(call_id.encode()).hexdigest())
             usage = result.get('usage', {})
             counts = [usage.get(k) for k in ('prompt_tokens', 'completion_tokens', 'total_tokens')]
             if any(type(value) is not int or value < 0 for value in counts) or counts[0] + counts[1] != counts[2]:

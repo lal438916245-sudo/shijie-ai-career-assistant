@@ -37,6 +37,8 @@ export function createSimpleActions({token,storage,request=workbenchRequest,abf=
   const isA=stage==='a_diagnosis',call=isA?abf:ced,prefix=isA?'abf':'call'
   const key=base+':model:'+stage+':'+target
   let memo=read(key),receipt=null
+  const configRevision=s.runtime_capabilities?.config_revision
+  if(memo&&!memo.executeRequested&&typeof configRevision==='number'&&memo.configRevision!==configRevision){storage.removeItem(key);memo=null}
   // Recover from durable server records even if the old browser preparation UI was cleared.
   for(const entry of [...(s.session_runtime?.entries??[])].reverse()){
    if(entry.stage!==stage||entry.status==='released_unconsumed')continue
@@ -44,11 +46,12 @@ export function createSimpleActions({token,storage,request=workbenchRequest,abf=
    if(sameTarget(existing,stage,target)){receipt=existing;break}
   }
   if(!receipt&&memo?.authorizationId)receipt=await call(prefix+'_status',token,{authorization_id:memo.authorizationId})
+  if(receipt?.status==='authorized'&&typeof configRevision==='number'&&receipt.config_revision!==configRevision){storage.removeItem(key);memo=null;receipt=null}
   if(!receipt){
    if(!memo){
     const preview=await call(prefix+'_preview',token,{request_id:uuid(),expected_revision:s.revision,stage,...(isA?{target_version:Number(target)}:{target_id:target})})
     if(preview.input_limit_exceeded)throw Error('资料超过本次处理上限，请适当精简后再生成。')
-    memo={stage,target,previewId:preview.preview_id,digest:preview.request_digest,authorizationId:null,executeRequested:false}
+    memo={stage,target,configRevision,previewId:preview.preview_id,digest:preview.request_digest,authorizationId:null,executeRequested:false}
     write(key,memo)
    }
    receipt=await call(prefix+'_authorize',token,{preview_id:memo.previewId,request_digest:memo.digest,accept_session_once:true})
