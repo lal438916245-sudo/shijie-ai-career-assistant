@@ -2,6 +2,8 @@
 
 将本目录的部署文件更新到原 Render 服务使用的源码目录并重新部署。沿用原 Web Service、Postgres、服务商 Key 和评委凭证，保持 `SHIJIE_PROBE_ONLY=0`。
 
+本仓库根目录另提供相同网关的 `Dockerfile`，可沿用 Render 的空 Root Directory、`./Dockerfile` 路径和 `.` 构建上下文。根目录 `.dockerignore` 只纳入网关源码、依赖清单和非敏感策略。
+
 本次新增 `career_agent` 请求及原生工具调用消息，输入字符上限调整为 60000。共享预算 7 元、最多 200 次、北京时间 2026-12-10 23:59 到期、模型和单价继续沿用当前策略。
 
 `previous-policy.json` 对应升级前的 7 元策略。迁移在同一事务中保留调用、响应、已结算费用和未知费用预占，并记录新旧策略。它要求现有账本，重复部署幂等。

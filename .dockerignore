@@ -1,0 +1,9 @@
+**
+!Dockerfile
+!源码/
+!源码/deploy/
+!源码/deploy/judge-gateway/
+!源码/deploy/judge-gateway/render/
+!源码/deploy/judge-gateway/render/*.py
+!源码/deploy/judge-gateway/render/*.json
+!源码/deploy/judge-gateway/render/requirements.txt
