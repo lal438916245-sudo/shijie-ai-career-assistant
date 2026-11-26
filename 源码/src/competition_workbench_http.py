@@ -36,6 +36,8 @@ def handle(handler,parsed,*,write=False):
                 active_mark=('competition-workbench',str(uuid.uuid4()))
                 handler.server.active.add(active_mark)
         kind=parsed.path[len(PREFIX):]
+        from career_agent_http import handle_agent
+        if handle_agent(handler,service,kind,parsed,write):return True
         if write:
             if parsed.query or (kind not in CALL_ACTIONS|ABF_ACTIONS and kind not in ('create','create_personal','diagnosis','plan','review','adopt','publish','progress','learning_artifact','recover','assessment_start','retest_start','answer','assessment_next','assessment_end','interview_start','interview_answer','interview_end','resume_generate','resume_check','candidate_apply','abf_apply','ce_budget_open','session_runtime_open','saved_b_preview','saved_b_apply','plan_check','plan_confirm_publish','plan_prepare')):
                 handler.reject_request(404,{'error':'工作台接口不存在。','code':'not_found'});return True

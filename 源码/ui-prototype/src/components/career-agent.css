@@ -1,0 +1,16 @@
+.career-agent { margin-top: 24px; }
+.career-agent > * + * { margin-top: 16px; }
+.career-agent label { display: grid; gap: 7px; }
+.career-agent textarea { min-height: 88px; }
+.agent-config-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 16px 0; }
+.agent-run-controls { display: flex; align-items: end; flex-wrap: wrap; gap: 12px; }
+.agent-run-controls input { max-width: 170px; }
+.agent-task { padding: 20px 0; border-top: 1px solid var(--border, #dce3d7); }
+.agent-task h4 { display: flex; justify-content: space-between; gap: 16px; }
+.agent-task h4 span { font-size: 13px; font-weight: normal; color: #63745e; }
+.agent-task p { margin: 12px 0; }
+.agent-task .multi-actions { margin-top: 12px; }
+.agent-preserve { white-space: pre-wrap; overflow-wrap: anywhere; }
+.agent-event { margin-top: 16px; }
+.agent-event pre { max-height: 280px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; padding: 12px; background: #f3f5ef; font-size: 12px; }
+@media (max-width: 720px) { .agent-config-grid { grid-template-columns: 1fr; } }

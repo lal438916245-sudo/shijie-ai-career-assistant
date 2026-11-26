@@ -32,6 +32,14 @@ policy.json
 *.db-*
 !/源码/seed/showcase_sessions_20261107/complete-v2/session_30ca9dec37775bb5b5cd1d1ec4d43ff6.db
 /.local-demo/
+/.agent-build-venv/
+/agent-build/
+/ShijieAgent.exe
+/_agent_internal/
+!/智能体启动.cmd
+!/智能体停止.cmd
+!/一键启动.cmd
+!/停止服务.cmd
 .venv/
 __pycache__/
 *.py[cod]

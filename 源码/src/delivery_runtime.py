@@ -6,7 +6,7 @@ from pathlib import Path
 from urllib.parse import urlsplit,unquote
 import argparse,hashlib,http.client,json,mimetypes,os,secrets,shutil,subprocess,sys,threading,time,uuid,webbrowser
 
-BUILD='career-pilot-windows-20261113-v1'
+BUILD='career-pilot-agent-20261126-v1'
 APPROOT=Path(sys.executable).resolve().parent if getattr(sys,'frozen',False) else Path(__file__).resolve().parents[1]
 BODY_LIMIT=400000
 SAFE_CONFIG={'provider':'本地体验（模拟计价，非服务商验证）','base_url':'https://api.deepseek.com','model':'deepseek-flash','max_input_chars':16000,'max_output_tokens':16000,'timeout_seconds':60,'currency':'CNY','input_price_per_million':2,'output_price_per_million':8,'output_token_parameter':'max_tokens','temperature':0.7}
@@ -24,7 +24,7 @@ def write_json(path,value):
 def seed_data(data,root=APPROOT):
     """Copy only allowlisted fictional replay; never settings, personal DBs or keys."""
     manifest=read_json(root/'seed'/'manifest.json')
-    assert manifest['build']==BUILD and len(manifest['files'])==2
+    assert manifest['build'] in (BUILD,'career-pilot-windows-20261113-v1') and len(manifest['files'])==2
     for name,expected in manifest['files'].items():
         rel=Path(name)
         if rel.is_absolute() or '..' in rel.parts or rel.parts[0]!='showcase_sessions_20261107':raise ValueError('Invalid seed manifest')
