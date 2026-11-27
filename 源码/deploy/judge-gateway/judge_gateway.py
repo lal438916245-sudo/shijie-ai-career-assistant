@@ -24,8 +24,9 @@ def charge(n,price):return int((Decimal(n)*Decimal(str(price))).to_integral_valu
 
 def validate_agent_messages(body):
     tools=body.get('tools')
-    names={'read_context','search_history','search_resources','check_resume_quotes','save_plan'}
-    if body.get('tool_choice')!='auto' or not isinstance(tools,list) or not 1<=len(tools)<=5:raise ValueError()
+    names={'read_context','search_history','search_resources','check_resume_quotes','save_plan',
+           'diagnose_job','optimize_resume','start_mock_interview','review_mock_interview'}
+    if body.get('tool_choice')!='auto' or not isinstance(tools,list) or not 1<=len(tools)<=9:raise ValueError()
     declared=set()
     for tool in tools:
         if not isinstance(tool,dict) or tool.get('type')!='function' or set(tool)!={'type','function'}:raise ValueError()
@@ -109,7 +110,7 @@ class JudgeGateway:
     def configuration(self,authorization):
         self.authenticate(authorization);p=self.policy
         stages=p.get('supported_stages',list(LEGACY_STAGES))
-        return {'version':'judge-gateway-v2' if 'supported_stages' in p else 'judge-gateway-v1','provider':p['provider'],'model':p['model'],'currency':'CNY','input_price_per_million':p['input_price_per_million'],'output_price_per_million':p['output_price_per_million'],'max_input_chars':p['max_input_chars'],'max_output_tokens':p['max_output_tokens'],'expires_at':p['expires_at'],'supported_stages':stages,'sponsored':True,'budget_micro_cny':p['budget_micro_cny'],**({'tool_calls_supported':True} if p.get('tool_calls_supported') else {}),**({'probe_only':True} if self.probe_only else {}),**({'session_budget_micro_cny':p['session_budget_micro_cny']} if 'session_budget_micro_cny' in p else {}),'notice':'作者承担模型费用；每次仍须预览与授权。资料经作者托管网关转发至模型服务商。全体评委共享服务端总额度，失败与未知用量保留占额。'}
+        return {'version':'judge-gateway-v2' if 'supported_stages' in p else 'judge-gateway-v1','provider':p['provider'],'model':p['model'],'currency':'CNY','input_price_per_million':p['input_price_per_million'],'output_price_per_million':p['output_price_per_million'],'max_input_chars':p['max_input_chars'],'max_output_tokens':p['max_output_tokens'],'expires_at':p['expires_at'],'supported_stages':stages,'sponsored':True,'budget_micro_cny':p['budget_micro_cny'],**({'tool_calls_supported':True,'agent_business_tools_supported':True} if p.get('tool_calls_supported') else {}),**({'probe_only':True} if self.probe_only else {}),**({'session_budget_micro_cny':p['session_budget_micro_cny']} if 'session_budget_micro_cny' in p else {}),'notice':'作者承担模型费用；每次仍须预览与授权。资料经作者托管网关转发至模型服务商。全体评委共享服务端总额度，失败与未知用量保留占额。'}
 
     def status(self,authorization):
         self.authenticate(authorization)
