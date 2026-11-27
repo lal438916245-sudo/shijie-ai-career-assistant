@@ -169,6 +169,8 @@ class WorkbenchCandidateAdoption:
             'notice':'同一虚构会话内经核对采用；固定替身结果不证明真实能力或简历事实。'}
         if stage == 'd_revision':
             app['formal_resume_id'] = bound_id(meta['session_id'], 'resume', body['request_id'])
+        if getattr(self.agent_review,'actor',None)=='career_agent':
+            app.update(review_actor='career_agent',notice='用户委托智能体调用，程序校验后自动保存；原始用户回答保留。')
         self._record(c, meta, app['record_id'], kind, '核对采用 · '+stage,
                      {'event':'candidate_adopted', **app}, parents, source='user_review')
         c.execute('INSERT INTO wbc_applications VALUES (?,?,?,?,?,?,?,?)',

@@ -91,6 +91,7 @@ class CompetitionWorkbench(WorkbenchPlanConfirmation,WorkbenchSavedB,WorkbenchSe
     def __init__(self,directory,*,hunter=fixed_hunter,reviewer=fixed_review,call_configuration=None,call_transport=None,call_boot_id=None,case_profile='legacy',abf_transport=None,ce_transport=None,session_preparation=None,session_outbound_enabled=False,session_http_client_factory=None):
         self.directory=Path(directory).resolve()/'unified_case_sessions'
         self.lock=threading.RLock()
+        self.agent_review=threading.local()
         if case_profile not in ('legacy','final-20261107'):raise ValueError('Unknown case profile')
         self.case_profile=case_profile
         self.package_loader=load_package

@@ -24,7 +24,8 @@ class AgentModel:
                 'source': status.get('model_source','user'),
                 'platform_available': status.get('platform_available',False),
                 'user_key_saved': status.get('user_key_saved',True),
-                'tools_supported': status.get('tools_supported',True)}
+                'tools_supported': status.get('tools_supported',True),
+                'business_tools_supported': status.get('business_tools_supported',True)}
 
     def configure(self, body):
         if not isinstance(body, dict) or set(body) != {

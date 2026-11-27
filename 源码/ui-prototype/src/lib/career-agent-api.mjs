@@ -1,6 +1,6 @@
 export async function agentRequest(path, token, body, transport = fetch) {
   const reads = path === 'agent-state' && body === undefined
-  const writes = ['agent-run', 'agent-cancel', 'agent-configure', 'model-platform'].includes(path) && body !== undefined
+  const writes = ['agent-run', 'agent-cancel', 'agent-configure', 'model-platform', 'agent-answer-interview', 'agent-resume-apply'].includes(path) && body !== undefined
   if ((!reads && !writes) || !/^[0-9a-f]{64}$/.test(token)) throw Error('智能体请求无效。')
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 15000)

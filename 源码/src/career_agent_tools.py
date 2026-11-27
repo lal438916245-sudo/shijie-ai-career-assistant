@@ -40,6 +40,10 @@ class Plan(Arguments):
     tasks: list[Task] = Field(min_length=1, max_length=8)
 
 
+class Interview(Arguments):
+    interview_id: str = Field(min_length=1, max_length=240)
+
+
 TOOL_MODELS = {
     'read_context': Empty,
     'search_history': Search,
@@ -47,20 +51,26 @@ TOOL_MODELS = {
     'check_resume_quotes': Claims,
     'save_plan': Plan,
 }
+BUSINESS_MODELS = {'diagnose_job': Empty, 'optimize_resume': Empty,
+                   'start_mock_interview': Empty, 'review_mock_interview': Interview}
 DESCRIPTIONS = {
     'read_context': '读取当前用户简历、JD、诊断、最新任务、计划版本和执行反馈。先读取再规划。',
     'search_history': '按关键词检索当前会话的历史记录、用户执行反馈和以前的智能体结果。返回来源编号。',
     'search_resources': '检索项目已有的本地学习资源目录。返回参考链接及阅读目标，未实时访问外部网页。',
     'check_resume_quotes': '逐字核对引用能否在当前简历找到。命中只表示原文有此自述，不能证明能力或业绩。',
     'save_plan': '按当前计划版本保存或调整可执行任务。保留已完成任务。工具返回新的任务编号和版本。',
+    'diagnose_job': '调用当前配置的真实业务模型生成并保存岗位匹配诊断，复用已有成功诊断。先read_context。费用计入本轮上限。',
+    'optimize_resume': '依据已保存诊断和真实会话材料生成简历优化草稿。复用相同证据的草稿，用户核对条目后保存。不得声称事实已核实。',
+    'start_mock_interview': '调用业务模型生成一轮短面试问题。返回用户待答问题后等待界面真实作答，不允许代答。每轮至多创建一场。',
+    'review_mock_interview': '依据用户已提交的真实回答调用业务模型生成复盘，返回问题分析和改进建议。然后据结果调整计划；未作答会返回等待状态。',
 }
 
 
-def definitions():
+def definitions(include_business=False):
     return [
         {'type': 'function', 'function': {'name': name, 'description': DESCRIPTIONS[name],
                                         'parameters': model.model_json_schema()}}
-        for name, model in TOOL_MODELS.items()
+        for name, model in (TOOL_MODELS | (BUSINESS_MODELS if include_business else {})).items()
     ]
 
 
@@ -83,12 +93,26 @@ class CareerTools:
         self.run_id = run_id
 
     def execute(self, name, arguments):
-        if name not in TOOL_MODELS:
+        models = TOOL_MODELS | BUSINESS_MODELS
+        if name not in models:
             return {'error': 'unknown_tool', 'message': '请选择已提供的工具。'}
         try:
-            args = TOOL_MODELS[name].model_validate(arguments)
+            args = models[name].model_validate(arguments)
         except ValueError:
             return {'error': 'invalid_arguments', 'message': '工具参数未通过校验，请按工具定义修正。'}
+        if name in BUSINESS_MODELS:
+            from contextlib import closing
+            from career_agent_business import CareerBusiness
+            from competition_workbench import WorkbenchError
+            with closing(self.owner._open(self.token)) as conn:
+                read = conn.execute("SELECT 1 FROM events WHERE run_id=? AND kind='tool_result' AND json_extract(content,'$.name')='read_context'", (self.run_id,)).fetchone()
+            if not read:
+                return {'error': 'context_required', 'message': '请先调用read_context读取当前资料和版本。'}
+            business = CareerBusiness(self.owner, self.token, self.run_id)
+            try:
+                return business.review_mock_interview(args.interview_id) if name == 'review_mock_interview' else getattr(business, name)()
+            except WorkbenchError as exc:
+                return {'error': 'business_conflict', 'message': str(exc), 'retry_automatically': False}
         return getattr(self, name)(args)
 
     def read_context(self, _args):

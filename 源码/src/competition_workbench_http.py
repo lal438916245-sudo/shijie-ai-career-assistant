@@ -42,6 +42,10 @@ def handle(handler,parsed,*,write=False):
             if parsed.query or (kind not in CALL_ACTIONS|ABF_ACTIONS and kind not in ('create','create_personal','diagnosis','plan','review','adopt','publish','progress','learning_artifact','recover','assessment_start','retest_start','answer','assessment_next','assessment_end','interview_start','interview_answer','interview_end','resume_generate','resume_check','candidate_apply','abf_apply','ce_budget_open','session_runtime_open','saved_b_preview','saved_b_apply','plan_check','plan_confirm_publish','plan_prepare')):
                 handler.reject_request(404,{'error':'工作台接口不存在。','code':'not_found'});return True
             body=handler.body();token=handler.token()
+            agent=getattr(service,'career_agent',None)
+            if agent and kind not in ('create','create_personal') and agent.is_active(token):
+                from competition_workbench import WorkbenchConflict
+                raise WorkbenchConflict('智能体正在推进当前会话，请等待本轮结束后再手动修改或生成。')
             value=getattr(service,kind)(token,body) if kind in CALL_ACTIONS|ABF_ACTIONS or kind in ('saved_b_preview','plan_check') else service.create(token,body) if kind=='create' else service.create_personal(token,body) if kind=='create_personal' else service.mutate(token,kind,body)
         else:
             query=parse_qs(parsed.query,strict_parsing=True)

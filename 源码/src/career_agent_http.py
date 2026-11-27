@@ -3,10 +3,12 @@ from career_agent import CareerAgent
 from career_agent_model import AgentModel
 from model_preparation import PreparationError
 from competition_workbench import WorkbenchError
+from career_agent_business import CareerBusiness
 
 
 def handle_agent(handler, workbench, kind, parsed, write):
-    if kind not in {'agent-state', 'agent-run', 'agent-cancel', 'agent-configure', 'model-platform'}:
+    if kind not in {'agent-state', 'agent-run', 'agent-cancel', 'agent-configure', 'model-platform',
+                    'agent-answer-interview', 'agent-resume-apply'}:
         return False
     if parsed.query or (write == (kind == 'agent-state')):
         raise WorkbenchError('智能体请求方法无效。')
@@ -30,7 +32,18 @@ def handle_agent(handler, workbench, kind, parsed, write):
         if kind == 'agent-state':
             value = agent.snapshot(token)
         elif kind == 'agent-run':
-            value = agent.start(token, handler.body(), active)
+            with handler.server.guard:
+                if sum(marker[0]=='competition-workbench' for marker in handler.server.active)>1:
+                    raise WorkbenchError('当前业务请求尚未结束，请完成后再启动智能体。')
+                value = agent.start(token, handler.body(), active)
+        elif kind == 'agent-answer-interview':
+            with handler.server.guard:
+                if sum(marker[0]=='competition-workbench' for marker in handler.server.active)>1:
+                    raise WorkbenchError('当前业务请求尚未结束，请完成后再提交面试回答。')
+                value = agent.answer_interview(token, handler.body(), active)
+        elif kind == 'agent-resume-apply':
+            CareerBusiness(agent, token).accept_resume(handler.body())
+            value = agent.snapshot(token)
         elif kind == 'agent-configure':
             with handler.server.guard:
                 if sum(marker[0]=='competition-workbench' for marker in handler.server.active)>1:

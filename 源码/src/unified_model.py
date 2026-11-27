@@ -84,6 +84,7 @@ class UnifiedModelPreparation(ModelPreparation):
                           platform_available=value['platform'] is not None,
                           user_key_saved=value['user'] is not None,
                           tools_supported=value['selected'] == 'user' or bool(profile and (profile['policy'] or {}).get('tool_calls_supported')))
+            result['business_tools_supported'] = value['selected'] == 'user' or bool(profile and (profile['policy'] or {}).get('agent_business_tools_supported'))
             return result
 
     def platform_policy(self):

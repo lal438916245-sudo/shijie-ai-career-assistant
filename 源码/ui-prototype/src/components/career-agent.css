@@ -12,5 +12,10 @@
 .agent-task .multi-actions { margin-top: 12px; }
 .agent-preserve { white-space: pre-wrap; overflow-wrap: anywhere; }
 .agent-event { margin-top: 16px; }
+.agent-business { padding: 20px; border: 1px solid var(--border, #dce3d7); border-radius: 12px; background: #f6f8f1; }
+.agent-business > * + * { margin-top: 14px; }
+.agent-resume-item { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border, #dce3d7); }
+.career-agent .agent-choice { display: flex; align-items: center; gap: 8px; }
+.agent-business blockquote { margin: 10px 0; padding-left: 12px; border-left: 3px solid #bdcbb5; color: #65735f; }
 .agent-event pre { max-height: 280px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; padding: 12px; background: #f3f5ef; font-size: 12px; }
 @media (max-width: 720px) { .agent-config-grid { grid-template-columns: 1fr; } }

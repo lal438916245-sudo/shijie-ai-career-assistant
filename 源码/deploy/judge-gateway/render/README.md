@@ -1,5 +1,9 @@
 # 统一模型配置的网关工具调用升级
 
+2026-11-27扩展为九个工具，新增 `diagnose_job`、`optimize_resume`、`start_mock_interview`、`review_mock_interview`。配置接口返回 `agent_business_tools_supported=true`，继续沿用原策略文件及指纹，不清空账本。业务执行发生在本地应用，A/D/E模型请求继续通过原阶段路由。
+
+原Render服务已部署本次兼容扩展。部署前26次、239996微元记录保留；随后合成资料两轮业务验证新增16次请求、155388微元费用，累计42次、395384微元、0未知费用预占。
+
 将本目录的部署文件更新到原 Render 服务使用的源码目录并重新部署。沿用原 Web Service、Postgres、服务商 Key 和评委凭证，保持 `SHIJIE_PROBE_ONLY=0`。
 
 本仓库根目录另提供相同网关的 `Dockerfile`，可沿用 Render 的空 Root Directory、`./Dockerfile` 路径和 `.` 构建上下文。根目录 `.dockerignore` 只纳入网关源码、依赖清单和非敏感策略。

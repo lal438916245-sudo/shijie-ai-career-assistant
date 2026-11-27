@@ -46,5 +46,6 @@ def import_access(directory,path,*,client_factory=None,allow_local_test=False):
     sponsor={k:meta[k] for k in ('version','sponsored','supported_stages','expires_at','budget_micro_cny','notice')}
     if 'session_budget_micro_cny' in meta:sponsor['session_budget_micro_cny']=meta['session_budget_micro_cny']
     sponsor['tool_calls_supported']=meta.get('tool_calls_supported',False)
+    sponsor['agent_business_tools_supported']=meta.get('agent_business_tools_supported',False)
     prep.install_platform(conf,token,sponsor)
     return sponsor

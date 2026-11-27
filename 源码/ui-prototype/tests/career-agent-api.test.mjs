@@ -16,6 +16,11 @@ test('agent requests keep personal session authorization and native agent proven
   const body = {request_id: 'original-request', goal: '准备面试'}
   await agentRequest('agent-run', token, body, transport)
   assert.deepEqual(JSON.parse(requests[1].options.body), body)
+  await agentRequest('agent-answer-interview', token, {...body, answer: '用户真实回答'}, transport)
+  assert.equal(requests[2].url, '/api/live/workbench/agent-answer-interview')
+  assert.equal(JSON.parse(requests[2].options.body).answer, '用户真实回答')
+  await agentRequest('agent-resume-apply', token, {authorization_id: 'saved-candidate', selected_item_ids: ['one']}, transport)
+  assert.equal(requests[3].options.headers['X-CP-Session'], token)
   await assert.rejects(agentRequest('agent-state', 'invalid', undefined, transport))
   await assert.rejects(agentRequest('agent-unknown', token, {}, transport))
   await assert.rejects(agentRequest('agent-state', token, undefined, async () => ({ok: true,

@@ -251,6 +251,8 @@ class WorkbenchABF:
             formal={**candidate['review'],**producer,'scope':self._scope(meta)}
             c.execute('INSERT INTO wb_reviews VALUES (?,?,?,?,?)',(review_id,version,req['context']['plan_digest'],encode(formal),formal_id))
         app.update(formal_record_id=formal_id,formal_result=deepcopy(formal))
+        if getattr(self.agent_review,'actor',None)=='career_agent':
+            app.update(review_actor='career_agent',notice='用户委托智能体调用，程序校验后自动保存；非本人逐条事实核实。')
         if stage=='b_plan':app['formal_plan_version']=next_version
         if stage=='f_review':app['formal_review_id']=review_id
         self._record(c,meta,record_id,kind,'核对采用 · '+stage,{'event':'abf_candidate_adopted',**app},parents,source='user_review')

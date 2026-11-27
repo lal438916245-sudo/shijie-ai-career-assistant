@@ -164,9 +164,10 @@ def test_gateway_tool_upgrade_preserves_existing_global_ledger(tmp_path):
     before=gateway.status('Bearer limited-platform-access-pass')
     gateway=JudgeGateway(path,upgraded,'limited-platform-access-pass','owner-provider-key',client_factory=factory,clock=lambda:0,previous_settings=old)
     assert gateway.status('Bearer limited-platform-access-pass')==before
-    body={**original,'tools':definitions(),'tool_choice':'auto'}
+    body={**original,'tools':definitions(include_business=True),'tool_choice':'auto'}
     gateway.complete('Bearer limited-platform-access-pass',encode(body).encode(),'career_agent','2'*64)
     assert gateway.configuration('Bearer limited-platform-access-pass')['tool_calls_supported']
+    assert gateway.configuration('Bearer limited-platform-access-pass')['agent_business_tools_supported']
     assert gateway.status('Bearer limited-platform-access-pass')['calls']==2
     gateway.complete('Bearer limited-platform-access-pass',encode(body).encode(),'career_agent','2'*64)
     assert len(sent)==2

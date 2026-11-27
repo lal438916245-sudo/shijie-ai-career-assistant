@@ -7,14 +7,22 @@ import json
 import os
 from pathlib import Path
 import socket
+import sqlite3
 import subprocess
 import threading
 import time
 import uuid
+import sys
+from contextlib import closing
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 
 
 class Provider(BaseHTTPRequestHandler):
     requests = 0
+    business_mode = False
+    business_requests = []
+    data_directory = None
 
     def log_message(self, *_args):
         pass
@@ -23,12 +31,53 @@ class Provider(BaseHTTPRequestHandler):
         Provider.requests += 1
         body = json.loads(self.rfile.read(int(self.headers['Content-Length'])))
         assert self.path == '/v1/chat/completions'
-        assert len(body['tools']) == 5
+        if 'tools' not in body:
+            from workbench_abf import FixedABFTransport
+            from ced_contracts import fixed_output
+            source = json.loads(body['messages'][1]['content'])
+            stage = source.get('stage', 'a_diagnosis')
+            Provider.business_requests.append(stage)
+            prefix = 'wbf' if stage == 'a_diagnosis' else 'wbc'
+            frozen = None
+            for database in (Provider.data_directory / 'showcase_sessions_20261107').glob('session_*.db'):
+                with closing(sqlite3.connect(database)) as conn:
+                    if not conn.execute("SELECT 1 FROM sqlite_master WHERE name=?", (prefix + '_grants',)).fetchone():
+                        continue
+                    row = conn.execute(f"SELECT p.request_json FROM {prefix}_grants g JOIN {prefix}_previews p USING(preview_id) WHERE g.status='dispatching' ORDER BY g.rowid DESC LIMIT 1").fetchone()
+                    if row:
+                        frozen = json.loads(row[0]); break
+            assert frozen is not None, 'No durable dispatching request'
+            content = FixedABFTransport().send(frozen)['content'] if stage == 'a_diagnosis' else json.dumps(fixed_output(frozen), ensure_ascii=False)
+            result = {'choices': [{'index': 0, 'finish_reason': 'stop', 'message': {'role': 'assistant', 'content': content}}],
+                      'usage': {'prompt_tokens': 100, 'completion_tokens': 100, 'total_tokens': 200}}
+            return self.respond(result)
+        assert len(body['tools']) == 9
         user = json.loads(body['messages'][1]['content'])
         observations = [json.loads(m['content']) for m in body['messages'] if m['role'] == 'tool']
         names = [m['tool_calls'][0]['function']['name'] for m in body['messages']
                  if m['role'] == 'assistant' and m.get('tool_calls')]
-        if not observations:
+        if Provider.business_mode:
+            answer = user.get('latest_interview_answer')
+            if not observations:
+                name, arguments = 'read_context', {}
+            elif names[-1] == 'read_context':
+                name, arguments = ('review_mock_interview', {'interview_id': answer['interview_id']}) if answer else ('diagnose_job', {})
+            elif names[-1] == 'diagnose_job':
+                assert observations[-1].get('saved') or observations[-1].get('reused'), observations[-1]
+                name, arguments = 'optimize_resume', {}
+            elif names[-1] == 'optimize_resume':
+                assert observations[-1].get('generated'), observations[-1]
+                name, arguments = 'start_mock_interview', {}
+            elif names[-1] in ('start_mock_interview', 'review_mock_interview'):
+                assert observations[-1].get('waiting_for_user') or (observations[-1].get('report') or {}).get('model_application'), observations[-1]
+                name, arguments = 'save_plan', {'expected_version': observations[0]['agent']['plan_version'],
+                    'rationale': '根据真实面试复盘调整任务。' if answer else '已生成诊断、简历草稿和面试题，等待真实作答。',
+                    'tasks': [{'title': '按复盘补充SQL验证' if answer else '完成本轮模拟面试',
+                               'action': '用小样本解释LEFT JOIN中的未匹配行，再核对预期结果。',
+                               'success_criteria': '能说明未匹配行和重复键怎样影响结果。'}]}
+            else:
+                name, arguments = None, None
+        elif not observations:
             name, arguments = 'read_context', {}
         elif names[-1] == 'read_context':
             name, arguments = 'search_history', {'query': 'JOIN'}
@@ -51,6 +100,9 @@ class Provider(BaseHTTPRequestHandler):
             message = {'role': 'assistant', 'content': '已保存计划，请执行并反馈。'}
         result = {'choices': [{'message': message, 'finish_reason': 'tool_calls' if name else 'stop'}],
                   'usage': {'prompt_tokens': 600, 'completion_tokens': 100, 'total_tokens': 700}}
+        self.respond(result)
+
+    def respond(self, result):
         raw = json.dumps(result, ensure_ascii=False).encode()
         self.send_response(200)
         self.send_header('Content-Type', 'application/json')
@@ -59,13 +111,15 @@ class Provider(BaseHTTPRequestHandler):
         self.wfile.write(raw)
 
 
-def main(executable):
+def main(executable, business_mode=False, preview_stop_file=None):
+    Provider.business_mode = business_mode
     provider = ThreadingHTTPServer(('127.0.0.1', 0), Provider)
     thread = threading.Thread(target=provider.serve_forever, daemon=True)
     thread.start()
     token = 'd' * 64
     with TemporaryDirectory(prefix='shijie-agent-exe-') as folder:
         data = Path(folder) / 'data'
+        Provider.data_directory = data
         with socket.socket() as sock:
             sock.bind(('127.0.0.1', 0))
             port = sock.getsockname()[1]
@@ -94,7 +148,7 @@ def main(executable):
                     '--data-dir', str(data), '--port', str(port)], env=environment,
                     stdout=output, stderr=output)
             try:
-                for _ in range(160):
+                for _ in range(500):
                     if process.poll() is not None:
                         raise RuntimeError(log.read_text(encoding='utf-8', errors='replace'))
                     conn = http.client.HTTPConnection('127.0.0.1', port, timeout=0.5)
@@ -114,7 +168,7 @@ def main(executable):
                 raise
 
         def wait_for_run():
-            for _ in range(60):
+            for _ in range(450):
                 state = api('agent-state')
                 if state['runs'][0]['status'] != 'running':
                     assert state['runs'][0]['status'] == 'waiting_user', state['runs'][0]
@@ -136,16 +190,33 @@ def main(executable):
                      'budget_micro_cny': 500000, 'feedback': None}
             api('agent-run', first)
             state = wait_for_run()
-            assert state['tasks'][0]['title'] == '核对JOIN结果'
+            assert state['tasks'][0]['title'] == ('完成本轮模拟面试' if business_mode else '核对JOIN结果')
             calls = Provider.requests
             api('agent-run', first)
             assert Provider.requests == calls
-            api('agent-run', {**first, 'request_id': str(uuid.uuid4()),
-                'feedback': {'task_id': state['tasks'][0]['task_id'], 'status': 'blocked',
-                             'content': '不会JOIN的配对规则，需要拆分前置步骤。'}})
+            if business_mode:
+                assert Provider.business_requests == ['a_diagnosis', 'd_revision', 'e_turn']
+                draft = state['business']['resume_draft']
+                api('agent-resume-apply', {'request_id': str(uuid.uuid4()), 'authorization_id': draft['authorization_id'],
+                    'selected_item_ids': draft['selectable_item_ids'][:1]})
+                interview = state['business']['interview']
+                continuation = {'request_id': str(uuid.uuid4()), 'goal': first['goal'], 'budget_micro_cny': 500000,
+                    'interview_id': interview['interview_id'], 'question_turn_id': interview['question']['turn_id'],
+                    'answer': '我能编写Python接口断言，尚未验证SQL未匹配行，需要先核对样例结果。'}
+                api('agent-answer-interview', continuation)
+            else:
+                api('agent-run', {**first, 'request_id': str(uuid.uuid4()),
+                    'feedback': {'task_id': state['tasks'][0]['task_id'], 'status': 'blocked',
+                                 'content': '不会JOIN的配对规则，需要拆分前置步骤。'}})
             state = wait_for_run()
-            assert state['tasks'][0]['title'] == '先练习手工逐行配对'
-            assert len(state['feedback']) == 1 and state['plan_version'] == 3
+            assert state['tasks'][0]['title'] == ('按复盘补充SQL验证' if business_mode else '先练习手工逐行配对')
+            if business_mode:
+                assert state['business']['interview']['report']['model_application']
+                assert state['business']['resume_draft']['saved_resume_id']
+                assert Provider.business_requests == ['a_diagnosis', 'd_revision', 'e_turn', 'e_report']
+                api('agent-answer-interview', continuation)
+            else:
+                assert len(state['feedback']) == 1 and state['plan_version'] == 3
             stopped = subprocess.run([str(executable), 'stop', '--data-dir', str(data)],
                                      env=environment, capture_output=True, timeout=20)
             assert stopped.returncode == 0, stopped.stderr.decode(errors='replace')
@@ -153,12 +224,26 @@ def main(executable):
             process = launch()
             restored = api('agent-state')
             assert restored['tasks'] == state['tasks'] and restored['model']['configured']
-            assert Provider.requests == 10
-            print('Packaged EXE verified: personal HTTP entry, DPAPI configuration, 10 native tool-call requests, feedback replanning, duplicate protection and restart recovery. Provider was loopback-only.')
+            assert Provider.requests == (14 if business_mode else 10), Provider.requests
+            if business_mode:
+                assert restored['business']['interview']['report']['model_application']
+                assert restored['business']['resume_draft']['saved_text']
+            print('Packaged EXE verified: ' + ('A/D/E SDK business loop, user-entered interview answer, review-driven replanning, explicit resume saving, 14 model requests, ' if business_mode else '10 native tool-call requests, feedback replanning, ') + 'duplicate protection and restart recovery. Provider was loopback-only.')
+            if preview_stop_file:
+                ready = preview_stop_file.with_suffix('.ready.json')
+                ready.write_text(json.dumps({'origin': f'http://127.0.0.1:{port}'}), encoding='utf-8')
+                print('Isolated UI preview ready at ' + f'http://127.0.0.1:{port}', flush=True)
+                while not preview_stop_file.exists():
+                    time.sleep(.5)
         finally:
             if process and process.poll() is None:
-                process.terminate()
-                process.wait(8)
+                try:
+                    subprocess.run([str(executable), 'stop', '--data-dir', str(data)],
+                                   env=environment, capture_output=True, timeout=20)
+                    process.wait(10)
+                except (subprocess.TimeoutExpired, OSError):
+                    process.terminate()
+                    process.wait(8)
             provider.shutdown()
             provider.server_close()
             thread.join(3)
@@ -167,5 +252,7 @@ def main(executable):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--executable', type=Path, required=True)
+    parser.add_argument('--business', action='store_true')
+    parser.add_argument('--preview-stop-file', type=Path)
     args = parser.parse_args()
-    main(args.executable.resolve())
+    main(args.executable.resolve(), args.business, args.preview_stop_file)
